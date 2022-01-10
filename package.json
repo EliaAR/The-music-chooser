@@ -12,6 +12,8 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
+    "@mysql/xdevapi": "^8.0.27",
+    "mysqlx": "^1.1.7",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
