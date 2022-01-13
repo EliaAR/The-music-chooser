@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { pool } from "../../lib/db";
+import { pool } from "../../../lib/db";
 
 const text =
   "INSERT INTO songs(id_room, name_song, url_song) VALUES($1, $2, $3) RETURNING *";
