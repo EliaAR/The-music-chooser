@@ -9,6 +9,14 @@ const themeOptions = {
     secondary: {
       main: "#758045",
     },
+    text: {
+      primary: "#E4E6EB",
+      secondary: "#B0B3B8",
+    },
+    background: {
+      default: "#4F4580",
+      paper: "#4F4580",
+    },
   },
 };
 
