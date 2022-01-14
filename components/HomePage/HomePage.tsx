@@ -1,8 +1,28 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
 import styles from "./HomePage.module.scss";
+import { createRoom } from "../../services";
 
 function HomePage() {
+  const [nameRoom, setNameRoom] = useState("");
+  const [error, setError] = useState(false);
+  const [callAPI, setCallAPI] = useState(true);
+
+  useEffect(() => {
+    if (callAPI) {
+      setError(false);
+      setCallAPI(false);
+      createRoom({ nameRoom })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          setError(true);
+          console.error(err);
+        });
+    }
+  }, [callAPI, nameRoom]);
   return (
     <main className={styles.HomePage}>
       <h3 className={styles.HomePage__title}>Pick out your song!</h3>
@@ -20,11 +40,12 @@ function HomePage() {
           label="Nombre Sala"
           color="secondary"
           placeholder="Escríbelo aquí"
-          // sx={{ mb: "10px" }}
           focused
+          onChange={(e) => setNameRoom(e.currentTarget.value)}
+          value={nameRoom}
         />
 
-        <Button variant="contained" href="#contained-buttons">
+        <Button variant="contained" onClick={() => setCallAPI(true)}>
           Crear Sala
         </Button>
       </section>
