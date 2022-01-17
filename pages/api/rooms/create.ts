@@ -11,7 +11,7 @@ const insertRoom: NextApiHandler = async (req, res) => {
     if (!name_room || !url_room) {
       return res
         .status(400)
-        .json({ message: "`name_room` and `url_room` are both required" });
+        .json({ error: "`name_room` and `url_room` are both required" });
     }
 
     const results = await pool.query(text, [name_room, url_room]);
@@ -19,7 +19,7 @@ const insertRoom: NextApiHandler = async (req, res) => {
     return res.json(results);
   } catch (e: any) {
     console.error(e);
-    res.status(500).json({ message: e?.message });
+    res.status(500).json({ error: e?.message });
   }
 };
 

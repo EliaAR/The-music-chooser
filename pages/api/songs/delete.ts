@@ -12,7 +12,7 @@ const deleteSong: NextApiHandler = async (req, res) => {
     return res.json(results);
   } catch (e: any) {
     console.error(e);
-    res.status(500).json({ message: e?.message });
+    res.status(500).json({ error: e?.message });
   }
 };
 

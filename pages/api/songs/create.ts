@@ -11,7 +11,7 @@ const insertSong: NextApiHandler = async (req, res) => {
     if (!id_room || !name_song || !url_song) {
       return res
         .status(400)
-        .json({ message: "`name_song` and `url_song` are both required" });
+        .json({ error: "`name_song` and `url_song` are both required" });
     }
 
     const results = await pool.query(text, [id_room, name_song, url_song]);
@@ -19,7 +19,7 @@ const insertSong: NextApiHandler = async (req, res) => {
     return res.json(results);
   } catch (e: any) {
     console.error(e);
-    res.status(500).json({ message: e?.message });
+    res.status(500).json({ error: e?.message });
   }
 };
 

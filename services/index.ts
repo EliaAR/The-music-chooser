@@ -17,7 +17,12 @@ function createRoom({ nameRoom }: createRoomProps) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name_room: nameRoom, url_room: slugify(nameRoom) }),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.error) throw new Error(response.error);
+      return response;
+    });
 }
 
 export { createRoom };
