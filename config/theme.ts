@@ -17,6 +17,10 @@ const themeOptions = {
       default: "#4F4580",
       paper: "#4F4580",
     },
+    error: {
+      main: "#592a2a",
+      contrastText: "#E4E6EB",
+    },
   },
 };
 
