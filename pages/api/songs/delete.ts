@@ -9,7 +9,7 @@ const deleteSong: NextApiHandler = async (req, res) => {
   try {
     const results = await pool.query(text, [id_song]);
 
-    return res.json(results);
+    return res.json(results.rows[0]);
   } catch (e: any) {
     console.error(e);
     res.status(500).json({ error: e?.message });

@@ -6,7 +6,7 @@ const selectTableSongs: NextApiHandler = async (req, res) => {
   const { id_room } = req.query;
   try {
     const results = await pool.query(text, [id_room]);
-    return res.json(results);
+    return res.json(results.rows);
   } catch (e: any) {
     console.error(e);
     res.status(500).json({ error: e?.message });
