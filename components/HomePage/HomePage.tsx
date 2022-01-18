@@ -1,16 +1,18 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState, useEffect } from "react";
-import styles from "./HomePage.module.scss";
 import { createRoom } from "../../services";
 import { Header } from "../../components/Header/Header";
 import { Alert } from "../Common/Alert";
-import { style } from "@mui/system";
+import styles from "./HomePage.module.scss";
 
 function HomePage() {
   const [nameRoom, setNameRoom] = useState("");
   const [error, setError] = useState(false);
   const [callAPI, setCallAPI] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (callAPI) {
@@ -19,6 +21,8 @@ function HomePage() {
       createRoom({ nameRoom })
         .then((data) => {
           console.log(data);
+          debugger;
+          router.push("/room/[id]", `/room/${data.id_room}`);
         })
         .catch((err) => {
           setError(true);
@@ -50,12 +54,7 @@ function HomePage() {
             value={nameRoom}
           />
 
-          <Button
-            variant="contained"
-            onClick={() => {
-              setCallAPI(true);
-            }}
-          >
+          <Button variant="contained" onClick={() => setCallAPI(true)}>
             Crear Sala
           </Button>
         </section>
