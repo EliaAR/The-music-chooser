@@ -5,7 +5,11 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-function Header() {
+interface HeaderProps {
+  title: string;
+}
+
+function Header({ title }: HeaderProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -20,7 +24,7 @@ function Header() {
             sx={{ flexGrow: 1 }}
             align="center"
           >
-            The Music Chooser
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

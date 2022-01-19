@@ -32,7 +32,7 @@ function HomePage() {
   }, [callAPI, nameRoom]);
   return (
     <>
-      <Header />
+      <Header title="The Music Chooser" />
       <main className={styles.HomePage}>
         <h3 className={styles.HomePage__title}>Pick out your song!</h3>
         <section className={styles.HomePage__article}>
