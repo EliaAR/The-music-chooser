@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { createRoom } from "../../services";
-import { Header } from "../../components/Header/Header";
 import { Alert } from "../Common/Alert";
 import styles from "./HomePage.module.scss";
 
@@ -32,7 +31,6 @@ function HomePage() {
   }, [callAPI, nameRoom]);
   return (
     <>
-      <Header title="The Music Chooser" />
       <main className={styles.HomePage}>
         <h3 className={styles.HomePage__title}>Pick out your song!</h3>
         <section className={styles.HomePage__article}>
