@@ -5,33 +5,26 @@
   align-items: center;
   padding: 0 20px;
   height: calc(100vh - 48px);
-  background-color: #303030;
+
   &__title {
     flex-grow: 0.15;
     display: flex;
     align-items: center;
-    color: #758045;
-    text-shadow: 3px 2px 3px rgba(144, 153, 106, 0.2);
     transform: rotate(-5deg);
     font-size: 35px;
   }
-  &__article {
+  &__title--dark {
+    text-shadow: 3px 2px 3px rgba(144, 153, 106, 0.2);
+  }
+  &__title--light {
+    text-shadow: 3px 2px 3px rgb(43 48 24 / 40%);
+  }
+  &__instructions {
     display: flex;
     flex-direction: column;
-    padding: 5px 12px 10px;
+    padding: 5px 15px 10px;
     max-width: 500px;
     border-radius: 5px;
-    background-color: #424242;
-    color: rgba(255, 255, 255, 0.7);
-  }
-  &__articleTitle {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    line-height: 2;
-  }
-  &__articleParagraph {
-    padding-top: 5px;
-    text-align: justify;
-    text-indent: 10px;
   }
   &__room {
     flex-grow: 0.15;
