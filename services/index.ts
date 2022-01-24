@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { RoomModel, SongModel } from "../types/model";
 
 interface createRoomProps {
   nameRoom: string;
@@ -8,12 +9,11 @@ interface getRoomsProps {
   id: string;
 }
 
-// function getSongs() {
-//   const ENDPOINT = location.origin + "/api/songs?id_room=1";
-//   return fetch(ENDPOINT).then((response) => response.json());
-// }
+interface getSongsProps {
+  id: string | number;
+}
 
-function createRoom({ nameRoom }: createRoomProps) {
+function createRoom({ nameRoom }: createRoomProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms/create";
   return fetch(ENDPOINT, {
     method: "POST",
@@ -29,7 +29,7 @@ function createRoom({ nameRoom }: createRoomProps) {
     });
 }
 
-function getRoom({ id }: getRoomsProps) {
+function getRoom({ id }: getRoomsProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms";
   return fetch(ENDPOINT + "?id_room=" + id)
     .then((response) => response.json())
@@ -39,4 +39,14 @@ function getRoom({ id }: getRoomsProps) {
     });
 }
 
-export { createRoom, getRoom };
+function getSongs({ id }: getSongsProps): Promise<SongModel[]> {
+  const ENDPOINT = location.origin + "/api/songs";
+  return fetch(ENDPOINT + "?id_room=" + id)
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.error) throw new Error(response.error);
+      return response;
+    });
+}
+
+export { createRoom, getRoom, getSongs };

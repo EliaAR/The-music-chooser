@@ -3,22 +3,27 @@ import { useState, useEffect } from "react";
 import { Header } from "../../components/Header/Header";
 import { Room } from "../../components/Room/Room";
 import { getRoom } from "../../services/index";
+import { RoomModel } from "../../types/model";
 
 function IdRoom() {
-  const [nameRoom, setNameRoom] = useState("");
+  const [data, setData] = useState<RoomModel | undefined>();
 
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
     if (id && typeof id === "string")
-      getRoom({ id }).then((data) => setNameRoom(data.name_room));
+      getRoom({ id }).then((data) => setData(data));
   }, [id]);
 
   return (
     <>
-      <Header title={`SALA ${nameRoom}`} />
-      <Room />
+      {data ? (
+        <>
+          <Header title={`SALA ${data.name_room}`} />
+          <Room id={data.id_room} />
+        </>
+      ) : null}
     </>
   );
 }
