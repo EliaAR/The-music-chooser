@@ -8,10 +8,10 @@ const insertRoom: NextApiHandler = async (req, res) => {
   const { name_room, url_room } = req.body;
 
   try {
-    if (!name_room || !url_room) {
+    if (!name_room) {
       return res
         .status(400)
-        .json({ error: "`name_room` and `url_room` are both required" });
+        .json({ error: "Debes introducir un nombre para la Sala" });
     }
 
     const results = await pool.query(text, [name_room, url_room]);
