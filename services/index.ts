@@ -13,6 +13,11 @@ interface getSongsProps {
   id: string | number;
 }
 
+interface createSongProps {
+  idRoom: string;
+  urlSong: string;
+}
+
 function createRoom({ nameRoom }: createRoomProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms/create";
   return fetch(ENDPOINT, {
@@ -49,4 +54,23 @@ function getSongs({ id }: getSongsProps): Promise<SongModel[]> {
     });
 }
 
-export { createRoom, getRoom, getSongs };
+function createSong({ idRoom, urlSong }: createSongProps) {
+  const ENDPOINT = location.origin + "api/songs/create";
+  return fetch(ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id_room: idRoom,
+      url_song: urlSong,
+    }),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.error) throw new Error(response.error);
+      return response;
+    });
+}
+
+export { createRoom, getRoom, getSongs, createSong };

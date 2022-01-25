@@ -1,20 +1,39 @@
 import { NextApiHandler } from "next";
 import { pool } from "../../../lib/db";
+import youtubedl from "youtube-dl-exec";
 
 const text =
-  "INSERT INTO songs(id_room, name_song, url_song) VALUES($1, $2, $3) RETURNING *";
+  "INSERT INTO songs(id_room, name_song, url_song, img, audio) VALUES($1, $2,$3,$4,$5) RETURNING *";
 
 const insertSong: NextApiHandler = async (req, res) => {
-  const { id_room, name_song, url_song } = req.body;
+  const { id_room, url_song } = req.body;
 
   try {
-    if (!id_room || !name_song || !url_song) {
+    if (!url_song) {
       return res
         .status(400)
-        .json({ error: "`name_song` and `url_song` are both required" });
+        .json({ error: "Introduzca una URL de Youtube válida" });
     }
 
-    const results = await pool.query(text, [id_room, name_song, url_song]);
+    const youtubeData = await youtubedl(url_song, {
+      dumpSingleJson: true,
+      noWarnings: true,
+      noCheckCertificate: true,
+      preferFreeFormats: true,
+      youtubeSkipDashManifest: true,
+    });
+
+    const name_song = youtubeData.title;
+    const img = youtubeData.thumbnails[0].url;
+    const audio = youtubeData.formats[0].url;
+
+    const results = await pool.query(text, [
+      id_room,
+      name_song,
+      url_song,
+      img,
+      audio,
+    ]);
 
     return res.json(results.rows[0]);
   } catch (e: any) {

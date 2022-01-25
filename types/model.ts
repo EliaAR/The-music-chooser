@@ -9,4 +9,6 @@ export interface SongModel {
   id_room: number;
   name_song: string;
   url_song: string;
+  img: string;
+  audio: string;
 }
