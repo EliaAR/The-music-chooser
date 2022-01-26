@@ -14,7 +14,7 @@ interface getSongsProps {
 }
 
 interface createSongProps {
-  idRoom: string;
+  idRoom: string | number;
   urlSong: string;
 }
 
@@ -54,8 +54,8 @@ function getSongs({ id }: getSongsProps): Promise<SongModel[]> {
     });
 }
 
-function createSong({ idRoom, urlSong }: createSongProps) {
-  const ENDPOINT = location.origin + "api/songs/create";
+function createSong({ idRoom, urlSong }: createSongProps): Promise<SongModel> {
+  const ENDPOINT = location.origin + "/api/songs/create";
   return fetch(ENDPOINT, {
     method: "POST",
     headers: {
