@@ -9,12 +9,12 @@ import { useTheme } from "@mui/material/styles";
 import { createRoom } from "../../services";
 import { Alert } from "../Common/Alert";
 import styles from "./HomePage.module.scss";
-import { ColorModeContext } from "../../config/theme";
 
 function HomePage() {
   const [nameRoom, setNameRoom] = useState("");
   const [error, setError] = useState(false);
   const [callAPI, setCallAPI] = useState(false);
+
   const theme = useTheme();
 
   const router = useRouter();
@@ -34,6 +34,7 @@ function HomePage() {
         });
     }
   }, [callAPI, nameRoom]);
+
   return (
     <>
       <Box
@@ -45,7 +46,6 @@ function HomePage() {
           variant="h6"
           component="h3"
           sx={{ color: "secondary.main" }}
-          // className={styles.HomePage__title}
           className={
             styles.HomePage__title +
             " " +
@@ -80,7 +80,7 @@ function HomePage() {
             fugiat deleniti? Eum quasi quidem quibusdam.
           </Typography>
         </Box>
-        <section className={styles.HomePage__room}>
+        <Box component="section" className={styles.HomePage__room}>
           <TextField
             label="Nombre Sala"
             color="secondary"
@@ -89,11 +89,10 @@ function HomePage() {
             onChange={(e) => setNameRoom(e.currentTarget.value)}
             value={nameRoom}
           />
-
           <Button variant="contained" onClick={() => setCallAPI(true)}>
             Crear Sala
           </Button>
-        </section>
+        </Box>
       </Box>
       <Alert
         open={error}

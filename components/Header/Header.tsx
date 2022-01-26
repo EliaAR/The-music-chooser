@@ -17,6 +17,7 @@ interface HeaderProps {
 
 function Header({ title }: HeaderProps) {
   const theme = useTheme();
+
   const colorMode = useContext(ColorModeContext);
 
   return (

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Alert } from "../Common/Alert";
 import { getSongs, createSong } from "../../services";
 import { SongModel } from "../../types/model";
+import { Alert } from "../Common/Alert";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./Room.module.scss";
 
@@ -79,7 +78,6 @@ function Room({ id }: RoomProps) {
                 imgSong={song.img}
                 nameSong={song.name_song}
               />
-              {/* <Divider orientation="horizontal" variant="inset" /> */}
             </>
           ))}
         </Box>

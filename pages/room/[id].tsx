@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { Header } from "../../components/Header/Header";
-import { Room } from "../../components/Room/Room";
 import { getRoom } from "../../services/index";
 import { RoomModel } from "../../types/model";
+import { Header } from "../../components/Header/Header";
+import { Room } from "../../components/Room/Room";
 
 function IdRoom() {
   const [data, setData] = useState<RoomModel | undefined>();
