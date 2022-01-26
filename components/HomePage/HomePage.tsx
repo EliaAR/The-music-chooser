@@ -12,7 +12,7 @@ import styles from "./HomePage.module.scss";
 
 function HomePage() {
   const [nameRoom, setNameRoom] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [callAPI, setCallAPI] = useState(false);
 
   const theme = useTheme();
@@ -21,7 +21,7 @@ function HomePage() {
 
   useEffect(() => {
     if (callAPI) {
-      setError(false);
+      setError("");
       setCallAPI(false);
       createRoom({ nameRoom })
         .then((data) => {
@@ -29,7 +29,7 @@ function HomePage() {
           router.push("/room/[id]", `/room/${data.id_room}`);
         })
         .catch((err) => {
-          setError(true);
+          setError(err.message);
           console.error(err);
         });
     }
@@ -95,9 +95,9 @@ function HomePage() {
         </Box>
       </Box>
       <Alert
-        open={error}
-        alertMsg="Fallo al crear la Sala"
-        hadleCloseAlert={() => setError(false)}
+        open={error !== ""}
+        alertMsg={error}
+        hadleCloseAlert={() => setError("")}
       />
     </>
   );
