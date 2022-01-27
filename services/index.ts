@@ -18,6 +18,11 @@ interface createSongProps {
   urlSong: string;
 }
 
+interface updateSongProps {
+  votos: number;
+  idSong: number;
+}
+
 function createRoom({ nameRoom }: createRoomProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms/create";
   return fetch(ENDPOINT, {
@@ -73,4 +78,24 @@ function createSong({ idRoom, urlSong }: createSongProps): Promise<SongModel> {
     });
 }
 
-export { createRoom, getRoom, getSongs, createSong };
+function updateSong({ votos, idSong }: updateSongProps): Promise<SongModel> {
+  const ENDPOINT = location.origin + "/api/songs/update";
+
+  return fetch(ENDPOINT, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      votos,
+      id_song: idSong,
+    }),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.error) throw new Error(response.error);
+      return response;
+    });
+}
+
+export { createRoom, getRoom, getSongs, createSong, updateSong };

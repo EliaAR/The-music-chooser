@@ -11,4 +11,5 @@ export interface SongModel {
   url_song: string;
   img: string;
   audio: string;
+  votos: number;
 }

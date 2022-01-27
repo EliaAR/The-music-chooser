@@ -13,9 +13,26 @@
     justify-content: space-evenly;
   }
 
+  &__listTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #4d4b4b;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
   &__listContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     min-height: 200px;
     min-width: 200px;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 }

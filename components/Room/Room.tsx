@@ -2,14 +2,21 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { getSongs, createSong } from "../../services";
+import { getSongs, createSong, updateSong } from "../../services";
+import { GetLocalStorage, SetLocalStorage } from "../../services/localStorage";
 import { SongModel } from "../../types/model";
 import { Alert } from "../Common/Alert";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./Room.module.scss";
+import { Typography } from "@mui/material";
 
 interface RoomProps {
   id: string | number;
+}
+
+interface HandleUpdateSongProps {
+  votos: number;
+  idSong: number;
 }
 
 function Room({ id }: RoomProps) {
@@ -18,6 +25,9 @@ function Room({ id }: RoomProps) {
   const [callAPIPost, setCallAPIPost] = useState(false);
   const [error, setError] = useState("");
   const [urlSong, setUrlSong] = useState("");
+  const [idVotadas, setIdVotadas] = useState(
+    GetLocalStorage<number[]>({ key: "idVotadas", defaultValue: [] })
+  );
 
   useEffect(() => {
     if (callAPIGet) {
@@ -36,6 +46,7 @@ function Room({ id }: RoomProps) {
         .then((data) => {
           console.log(data);
           setCallAPIGet(true);
+          setUrlSong("");
         })
         .catch((err) => {
           setError(err.message);
@@ -43,6 +54,18 @@ function Room({ id }: RoomProps) {
         });
     }
   }, [callAPIPost, id, urlSong]);
+
+  const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
+    updateSong({ votos, idSong })
+      .then((data) => {
+        console.log(data);
+        setCallAPIGet(true);
+      })
+      .catch((err) => {
+        setError(err.message);
+        console.error(err);
+      });
+  };
 
   return (
     <>
@@ -64,23 +87,46 @@ function Room({ id }: RoomProps) {
             Crear Canción
           </Button>
         </Box>
-        <Box
-          sx={{
-            backgroundColor: "background.paper",
-          }}
-          component="section"
-          className={styles.room__listContainer}
-        >
-          {songs.map((song) => (
-            <>
+        <div>
+          <Typography
+            variant="body1"
+            component="h6"
+            sx={{
+              fontWeight: 500,
+            }}
+            className={styles.room__listTitle}
+          >
+            Listado canciones
+          </Typography>
+          <Box
+            sx={{
+              backgroundColor: "background.paper",
+            }}
+            component="section"
+            className={styles.room__listContainer}
+          >
+            {songs.map((song) => (
               <CardSong
                 key={song.id_song}
-                imgSong={song.img}
-                nameSong={song.name_song}
+                song={song}
+                onClickVote={() => {
+                  if (!idVotadas.includes(song.id_song)) {
+                    SetLocalStorage({
+                      key: "idVotadas",
+                      value: [...idVotadas, song.id_song],
+                    });
+                    handleUpdateSong({
+                      votos: song.votos + 1,
+                      idSong: song.id_song,
+                    });
+                    setIdVotadas([...idVotadas, song.id_song]);
+                  }
+                }}
+                isVoted={idVotadas.includes(song.id_song)}
               />
-            </>
-          ))}
-        </Box>
+            ))}
+          </Box>
+        </div>
       </Box>
       <Alert
         open={error !== ""}
