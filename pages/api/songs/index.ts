@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next";
 import { pool } from "../../../lib/db";
 
-const text = "SELECT * FROM songs WHERE id_room = $1";
+const text = "SELECT * FROM songs WHERE id_room = $1 ORDER BY votos DESC";
 
 const selectTableSongs: NextApiHandler = async (req, res) => {
   const { id_room } = req.query;
