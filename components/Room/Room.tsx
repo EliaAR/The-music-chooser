@@ -120,6 +120,16 @@ function Room({ id }: RoomProps) {
                       idSong: song.id_song,
                     });
                     setIdVotadas([...idVotadas, song.id_song]);
+                  } else {
+                    SetLocalStorage({
+                      key: "idVotadas",
+                      value: idVotadas.filter((id) => id !== song.id_song),
+                    });
+                    handleUpdateSong({
+                      votos: song.votos - 1,
+                      idSong: song.id_song,
+                    });
+                    setIdVotadas(idVotadas.filter((id) => id !== song.id_song));
                   }
                 }}
                 isVoted={idVotadas.includes(song.id_song)}

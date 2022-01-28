@@ -15,6 +15,7 @@ function GetLocalStorage<T>({ key, defaultValue }: GetLocalStorageProps<T>): T {
     return JSON.parse(data);
   }
 }
+
 function SetLocalStorage({ key, value }: SetLocalStorageProps) {
   localStorage.setItem(key, JSON.stringify(value));
 }
