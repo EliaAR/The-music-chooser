@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
 import { getSongs, createSong, updateSong } from "../../services";
 import { GetLocalStorage, SetLocalStorage } from "../../services/localStorage";
 import { SongModel } from "../../types/model";
 import { Alert } from "../Common/Alert";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./Room.module.scss";
-import { Typography } from "@mui/material";
 
 interface RoomProps {
   id: string | number;
@@ -84,7 +85,7 @@ function Room({ id }: RoomProps) {
             value={urlSong}
           />
           <Button variant="contained" onClick={() => setCallAPIPost(true)}>
-            Crear Canción
+            Añadir Canción
           </Button>
         </Box>
         <div>
@@ -137,6 +138,13 @@ function Room({ id }: RoomProps) {
             ))}
           </Box>
         </div>
+        <Box component="section">
+          <Button variant="contained">
+            <Link href={"/partyRoom/[id]"} as={`/partyRoom/${id}`}>
+              <a>Abrir Sala de Reproducción</a>
+            </Link>
+          </Button>
+        </Box>
       </Box>
       <Alert
         open={error !== ""}
