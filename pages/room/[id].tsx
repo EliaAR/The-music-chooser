@@ -21,7 +21,7 @@ function IdRoom() {
       {data ? (
         <>
           <Header title={`SALA ${data.name_room}`} />
-          <Room id={data.id_room} />
+          <Room roomData={data} />
         </>
       ) : null}
     </>

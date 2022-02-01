@@ -2,6 +2,7 @@ export interface RoomModel {
   id_room: number;
   name_room: string;
   url_room: string;
+  isclosed: boolean;
 }
 
 export interface SongModel {

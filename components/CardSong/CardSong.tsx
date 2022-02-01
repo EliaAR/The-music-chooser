@@ -14,9 +14,10 @@ interface CardSongProps {
   song: SongModel;
   onClickVote: () => void;
   isVoted: boolean;
+  isClosed: boolean;
 }
 
-function CardSong({ song, onClickVote, isVoted }: CardSongProps) {
+function CardSong({ song, onClickVote, isVoted, isClosed }: CardSongProps) {
   return (
     <Card className={styles.cardSong}>
       <CardContent>
@@ -35,21 +36,23 @@ function CardSong({ song, onClickVote, isVoted }: CardSongProps) {
         alt={song.name_song}
         sx={{ maxHeight: 50 }}
       />
-      <Box className={styles.cardSong__voteContainer}>
-        <CardActions sx={{ p: 0 }}>
-          <IconButton
-            aria-label="voto"
-            color="secondary"
-            sx={{ pt: 0, pr: 1, pb: 0, pl: 1 }}
-            onClick={onClickVote}
-          >
-            {isVoted ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
-          </IconButton>
-        </CardActions>
-        <Typography variant="body1" component="p" sx={{ fontSize: 12 }}>
-          {song.votos}
-        </Typography>
-      </Box>
+      {!isClosed ? (
+        <Box className={styles.cardSong__voteContainer}>
+          <CardActions sx={{ p: 0 }}>
+            <IconButton
+              aria-label="voto"
+              color="secondary"
+              sx={{ pt: 0, pr: 1, pb: 0, pl: 1 }}
+              onClick={onClickVote}
+            >
+              {isVoted ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
+            </IconButton>
+          </CardActions>
+          <Typography variant="body1" component="p" sx={{ fontSize: 12 }}>
+            {song.votos}
+          </Typography>
+        </Box>
+      ) : null}
     </Card>
   );
 }

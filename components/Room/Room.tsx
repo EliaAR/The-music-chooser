@@ -4,15 +4,15 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import { getSongs, createSong, updateSong } from "../../services";
+import { getSongs, createSong, updateSong, updateRoom } from "../../services";
 import { GetLocalStorage, SetLocalStorage } from "../../services/localStorage";
-import { SongModel } from "../../types/model";
+import { RoomModel, SongModel } from "../../types/model";
 import { Alert } from "../Common/Alert";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./Room.module.scss";
 
 interface RoomProps {
-  id: string | number;
+  roomData: RoomModel;
 }
 
 interface HandleUpdateSongProps {
@@ -20,7 +20,12 @@ interface HandleUpdateSongProps {
   idSong: number;
 }
 
-function Room({ id }: RoomProps) {
+interface HandleUpdateRoomProps {
+  isClosed: boolean;
+  idRoom: string | number;
+}
+
+function Room({ roomData }: RoomProps) {
   const [callAPIGet, setCallAPIGet] = useState(true);
   const [songs, setSongs] = useState<SongModel[]>([]);
   const [callAPIPost, setCallAPIPost] = useState(false);
@@ -29,6 +34,8 @@ function Room({ id }: RoomProps) {
   const [idVotadas, setIdVotadas] = useState(
     GetLocalStorage<number[]>({ key: "idVotadas", defaultValue: [] })
   );
+
+  const id = roomData.id_room;
 
   useEffect(() => {
     if (callAPIGet) {
@@ -58,6 +65,18 @@ function Room({ id }: RoomProps) {
 
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
     updateSong({ votos, idSong })
+      .then((data) => {
+        console.log(data);
+        setCallAPIGet(true);
+      })
+      .catch((err) => {
+        setError(err.message);
+        console.error(err);
+      });
+  };
+
+  const handleUpdateRoom = ({ isClosed, idRoom }: HandleUpdateRoomProps) => {
+    updateRoom({ isClosed, idRoom })
       .then((data) => {
         console.log(data);
         setCallAPIGet(true);
@@ -134,12 +153,16 @@ function Room({ id }: RoomProps) {
                   }
                 }}
                 isVoted={idVotadas.includes(song.id_song)}
+                isClosed={roomData.isclosed}
               />
             ))}
           </Box>
         </div>
         <Box component="section">
-          <Button variant="contained">
+          <Button
+            variant="contained"
+            onClick={() => handleUpdateRoom({ isClosed: true, idRoom: id })}
+          >
             <Link href={"/partyRoom/[id]"} as={`/partyRoom/${id}`}>
               <a>Abrir Sala de Reproducción</a>
             </Link>

@@ -9,6 +9,11 @@ interface getRoomsProps {
   id: string;
 }
 
+interface updateRoomProps {
+  isClosed: boolean;
+  idRoom: string | number;
+}
+
 interface getSongsProps {
   id: string | number;
 }
@@ -42,6 +47,25 @@ function createRoom({ nameRoom }: createRoomProps): Promise<RoomModel> {
 function getRoom({ id }: getRoomsProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms";
   return fetch(ENDPOINT + "?id_room=" + id)
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.error) throw new Error(response.error);
+      return response;
+    });
+}
+
+function updateRoom({ isClosed, idRoom }: updateRoomProps) {
+  const ENDPOINT = location.origin + "/api/rooms/update";
+  return fetch(ENDPOINT, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      isclosed: isClosed,
+      id_room: idRoom,
+    }),
+  })
     .then((response) => response.json())
     .then((response) => {
       if (response.error) throw new Error(response.error);
@@ -98,4 +122,4 @@ function updateSong({ votos, idSong }: updateSongProps): Promise<SongModel> {
     });
 }
 
-export { createRoom, getRoom, getSongs, createSong, updateSong };
+export { createRoom, getRoom, updateRoom, getSongs, createSong, updateSong };
