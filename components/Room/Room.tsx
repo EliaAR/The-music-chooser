@@ -163,7 +163,7 @@ function Room({ roomData }: RoomProps) {
             variant="contained"
             onClick={() => handleUpdateRoom({ isClosed: true, idRoom: id })}
           >
-            <Link href={"/partyRoom/[id]"} as={`/partyRoom/${id}`}>
+            <Link href={"/idpartyroom/[id]"} as={`/idpartyroom/${id}`}>
               <a>Abrir Sala de Reproducción</a>
             </Link>
           </Button>

@@ -3,7 +3,7 @@ import { pool } from "../../../lib/db";
 
 const text = "UPDATE songs SET votos = $1 WHERE id_song = $2 RETURNING *";
 
-const deleteSong: NextApiHandler = async (req, res) => {
+const updateSong: NextApiHandler = async (req, res) => {
   const { votos, id_song } = req.body;
 
   try {
@@ -16,4 +16,4 @@ const deleteSong: NextApiHandler = async (req, res) => {
   }
 };
 
-export default deleteSong;
+export default updateSong;

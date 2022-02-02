@@ -26,7 +26,7 @@ function HomePage() {
       createRoom({ nameRoom })
         .then((data) => {
           console.log(data);
-          router.push("/room/[id]", `/room/${data.id_room}`);
+          router.push("/idroom/[id]", `/idroom/${data.id_room}`);
         })
         .catch((err) => {
           setError(err.message);

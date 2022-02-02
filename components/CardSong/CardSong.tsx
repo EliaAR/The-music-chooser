@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import styles from "./CardSong.module.scss";
 import { SongModel } from "../../types/model";
 import { Box } from "@mui/material";
+import styles from "./CardSong.module.scss";
 
 interface CardSongProps {
   song: SongModel;
