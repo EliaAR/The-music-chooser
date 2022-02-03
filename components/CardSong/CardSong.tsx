@@ -19,8 +19,12 @@ interface CardSongProps {
 
 function CardSong({ song, onClickVote, isVoted, isClosed }: CardSongProps) {
   return (
-    <Card className={styles.cardSong}>
-      <CardContent>
+    <Card
+      component="article"
+      className={styles.cardSong}
+      sx={{ overflow: "visible" }}
+    >
+      <CardContent component="section">
         <Typography
           variant="body1"
           component="p"
@@ -34,12 +38,13 @@ function CardSong({ song, onClickVote, isVoted, isClosed }: CardSongProps) {
         component="img"
         image={song.img}
         alt={song.name_song}
-        sx={{ maxHeight: 50 }}
+        className={styles.cardSong__img}
       />
       {!isClosed ? (
-        <Box className={styles.cardSong__voteContainer}>
+        <Box component="section" className={styles.cardSong__voteContainer}>
           <CardActions sx={{ p: 0 }}>
             <IconButton
+              component="section"
               aria-label="voto"
               color="secondary"
               sx={{ pt: 0, pr: 1, pb: 0, pl: 1 }}

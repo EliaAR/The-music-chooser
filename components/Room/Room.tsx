@@ -102,25 +102,32 @@ function Room({ roomData }: RoomProps) {
             focused
             onChange={(e) => setUrlSong(e.currentTarget.value)}
             value={urlSong}
+            sx={{ mb: 1 }}
           />
           <Button variant="contained" onClick={() => setCallAPIPost(true)}>
             Añadir Canción
           </Button>
         </Box>
-        <div>
-          <Typography
-            variant="body1"
-            component="h6"
-            sx={{
-              fontWeight: 500,
-            }}
+        <Box component="section">
+          <Box
+            component="section"
+            sx={{ boxShadow: 2 }}
             className={styles.room__listTitle}
           >
-            Listado canciones
-          </Typography>
+            <Typography
+              variant="body1"
+              component="h6"
+              sx={{
+                fontWeight: 500,
+              }}
+            >
+              Listado canciones
+            </Typography>
+          </Box>
           <Box
             sx={{
               backgroundColor: "background.paper",
+              boxShadow: 2,
             }}
             component="section"
             className={styles.room__listContainer}
@@ -157,8 +164,8 @@ function Room({ roomData }: RoomProps) {
               />
             ))}
           </Box>
-        </div>
-        <Box component="section">
+        </Box>
+        <Box component="section" className={styles.room__buttonContainer}>
           <Button
             variant="contained"
             onClick={() => handleUpdateRoom({ isClosed: true, idRoom: id })}
