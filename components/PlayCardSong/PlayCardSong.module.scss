@@ -1,0 +1,19 @@
+.playCardSong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  &__title {
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &__controlContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
