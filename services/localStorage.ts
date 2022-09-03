@@ -12,7 +12,7 @@ function GetLocalStorage<T>({ key, defaultValue }: GetLocalStorageProps<T>): T {
   if (data === null) {
     return defaultValue;
   } else {
-    return JSON.parse(data);
+    return JSON.parse(data) as T;
   }
 }
 

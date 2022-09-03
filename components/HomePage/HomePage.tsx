@@ -19,19 +19,22 @@ function HomePage() {
 
   const router = useRouter();
 
+  const handleCreateRoom = async () => {
+    try {
+      const data = await createRoom({ nameRoom });
+      if ("id_room" in data) {
+        await router.push("/idroom/[id]", `/idroom/${data.id_room}`);
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   useEffect(() => {
     if (callAPI) {
       setError("");
       setCallAPI(false);
-      createRoom({ nameRoom })
-        .then((data) => {
-          console.log(data);
-          router.push("/idroom/[id]", `/idroom/${data.id_room}`);
-        })
-        .catch((err) => {
-          setError(err.message);
-          console.error(err);
-        });
+      handleCreateRoom();
     }
   }, [callAPI, nameRoom]);
 
@@ -97,7 +100,7 @@ function HomePage() {
       <Alert
         open={error !== ""}
         alertMsg={error}
-        hadleCloseAlert={() => setError("")}
+        handleCloseAlert={() => setError("")}
       />
     </>
   );

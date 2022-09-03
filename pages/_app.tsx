@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    []
+    [],
   );
 
   const theme = useMemo(
@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             : themeOptionsDark.palette),
         },
       }),
-    [mode]
+    [mode],
   );
 
   return (

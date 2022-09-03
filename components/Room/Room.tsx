@@ -32,7 +32,7 @@ function Room({ roomData }: RoomProps) {
   const [error, setError] = useState("");
   const [urlSong, setUrlSong] = useState("");
   const [idVotadas, setIdVotadas] = useState(
-    GetLocalStorage<number[]>({ key: "idVotadas", defaultValue: [] })
+    GetLocalStorage<number[]>({ key: "idVotadas", defaultValue: [] }),
   );
 
   const id = roomData.id_room;
@@ -179,7 +179,7 @@ function Room({ roomData }: RoomProps) {
       <Alert
         open={error !== ""}
         alertMsg={error}
-        hadleCloseAlert={() => setError("")}
+        handleCloseAlert={() => setError("")}
       />
     </>
   );

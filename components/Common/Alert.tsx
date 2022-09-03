@@ -8,7 +8,7 @@ import MuiAlert from "@mui/material/Alert";
 
 interface AlertProps {
   alertMsg: string;
-  hadleCloseAlert: () => void;
+  handleCloseAlert: () => void;
   open: boolean;
 }
 
@@ -16,11 +16,11 @@ function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="up" />;
 }
 
-function Alert({ alertMsg, hadleCloseAlert, open }: AlertProps) {
+function Alert({ alertMsg, handleCloseAlert, open }: AlertProps) {
   return (
     <Snackbar
       open={open}
-      onClose={hadleCloseAlert}
+      onClose={handleCloseAlert}
       TransitionComponent={open ? SlideTransition : Fade}
       key={Fade.name}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -31,13 +31,13 @@ function Alert({ alertMsg, hadleCloseAlert, open }: AlertProps) {
         <Button
           color="secondary"
           size="small"
-          onClick={hadleCloseAlert}
+          onClick={handleCloseAlert}
         ></Button>
         <IconButton
           size="small"
           aria-label="close"
           color="inherit"
-          onClick={hadleCloseAlert}
+          onClick={handleCloseAlert}
         >
           <CloseIcon fontSize="small" />
         </IconButton>

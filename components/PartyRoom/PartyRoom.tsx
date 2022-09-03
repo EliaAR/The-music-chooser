@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { UpdateRoomResponse } from "../../pages/api/rooms/update";
 import { getSongs, updateRoom } from "../../services";
 import { RoomModel, SongModel } from "../../types/model";
 import { PlayCardSong } from "../PlayCardSong/PlayCardSong";
@@ -29,18 +30,22 @@ function PartyRoom({ roomData }: PartyRoomProps) {
       .catch((err) => console.log(err));
   }, [id]);
 
-  const handleUpdatePartyRoom = ({
+  const handleUpdatePartyRoom = async ({
     isClosed,
     idRoom,
   }: HandleUpdatePartyRoomProps) => {
-    updateRoom({ isClosed, idRoom })
-      .then((data) => {
-        console.log(data);
-        router.push("/idroom/[id]", `/idroom/${data.id_room}`);
-      })
-      .catch((err) => {
-        console.error(err);
+    try {
+      const data: UpdateRoomResponse = await updateRoom({
+        isClosed,
+        idRoom,
       });
+      console.log(data);
+      if ("id_room" in data) {
+        await router.push("/idroom/[id]", `/idroom/${data.id_room}`);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

@@ -1,13 +1,16 @@
 import { NextApiHandler } from "next";
 import { pool } from "../../../lib/db";
+import { SongModel } from "../../../types/model";
+
+export type GetSongResponse = SongModel[] | { error: string };
 
 const text = "SELECT * FROM songs WHERE id_room = $1 ORDER BY votos DESC";
 
-const selectTableSongs: NextApiHandler = async (req, res) => {
+const selectTableSongs: NextApiHandler<GetSongResponse> = async (req, res) => {
   const { id_room } = req.query;
 
   try {
-    const results = await pool.query(text, [id_room]);
+    const results = await pool.query<SongModel>(text, [id_room]);
 
     return res.json(results.rows);
   } catch (e: any) {

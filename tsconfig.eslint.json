@@ -2,7 +2,7 @@
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true,
-    "checkJs": true
+    "checkJs": false
   },
   "extends": "./tsconfig.base.json",
   "include": [
