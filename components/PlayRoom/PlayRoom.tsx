@@ -6,18 +6,18 @@ import { UpdateRoomResponse } from "../../pages/api/rooms/update";
 import { getSongs, updateRoom } from "../../services";
 import { RoomModel, SongModel } from "../../types/model";
 import { PlayCardSong } from "../PlayCardSong/PlayCardSong";
-import styles from "./PartyRoom.module.scss";
+import styles from "./PlayRoom.module.scss";
 
-interface PartyRoomProps {
+interface PlayRoomProps {
   roomData: RoomModel;
 }
 
-interface HandleUpdatePartyRoomProps {
+interface HandleUpdatePlayRoomProps {
   isClosed: boolean;
   idRoom: string | number;
 }
 
-function PartyRoom({ roomData }: PartyRoomProps) {
+function PlayRoom({ roomData }: PlayRoomProps) {
   const [songs, setSongs] = useState<SongModel[]>([]);
 
   const id = roomData.id_room;
@@ -30,10 +30,10 @@ function PartyRoom({ roomData }: PartyRoomProps) {
       .catch((err) => console.log(err));
   }, [id]);
 
-  const handleUpdatePartyRoom = async ({
+  const handleUpdatePlayRoom = async ({
     isClosed,
     idRoom,
-  }: HandleUpdatePartyRoomProps) => {
+  }: HandleUpdatePlayRoomProps) => {
     try {
       const data: UpdateRoomResponse = await updateRoom({
         isClosed,
@@ -41,7 +41,7 @@ function PartyRoom({ roomData }: PartyRoomProps) {
       });
       console.log(data);
       if ("id_room" in data) {
-        await router.push("/idroom/[id]", `/idroom/${data.id_room}`);
+        await router.push(`/room/${data.id_room}/vote`);
       }
     } catch (err) {
       console.error(err);
@@ -52,13 +52,13 @@ function PartyRoom({ roomData }: PartyRoomProps) {
     <Box
       sx={{ backgroundColor: "background.default" }}
       component="main"
-      className={styles.partyRoom}
+      className={styles.playRoom}
     >
       {songs[0] ? <PlayCardSong song={songs[0]} /> : <p>Mensaje Alert</p>}
       <Box component="section" className={styles.room__buttonContainer}>
         <Button
           variant="contained"
-          onClick={() => handleUpdatePartyRoom({ isClosed: false, idRoom: id })}
+          onClick={() => handleUpdatePlayRoom({ isClosed: false, idRoom: id })}
         >
           Volver y reabrir votaciones
         </Button>
@@ -67,4 +67,4 @@ function PartyRoom({ roomData }: PartyRoomProps) {
   );
 }
 
-export { PartyRoom };
+export { PlayRoom };

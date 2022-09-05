@@ -23,7 +23,7 @@ function HomePage() {
     try {
       const data = await createRoom({ nameRoom });
       if ("id_room" in data) {
-        await router.push("/idroom/[id]", `/idroom/${data.id_room}`);
+        await router.push(`/room/${data.id_room}/vote`);
       }
     } catch (err) {
       setError(err.message);
