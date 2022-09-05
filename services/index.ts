@@ -1,35 +1,43 @@
 import slugify from "slugify";
+import { GetRoomResponse } from "../pages/api/rooms";
+import { CreateRoomResponse } from "../pages/api/rooms/create";
+import { UpdateRoomResponse } from "../pages/api/rooms/update";
+import { GetSongResponse } from "../pages/api/songs";
+import { CreateSongResponse } from "../pages/api/songs/create";
+import { UpdateSongResponse } from "../pages/api/songs/update";
 import { RoomModel, SongModel } from "../types/model";
 
-interface createRoomProps {
+interface CreateRoomProps {
   nameRoom: string;
 }
 
-interface getRoomsProps {
+interface GetRoomsProps {
   id: string;
 }
 
-interface updateRoomProps {
+interface UpdateRoomProps {
   isClosed: boolean;
   idRoom: string | number;
+  currentsong?: number;
 }
 
-interface getSongsProps {
+interface GetSongsProps {
   id: string | number;
 }
 
-interface createSongProps {
+interface CreateSongProps {
   idRoom: string | number;
   urlSong: string;
 }
 
-interface updateSongProps {
+interface UpdateSongProps {
   votos: number;
   idSong: number;
 }
 
-function createRoom({ nameRoom }: createRoomProps): Promise<RoomModel> {
+function createRoom({ nameRoom }: CreateRoomProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms/create";
+
   return fetch(ENDPOINT, {
     method: "POST",
     headers: {
@@ -38,23 +46,27 @@ function createRoom({ nameRoom }: createRoomProps): Promise<RoomModel> {
     body: JSON.stringify({ name_room: nameRoom, url_room: slugify(nameRoom) }),
   })
     .then((response) => response.json())
-    .then((response) => {
-      if (response.error) throw new Error(response.error);
+    .then((response: CreateRoomResponse) => {
+      if ("error" in response) throw new Error(response.error);
       return response;
     });
 }
 
-function getRoom({ id }: getRoomsProps): Promise<RoomModel> {
+function getRoom({ id }: GetRoomsProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms";
   return fetch(ENDPOINT + "?id_room=" + id)
     .then((response) => response.json())
-    .then((response) => {
-      if (response.error) throw new Error(response.error);
+    .then((response: GetRoomResponse) => {
+      if ("error" in response) throw new Error(response.error);
       return response;
     });
 }
 
-function updateRoom({ isClosed, idRoom }: updateRoomProps) {
+function updateRoom({
+  isClosed,
+  idRoom,
+  currentsong,
+}: UpdateRoomProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms/update";
   return fetch(ENDPOINT, {
     method: "PUT",
@@ -64,26 +76,27 @@ function updateRoom({ isClosed, idRoom }: updateRoomProps) {
     body: JSON.stringify({
       isclosed: isClosed,
       id_room: idRoom,
+      currentsong: currentsong,
     }),
   })
     .then((response) => response.json())
-    .then((response) => {
-      if (response.error) throw new Error(response.error);
+    .then((response: UpdateRoomResponse) => {
+      if ("error" in response) throw new Error(response.error);
       return response;
     });
 }
 
-function getSongs({ id }: getSongsProps): Promise<SongModel[]> {
+function getSongs({ id }: GetSongsProps): Promise<SongModel[]> {
   const ENDPOINT = location.origin + "/api/songs";
-  return fetch(ENDPOINT + "?id_room=" + id)
+  return fetch(`${ENDPOINT}?id_room=${id}`)
     .then((response) => response.json())
-    .then((response) => {
-      if (response.error) throw new Error(response.error);
+    .then((response: GetSongResponse) => {
+      if ("error" in response) throw new Error(response.error);
       return response;
     });
 }
 
-function createSong({ idRoom, urlSong }: createSongProps): Promise<SongModel> {
+function createSong({ idRoom, urlSong }: CreateSongProps): Promise<SongModel> {
   const ENDPOINT = location.origin + "/api/songs/create";
   return fetch(ENDPOINT, {
     method: "POST",
@@ -96,13 +109,13 @@ function createSong({ idRoom, urlSong }: createSongProps): Promise<SongModel> {
     }),
   })
     .then((response) => response.json())
-    .then((response) => {
-      if (response.error) throw new Error(response.error);
+    .then((response: CreateSongResponse) => {
+      if ("error" in response) throw new Error(response.error);
       return response;
     });
 }
 
-function updateSong({ votos, idSong }: updateSongProps): Promise<SongModel> {
+function updateSong({ votos, idSong }: UpdateSongProps): Promise<SongModel> {
   const ENDPOINT = location.origin + "/api/songs/update";
 
   return fetch(ENDPOINT, {
@@ -116,8 +129,8 @@ function updateSong({ votos, idSong }: updateSongProps): Promise<SongModel> {
     }),
   })
     .then((response) => response.json())
-    .then((response) => {
-      if (response.error) throw new Error(response.error);
+    .then((response: UpdateSongResponse) => {
+      if ("error" in response) throw new Error(response.error);
       return response;
     });
 }

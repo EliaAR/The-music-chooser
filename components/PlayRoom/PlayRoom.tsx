@@ -48,13 +48,26 @@ function PlayRoom({ roomData }: PlayRoomProps) {
     }
   };
 
+  const currentSong = songs.find(
+    (song) => song.id_song === roomData.currentsong,
+  );
+
   return (
     <Box
       sx={{ backgroundColor: "background.default" }}
       component="main"
       className={styles.playRoom}
     >
-      {songs[0] ? <PlayCardSong song={songs[0]} /> : <p>Mensaje Alert</p>}
+      {currentSong ? (
+        <PlayCardSong song={currentSong} />
+      ) : (
+        <p>There is no song playing</p>
+      )}
+      {songs.length ? (
+        songs.map((song) => <p key={song.id_song}>{song.name_song}</p>)
+      ) : (
+        <p>Mensaje Alert</p>
+      )}
       <Box component="section" className={styles.room__buttonContainer}>
         <Button
           variant="contained"

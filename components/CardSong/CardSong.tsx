@@ -6,18 +6,73 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { updateSong } from "../../services";
+import { SetLocalStorage } from "../../services/localStorage";
 import { SongModel } from "../../types/model";
 import { Box } from "@mui/material";
 import styles from "./CardSong.module.scss";
 
 interface CardSongProps {
   song: SongModel;
-  onClickVote: () => void;
-  isVoted: boolean;
   isClosed: boolean;
+  idVotadas: number[];
+  handleIdVotadas: (idVotadas: number[]) => void;
+  handleVoteSuccess: () => void;
+  handleVoteError: (err: string) => void;
+  isVoted: boolean;
 }
 
-function CardSong({ song, onClickVote, isVoted, isClosed }: CardSongProps) {
+interface HandleUpdateSongProps {
+  votos: number;
+  idSong: number;
+}
+
+function CardSong({
+  song,
+  isClosed,
+  idVotadas,
+  handleIdVotadas,
+  handleVoteSuccess,
+  handleVoteError,
+  isVoted,
+}: CardSongProps) {
+  const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
+    updateSong({ votos, idSong })
+      .then((data) => {
+        console.log(data);
+        handleVoteSuccess();
+      })
+      .catch((err) => {
+        handleVoteError(err.message);
+        console.error(err);
+      });
+  };
+  const handleVote = (song: SongModel) => {
+    if (isClosed === false) {
+      if (!idVotadas.includes(song.id_song)) {
+        SetLocalStorage({
+          key: "idVotadas",
+          value: [...idVotadas, song.id_song],
+        });
+        handleUpdateSong({
+          votos: song.votos + 1,
+          idSong: song.id_song,
+        });
+        handleIdVotadas([...idVotadas, song.id_song]);
+      } else {
+        SetLocalStorage({
+          key: "idVotadas",
+          value: idVotadas.filter((id) => id !== song.id_song),
+        });
+        handleUpdateSong({
+          votos: song.votos - 1,
+          idSong: song.id_song,
+        });
+        handleIdVotadas(idVotadas.filter((id) => id !== song.id_song));
+      }
+    }
+  };
+
   return (
     <Card
       component="article"
@@ -48,7 +103,7 @@ function CardSong({ song, onClickVote, isVoted, isClosed }: CardSongProps) {
               aria-label="voto"
               color="secondary"
               sx={{ pt: 0, pr: 1, pb: 0, pl: 1 }}
-              onClick={onClickVote}
+              onClick={() => handleVote(song)}
             >
               {isVoted ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
             </IconButton>

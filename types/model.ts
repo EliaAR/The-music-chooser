@@ -3,6 +3,7 @@ export interface RoomModel {
   name_room: string;
   url_room: string;
   isclosed: boolean;
+  currentsong: number | null;
 }
 
 export interface SongModel {

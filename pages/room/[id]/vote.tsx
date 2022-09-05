@@ -7,21 +7,27 @@ import { Room } from "../../../components/Room/Room";
 
 function Vote() {
   const [data, setData] = useState<RoomModel | undefined>();
+  const [fetchRoom, setFetchRoom] = useState(true);
 
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    if (id && typeof id === "string")
-      getRoom({ id }).then((data) => setData(data));
-  }, [id]);
+    if (fetchRoom) {
+      if (id && typeof id === "string")
+        getRoom({ id }).then((data) => {
+          setData(data);
+          setFetchRoom(false);
+        });
+    }
+  }, [fetchRoom, id]);
 
   return (
     <>
       {data ? (
         <>
           <Header title={`SALA ${data.name_room}`} />
-          <Room roomData={data} />
+          <Room roomData={data} reloadRoomData={() => setFetchRoom(true)} />
         </>
       ) : null}
     </>

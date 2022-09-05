@@ -4,8 +4,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import { getSongs, createSong, updateSong, updateRoom } from "../../services";
-import { GetLocalStorage, SetLocalStorage } from "../../services/localStorage";
+import { getSongs, createSong, updateRoom } from "../../services";
+import { GetLocalStorage } from "../../services/localStorage";
 import { RoomModel, SongModel } from "../../types/model";
 import { Alert } from "../Common/Alert";
 import { CardSong } from "../CardSong/CardSong";
@@ -13,19 +13,14 @@ import styles from "./Room.module.scss";
 
 interface RoomProps {
   roomData: RoomModel;
+  reloadRoomData: () => void;
 }
-
-interface HandleUpdateSongProps {
-  votos: number;
-  idSong: number;
-}
-
 interface HandleUpdateRoomProps {
   isClosed: boolean;
   idRoom: string | number;
 }
 
-function Room({ roomData }: RoomProps) {
+function Room({ roomData, reloadRoomData }: RoomProps) {
   const [callAPIGet, setCallAPIGet] = useState(true);
   const [songs, setSongs] = useState<SongModel[]>([]);
   const [callAPIPost, setCallAPIPost] = useState(false);
@@ -63,22 +58,10 @@ function Room({ roomData }: RoomProps) {
     }
   }, [callAPIPost, id, urlSong]);
 
-  const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
-    updateSong({ votos, idSong })
-      .then((data) => {
-        console.log(data);
-        setCallAPIGet(true);
-      })
-      .catch((err) => {
-        setError(err.message);
-        console.error(err);
-      });
-  };
-
   const handleUpdateRoom = ({ isClosed, idRoom }: HandleUpdateRoomProps) => {
-    updateRoom({ isClosed, idRoom })
-      .then((data) => {
-        console.log(data);
+    updateRoom({ isClosed, idRoom, currentsong: songs[0].id_song })
+      .then(() => {
+        reloadRoomData();
         setCallAPIGet(true);
       })
       .catch((err) => {
@@ -136,40 +119,28 @@ function Room({ roomData }: RoomProps) {
               <CardSong
                 key={song.id_song}
                 song={song}
-                onClickVote={() => {
-                  if (!idVotadas.includes(song.id_song)) {
-                    SetLocalStorage({
-                      key: "idVotadas",
-                      value: [...idVotadas, song.id_song],
-                    });
-                    handleUpdateSong({
-                      votos: song.votos + 1,
-                      idSong: song.id_song,
-                    });
-                    setIdVotadas([...idVotadas, song.id_song]);
-                  } else {
-                    SetLocalStorage({
-                      key: "idVotadas",
-                      value: idVotadas.filter((id) => id !== song.id_song),
-                    });
-                    handleUpdateSong({
-                      votos: song.votos - 1,
-                      idSong: song.id_song,
-                    });
-                    setIdVotadas(idVotadas.filter((id) => id !== song.id_song));
-                  }
-                }}
-                isVoted={idVotadas.includes(song.id_song)}
                 isClosed={roomData.isclosed}
+                idVotadas={idVotadas}
+                handleIdVotadas={(newIdArrayVotadas) =>
+                  setIdVotadas(newIdArrayVotadas)
+                }
+                handleVoteSuccess={() => setCallAPIGet(true)}
+                handleVoteError={(err) => setError(err.message)}
+                isVoted={idVotadas.includes(song.id_song)}
               />
             ))}
           </Box>
         </Box>
-        <Box component="section" className={styles.room__buttonContainer}>
+        <Box component="section" className={styles.room__buttonsContainer}>
           <Button
             variant="contained"
-            onClick={() => handleUpdateRoom({ isClosed: true, idRoom: id })}
+            onClick={() =>
+              handleUpdateRoom({ isClosed: !roomData.isclosed, idRoom: id })
+            }
           >
+            {roomData.isclosed ? "Abrir" : "Cerrar"} Votaciones
+          </Button>
+          <Button variant="contained">
             <Link href={`/room/${id}/play`}>
               <a>Abrir Sala de Reproducción</a>
             </Link>
