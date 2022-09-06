@@ -59,7 +59,7 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
   }, [callAPIPost, id, urlSong]);
 
   const handleUpdateRoom = ({ isClosed, idRoom }: HandleUpdateRoomProps) => {
-    updateRoom({ isClosed, idRoom, currentsong: songs[0].id_song })
+    updateRoom({ isClosed, idRoom, currentSong: songs[0].id_song })
       .then(() => {
         reloadRoomData();
         setCallAPIGet(true);
@@ -119,7 +119,7 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
               <CardSong
                 key={song.id_song}
                 song={song}
-                isClosed={roomData.isclosed}
+                isClosed={roomData.is_closed}
                 idVotadas={idVotadas}
                 handleIdVotadas={(newIdArrayVotadas) =>
                   setIdVotadas(newIdArrayVotadas)
@@ -135,10 +135,10 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
           <Button
             variant="contained"
             onClick={() =>
-              handleUpdateRoom({ isClosed: !roomData.isclosed, idRoom: id })
+              handleUpdateRoom({ isClosed: !roomData.is_closed, idRoom: id })
             }
           >
-            {roomData.isclosed ? "Abrir" : "Cerrar"} Votaciones
+            {roomData.is_closed ? "Abrir" : "Cerrar"} Votaciones
           </Button>
           <Button variant="contained">
             <Link href={`/room/${id}/play`}>

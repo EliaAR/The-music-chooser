@@ -4,22 +4,22 @@ import { RoomModel } from "../../../types/model";
 
 interface UpdateRoomRequest {
   id_room: number;
-  isclosed: boolean;
-  currentsong: number;
+  is_closed: boolean;
+  current_song: number;
 }
 
 export type UpdateRoomResponse = RoomModel | { error: string };
 
 const text =
-  "UPDATE rooms SET isclosed = $1, currentsong = $2 WHERE id_room = $3 RETURNING *";
+  "UPDATE rooms SET is_closed = $1, current_song = $2 WHERE id_room = $3 RETURNING *";
 
 const updateRoom: NextApiHandler<UpdateRoomResponse> = async (req, res) => {
-  const { isclosed, currentsong, id_room } = req.body as UpdateRoomRequest;
+  const { is_closed, current_song, id_room } = req.body as UpdateRoomRequest;
 
   try {
     const results = await pool.query<RoomModel>(text, [
-      isclosed,
-      currentsong,
+      is_closed,
+      current_song,
       id_room,
     ]);
 

@@ -3,28 +3,28 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 0 20px;
-  height: calc(100vh - 48px);
+  padding: 0 1.25rem;
+  height: calc(100vh - 3rem);
 
   &__title {
     flex-grow: 0.15;
     display: flex;
     align-items: center;
     transform: rotate(-5deg);
-    font-size: 35px;
+    font-size: 2.5rem;
   }
   &__title--dark {
-    text-shadow: 3px 2px 3px rgba(144, 153, 106, 0.2);
+    text-shadow: 0.2rem 0.12rem 0.2rem rgba(144, 153, 106, 0.2);
   }
   &__title--light {
-    text-shadow: 3px 2px 3px rgb(43 48 24 / 40%);
+    text-shadow: 0.2rem 0.12rem 0.2rem rgb(43 48 24 / 40%);
   }
-  &__instructions {
+  &__instructionsContainer {
     display: flex;
     flex-direction: column;
-    padding: 5px 15px 10px;
-    max-width: 500px;
-    border-radius: 5px;
+    gap: 0.4rem;
+    padding: 0.3rem 1rem 0.3rem;
+    border-radius: 0.3rem;
   }
   &__room {
     flex-grow: 0.15;

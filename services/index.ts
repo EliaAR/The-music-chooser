@@ -18,7 +18,7 @@ interface GetRoomsProps {
 interface UpdateRoomProps {
   isClosed: boolean;
   idRoom: string | number;
-  currentsong?: number;
+  currentSong?: number;
 }
 
 interface GetSongsProps {
@@ -65,7 +65,7 @@ function getRoom({ id }: GetRoomsProps): Promise<RoomModel> {
 function updateRoom({
   isClosed,
   idRoom,
-  currentsong,
+  currentSong,
 }: UpdateRoomProps): Promise<RoomModel> {
   const ENDPOINT = location.origin + "/api/rooms/update";
   return fetch(ENDPOINT, {
@@ -74,9 +74,9 @@ function updateRoom({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      isclosed: isClosed,
+      is_closed: isClosed,
       id_room: idRoom,
-      currentsong: currentsong,
+      current_song: currentSong,
     }),
   })
     .then((response) => response.json())

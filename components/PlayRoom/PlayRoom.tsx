@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import { UpdateRoomResponse } from "../../pages/api/rooms/update";
 import { getSongs, updateRoom } from "../../services";
 import { RoomModel, SongModel } from "../../types/model";
 import { PlayCardSong } from "../PlayCardSong/PlayCardSong";
 import styles from "./PlayRoom.module.scss";
+import { CardListSong } from "../CardListSong/CardListSong";
 
 interface PlayRoomProps {
   roomData: RoomModel;
@@ -49,7 +52,7 @@ function PlayRoom({ roomData }: PlayRoomProps) {
   };
 
   const currentSong = songs.find(
-    (song) => song.id_song === roomData.currentsong,
+    (song) => song.id_song === roomData.current_song,
   );
 
   return (
@@ -61,13 +64,29 @@ function PlayRoom({ roomData }: PlayRoomProps) {
       {currentSong ? (
         <PlayCardSong song={currentSong} />
       ) : (
-        <p>There is no song playing</p>
+        <p>No hay canciones</p>
       )}
-      {songs.length ? (
-        songs.map((song) => <p key={song.id_song}>{song.name_song}</p>)
-      ) : (
-        <p>Mensaje Alert</p>
-      )}
+      <Box component="section">
+        <Divider variant="fullWidth" />
+        <Typography
+          variant="h6"
+          sx={{ color: "text.secondary" }}
+          className={styles.playRoom__title}
+        >
+          Lista de canciones
+        </Typography>
+        <Divider variant="fullWidth" />
+        {songs.length ? (
+          songs.map((song) => (
+            <CardListSong
+              key={song.id_song}
+              name={song.name_song}
+            ></CardListSong>
+          ))
+        ) : (
+          <p>No hay canciones</p>
+        )}
+      </Box>
       <Box component="section" className={styles.room__buttonContainer}>
         <Button
           variant="contained"

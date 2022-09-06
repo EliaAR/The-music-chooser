@@ -18,6 +18,10 @@ const themeOptionsDark = {
       default: "#303030",
       paper: "#424242",
     },
+    success: {
+      main: "rgba(255, 255, 255, 0.4)",
+      contrastText: "#fff",
+    },
     error: {
       main: "#592a2a",
       contrastText: "#E4E6EB",

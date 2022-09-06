@@ -41,13 +41,13 @@ function HomePage() {
   return (
     <>
       <Box
-        className={styles.HomePage}
-        sx={{ backgroundColor: "background.default" }}
         component="main"
+        sx={{ backgroundColor: "background.default" }}
+        className={styles.HomePage}
       >
         <Typography
-          variant="h6"
           component="h3"
+          variant="h6"
           sx={{ color: "secondary.main" }}
           className={
             styles.HomePage__title +
@@ -62,25 +62,28 @@ function HomePage() {
         <Box
           component="section"
           sx={{ backgroundColor: "background.paper", boxShadow: 3 }}
-          className={styles.HomePage__instructions}
+          className={styles.HomePage__instructionsContainer}
         >
           <Typography
-            variant="h6"
             component="h6"
+            variant="h6"
             lineHeight="2"
             sx={{ color: "text.secondary" }}
           >
             Descripción
           </Typography>
           <Divider orientation="horizontal" variant="middle" />
-          <Typography
-            variant="body1"
-            sx={{ color: "text.secondary", pt: "5px", textAlign: "justify" }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-            blanditiis tenetur unde suscipit, quam beatae rerum inventore
-            consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-            fugiat deleniti? Eum quasi quidem quibusdam.
+          <Typography variant="body1" sx={{ color: "text.secondary" }}>
+            1. Crea una Sala
+          </Typography>
+          <Typography variant="body1" sx={{ color: "text.secondary" }}>
+            2. Comparte la URL con tu gente
+          </Typography>
+          <Typography variant="body1" sx={{ color: "text.secondary" }}>
+            3. Votad por vuestras canciones favoritas
+          </Typography>
+          <Typography variant="body1" sx={{ color: "text.secondary" }}>
+            4. ¡Disfrutad de la música!
           </Typography>
         </Box>
         <Box component="section" className={styles.HomePage__room}>
@@ -99,7 +102,7 @@ function HomePage() {
       </Box>
       <Alert
         open={error !== ""}
-        alertMsg={error}
+        alertMsg="Ese nombre de sala ya existe. Prueba con otro"
         handleCloseAlert={() => setError("")}
       />
     </>
