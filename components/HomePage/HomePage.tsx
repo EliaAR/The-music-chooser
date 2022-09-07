@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import { createRoom } from "../../services";
-import { Alert } from "../Common/Alert";
+import { Alert } from "../Common/Alert/Alert";
 import styles from "./HomePage.module.scss";
 
 function HomePage() {

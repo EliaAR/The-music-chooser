@@ -23,10 +23,7 @@ function Header({ title }: HeaderProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "primary.main" }}>
-        <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+        <Toolbar component="section" variant="dense" sx={{ minHeight: 68.8 }}>
           <Typography
             variant="h5"
             color="inherit"

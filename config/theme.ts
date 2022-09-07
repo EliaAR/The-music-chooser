@@ -44,7 +44,11 @@ const themeOptionsLight = {
     },
     background: {
       default: "rgba(251, 246, 243, 0.49)",
-      paper: "#fbf4eb",
+      paper: "#e8e2db",
+    },
+    success: {
+      main: "rgba(0, 0, 0, 0.4)",
+      contrastText: "#E4E6EB",
     },
     error: {
       main: "#592a2a",

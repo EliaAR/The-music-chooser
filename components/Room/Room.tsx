@@ -3,11 +3,11 @@ import Link from "next/link";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { getSongs, createSong, updateRoom } from "../../services";
 import { GetLocalStorage } from "../../services/localStorage";
 import { RoomModel, SongModel } from "../../types/model";
-import { Alert } from "../Common/Alert";
+import { Alert } from "../Common/Alert/Alert";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./Room.module.scss";
 

@@ -2,6 +2,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -9,7 +10,6 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { updateSong } from "../../services";
 import { SetLocalStorage } from "../../services/localStorage";
 import { SongModel } from "../../types/model";
-import { Box } from "@mui/material";
 import styles from "./CardSong.module.scss";
 
 interface CardSongProps {
