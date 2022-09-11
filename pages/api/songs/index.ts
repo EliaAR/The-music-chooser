@@ -13,9 +13,11 @@ const selectTableSongs: NextApiHandler<GetSongResponse> = async (req, res) => {
     const results = await pool.query<SongModel>(text, [id_room]);
 
     return res.json(results.rows);
-  } catch (e: any) {
-    console.error(e);
-    res.status(500).json({ error: e?.message });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e);
+      res.status(500).json({ error: e?.message });
+    }
   }
 };
 

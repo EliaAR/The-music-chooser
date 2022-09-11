@@ -8,20 +8,28 @@ import { UpdateRoomResponse } from "../../pages/api/rooms/update";
 import { getSongs, updateRoom } from "../../services";
 import { RoomModel, SongModel } from "../../types/model";
 import { PlayCardSong } from "../PlayCardSong/PlayCardSong";
-import styles from "./PlayRoom.module.scss";
 import { CardListSong } from "../CardListSong/CardListSong";
+import { ErrorComponent } from "../Common/ErrorComponent/ErrorComponent";
+import styles from "./PlayRoom.module.scss";
 
 interface PlayRoomProps {
   roomData: RoomModel;
+  reloadRoomData: () => void;
 }
-
 interface HandleUpdatePlayRoomProps {
   isClosed: boolean;
   idRoom: string | number;
 }
 
-function PlayRoom({ roomData }: PlayRoomProps) {
+interface HandleUpdateCurrentSongDBProps {
+  isClosed: boolean;
+  idRoom: string | number;
+  currentSong: number;
+}
+
+function PlayRoom({ roomData, reloadRoomData }: PlayRoomProps) {
   const [songs, setSongs] = useState<SongModel[]>([]);
+  const [defaultIsPlaying, setDefaultIsPlaying] = useState(false);
 
   const id = roomData.id_room;
 
@@ -51,9 +59,46 @@ function PlayRoom({ roomData }: PlayRoomProps) {
     }
   };
 
-  const currentSong = songs.find(
+  const handleUpdateCurrentSongDB = ({
+    isClosed,
+    idRoom,
+    currentSong,
+  }: HandleUpdateCurrentSongDBProps) => {
+    updateRoom({ isClosed, idRoom, currentSong })
+      .then(() => {
+        reloadRoomData();
+        setDefaultIsPlaying(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const indexCurrentSong = songs.findIndex(
     (song) => song.id_song === roomData.current_song,
   );
+
+  const currentSong = songs[indexCurrentSong];
+
+  const handleSkipPrevious = () => {
+    if (songs[indexCurrentSong - 1]) {
+      handleUpdateCurrentSongDB({
+        isClosed: true,
+        idRoom: id,
+        currentSong: songs[indexCurrentSong - 1].id_song,
+      });
+    }
+  };
+
+  const handleSkipNext = () => {
+    if (songs[indexCurrentSong + 1]) {
+      handleUpdateCurrentSongDB({
+        isClosed: true,
+        idRoom: id,
+        currentSong: songs[indexCurrentSong + 1].id_song,
+      });
+    }
+  };
 
   return (
     <Box
@@ -62,9 +107,14 @@ function PlayRoom({ roomData }: PlayRoomProps) {
       className={styles.playRoom}
     >
       {currentSong ? (
-        <PlayCardSong song={currentSong} />
+        <PlayCardSong
+          song={currentSong}
+          onSkipPrevious={() => handleSkipPrevious()}
+          onSkipNext={() => handleSkipNext()}
+          defaultIsPlaying={defaultIsPlaying}
+        />
       ) : (
-        <p>No hay canciones</p>
+        <ErrorComponent message="No existe canción para reproducir" />
       )}
       <Box component="section">
         <Divider variant="fullWidth" />
@@ -84,7 +134,7 @@ function PlayRoom({ roomData }: PlayRoomProps) {
             ></CardListSong>
           ))
         ) : (
-          <p>No hay canciones</p>
+          <ErrorComponent message="No hay canciones en la lista" />
         )}
       </Box>
       <Box component="section" className={styles.room__buttonContainer}>

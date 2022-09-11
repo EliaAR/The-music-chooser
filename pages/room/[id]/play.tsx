@@ -7,21 +7,27 @@ import { PlayRoom } from "../../../components/PlayRoom/PlayRoom";
 
 function Play() {
   const [data, setData] = useState<RoomModel | undefined>();
+  const [fetchRoom, setFetchRoom] = useState(true);
 
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    if (id && typeof id === "string")
-      getRoom({ id }).then((data) => setData(data));
-  }, [id]);
+    if (fetchRoom) {
+      if (id && typeof id === "string")
+        getRoom({ id }).then((data) => {
+          setData(data);
+          setFetchRoom(false);
+        });
+    }
+  }, [fetchRoom, id]);
 
   return (
     <>
       {data ? (
         <>
           <Header title={`Sala Reproducción ${data.name_room}`} />
-          <PlayRoom roomData={data} />
+          <PlayRoom roomData={data} reloadRoomData={() => setFetchRoom(true)} />
         </>
       ) : null}
     </>

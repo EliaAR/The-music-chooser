@@ -52,8 +52,10 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
           setUrlSong("");
         })
         .catch((err) => {
-          setError(err.message);
-          console.error(err);
+          if (err instanceof Error) {
+            setError(err.message);
+            console.error(err);
+          }
         });
     }
   }, [callAPIPost, id, urlSong]);
@@ -65,8 +67,10 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
         setCallAPIGet(true);
       })
       .catch((err) => {
-        setError(err.message);
-        console.error(err);
+        if (err instanceof Error) {
+          setError(err.message);
+          console.error(err);
+        }
       });
   };
 

@@ -26,7 +26,9 @@ function HomePage() {
         await router.push(`/room/${data.id_room}/vote`);
       }
     } catch (err) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      }
     }
   };
 

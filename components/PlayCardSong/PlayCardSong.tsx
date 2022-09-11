@@ -1,65 +1,125 @@
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+import { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import Slider from "@mui/material/Slider";
 import Divider from "@mui/material/Divider";
 import { SongModel } from "../../types/model";
+import { ButtonsSong } from "../ButtonsSong/ButtonsSong";
 import styles from "./PlayCardSong.module.scss";
 
 interface PlayCardSongProps {
   song: SongModel;
+  onSkipNext: () => void;
+  onSkipPrevious: () => void;
+  defaultIsPlaying?: boolean;
+}
+interface controlProgressTrackProps {
+  onSkipNext: () => void;
 }
 
-function PlayCardSong({ song }: PlayCardSongProps) {
-  const theme = useTheme();
+function PlayCardSong({
+  song,
+  onSkipNext,
+  onSkipPrevious,
+  defaultIsPlaying,
+}: PlayCardSongProps) {
+  const [progressTrack, setProgressTrack] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(defaultIsPlaying || false);
+
+  const audioRef = useRef(new Audio(song.audio));
+  const intervalRef = useRef<NodeJS.Timer>();
+  // const isReady = useRef(false);
+
+  const { duration } = audioRef.current;
+
+  useEffect(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    audioRef.current.pause();
+    // setIsPlaying(false);
+    audioRef.current = new Audio(song.audio);
+    audioRef.current.play();
+  }, [song]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+      controlProgressTrack({ onSkipNext });
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying, onSkipNext]);
+
+  const controlProgressTrack = ({ onSkipNext }: controlProgressTrackProps) => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      if (audioRef.current.ended) {
+        onSkipNext();
+        setProgressTrack(0);
+      } else {
+        setProgressTrack(audioRef.current.currentTime);
+      }
+    }, 1000);
+  };
+
+  const onScrub = (value: number) => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      audioRef.current.currentTime = value;
+      setProgressTrack(audioRef.current.currentTime);
+    }
+  };
+
+  const onScrubEnd = () => {
+    if (!isPlaying) {
+      setIsPlaying(true);
+    }
+    controlProgressTrack({ onSkipNext });
+  };
 
   return (
     <Card component="section" className={styles.playCardSong}>
-      <Box>
-        <CardContent>
-          <Typography
-            component="h6"
-            variant="h6"
-            sx={{ fontSize: 15 }}
-            className={styles.playCardSong__title}
-            title={song.name_song}
-          >
-            {song.name_song}
-          </Typography>
-        </CardContent>
-        <Divider orientation="horizontal" variant="middle" />
-        <Box className={styles.playCardSong__controlContainer}>
-          <IconButton aria-label="previous">
-            {theme.direction === "rtl" ? (
-              <SkipNextIcon />
-            ) : (
-              <SkipPreviousIcon />
-            )}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === "rtl" ? (
-              <SkipPreviousIcon />
-            ) : (
-              <SkipNextIcon />
-            )}
-          </IconButton>
-        </Box>
-      </Box>
       <CardMedia
         component="img"
         image={song.img}
         alt={song.name_song}
-        sx={{ height: 118 }}
+        sx={{ height: 120, width: "auto", objectFit: "fill" }}
+        className={styles.playCardSong__img}
       />
+      <Box component="article" className={styles.playCardSong__songContainer}>
+        <Typography
+          component="h6"
+          variant="h6"
+          sx={{ fontSize: 15 }}
+          className={styles.playCardSong__songTitle}
+          title={song.name_song}
+        >
+          {song.name_song}
+        </Typography>
+        <Divider sx={{ width: 230 }} />
+        <ButtonsSong
+          isPlaying={isPlaying}
+          onPlayPauseClick={() => setIsPlaying(!isPlaying)}
+          onSkipPrevious={onSkipPrevious}
+          onSkipNext={onSkipNext}
+        />
+        <Divider sx={{ width: 230 }} />
+        <Slider
+          aria-label="time-indicator"
+          value={progressTrack}
+          min={0}
+          step={1}
+          max={duration ? duration : 0}
+          onChange={(_, value) => onScrub(value as number)}
+          onChangeCommitted={() => onScrubEnd()}
+          sx={{ width: 200, height: 10 }}
+        />
+      </Box>
     </Card>
   );
 }

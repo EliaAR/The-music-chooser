@@ -18,9 +18,11 @@ const updateSong: NextApiHandler<UpdateSongResponse> = async (req, res) => {
     const results = await pool.query<SongModel>(text, [votos, id_song]);
 
     return res.json(results.rows[0]);
-  } catch (e: any) {
-    console.error(e);
-    res.status(500).json({ error: e?.message });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e);
+      res.status(500).json({ error: e?.message });
+    }
   }
 };
 

@@ -43,8 +43,10 @@ function CardSong({
         handleVoteSuccess();
       })
       .catch((err) => {
-        handleVoteError(err.message);
-        console.error(err);
+        if (err instanceof Error) {
+          handleVoteError(err.message);
+          console.error(err);
+        }
       });
   };
   const handleVote = (song: SongModel) => {

@@ -1,19 +1,42 @@
 .playCardSong {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 90px 0;
+  padding-top: 1.5rem;
 
-  &__title {
-    width: 200px;
+  &__img {
+    border-radius: 0.2rem;
+  }
+
+  &__songContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__songTitle {
+    padding: 1rem;
+    width: 16.9rem;
+    text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
+    // overflow: hidden;
   }
+}
 
-  &__controlContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@media (min-width: 47.9rem) {
+  .playCardSong {
+    flex-direction: row;
+    padding-top: 0;
+    padding-right: 0.8rem;
+    &__img {
+      order: 1;
+    }
   }
 }

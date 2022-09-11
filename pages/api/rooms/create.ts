@@ -24,9 +24,11 @@ const insertRoom: NextApiHandler<CreateRoomResponse> = async (req, res) => {
     const results = await pool.query<RoomModel>(text, [name_room, url_room]);
 
     return res.json(results.rows[0]);
-  } catch (e: any) {
-    console.error(e);
-    res.status(500).json({ error: e?.message });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e);
+      res.status(500).json({ error: e?.message });
+    }
   }
 };
 
