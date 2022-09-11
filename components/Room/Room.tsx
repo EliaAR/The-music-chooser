@@ -129,7 +129,7 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
                   setIdVotadas(newIdArrayVotadas)
                 }
                 handleVoteSuccess={() => setCallAPIGet(true)}
-                handleVoteError={(err) => setError(err.message)}
+                handleVoteError={(err) => setError(err)}
                 isVoted={idVotadas.includes(song.id_song)}
               />
             ))}
