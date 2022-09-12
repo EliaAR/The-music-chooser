@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 
-let pool;
+let pool: Pool;
 
 try {
   pool = new Pool();
