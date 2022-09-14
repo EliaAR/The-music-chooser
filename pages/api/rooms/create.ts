@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
 import { pool } from "../../../lib/db";
 import { RoomModel } from "../../../types/model";
+
 interface CreateRoomRequest {
   name_room: string;
   url_room: string;

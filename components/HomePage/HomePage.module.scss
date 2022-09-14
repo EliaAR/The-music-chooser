@@ -6,6 +6,11 @@
   padding: 0 1.25rem;
   height: calc(100vh - 4.3rem);
 
+  &__headingContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__title {
     flex-grow: 0.15;
     display: flex;

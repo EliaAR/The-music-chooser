@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "nibble": "eslint-nibble */*.ts pages/**/*.ts */*.tsx components/**/*.tsx components/**/**/*.tsx pages/**/*.tsx"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -13,6 +14,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "dotenv": "^11.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "next": "12.0.7",
     "pg": "^8.7.1",
     "react": "17.0.2",

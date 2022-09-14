@@ -32,6 +32,28 @@ function MyApp({ Component, pageProps }: AppProps) {
             ? themeOptionsLight.palette
             : themeOptionsDark.palette),
         },
+        components: {
+          MuiSwitch: {
+            styleOverrides: {
+              switchBase: {
+                color: "#000",
+              },
+              colorPrimary: {
+                "&.Mui-checked": {
+                  color: "#fff",
+                },
+              },
+              track: {
+                opacity: 0.2,
+                backgroundColor: "#fff",
+                ".Mui-checked.Mui-checked + &": {
+                  opacity: 0.7,
+                  backgroundColor: "#fff",
+                },
+              },
+            },
+          },
+        },
       }),
     [mode],
   );

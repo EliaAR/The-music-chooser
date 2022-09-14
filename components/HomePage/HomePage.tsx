@@ -51,13 +51,11 @@ function HomePage() {
           component="h3"
           variant="h6"
           sx={{ color: "secondary.main" }}
-          className={
-            styles.HomePage__title +
-            " " +
-            (theme.palette.mode === "dark"
+          className={`${styles.HomePage__title} ${
+            theme.palette.mode === "dark"
               ? styles["HomePage__title--dark"]
-              : styles["HomePage__title--light"])
-          }
+              : styles["HomePage__title--light"]
+          }`}
         >
           Pick out your song!
         </Typography>
@@ -72,7 +70,7 @@ function HomePage() {
             lineHeight="2"
             sx={{ color: "text.secondary" }}
           >
-            Descripción
+            Pasos para hacer la playlist
           </Typography>
           <Divider orientation="horizontal" variant="middle" />
           <Typography variant="body1" sx={{ color: "text.secondary" }}>

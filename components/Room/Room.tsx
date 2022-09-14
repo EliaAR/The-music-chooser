@@ -98,14 +98,14 @@ function Room({ roomData, reloadRoomData }: RoomProps) {
         <Box component="section">
           <Box
             component="section"
-            sx={{ boxShadow: 2 }}
+            sx={{ backgroundColor: "info.main", boxShadow: 3 }}
             className={styles.room__listTitle}
           >
             <Typography
               variant="body1"
               component="h6"
               sx={{
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
               Listado canciones
