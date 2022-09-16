@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           MuiSwitch: {
             styleOverrides: {
               switchBase: {
-                color: "#000",
+                color: "#3a3838",
               },
               colorPrimary: {
                 "&.Mui-checked": {
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 opacity: 0.2,
                 backgroundColor: "#fff",
                 ".Mui-checked.Mui-checked + &": {
-                  opacity: 0.7,
+                  opacity: 0.2,
                   backgroundColor: "#fff",
                 },
               },

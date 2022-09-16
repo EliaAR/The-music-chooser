@@ -1,8 +1,12 @@
 .Header {
-  &__moon {
+  &__switchContainer {
+    display: flex;
+    align-items: center;
+  }
+  &__switchMoon {
     color: #fff;
   }
-  &__sun {
-    color: #000;
+  &__switchSun {
+    color: #3a3838;
   }
 }

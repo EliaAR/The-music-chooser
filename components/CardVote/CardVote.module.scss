@@ -1,0 +1,27 @@
+.CardVote {
+  &__title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.9rem;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    background-color: #545454;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    z-index: 99;
+  }
+  &__songs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.3rem;
+    min-height: 22rem;
+    width: 20.4rem;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
