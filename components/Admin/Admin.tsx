@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { updateRoom } from "../../services";
 import { RoomModel, SongModel } from "../../types/model";
-import { InfoComponent } from "../InfoComponent/InfoComponent";
+import { DescriptionComponent } from "../DescriptionComponent/DescriptionComponent";
 import { ShareButtons } from "../ShareButtons/ShareButtons";
 import { AddSongInput } from "../AddSongInput/AddSongInput";
 import { PlayCardSong } from "../PlayCardSong/PlayCardSong";
@@ -28,6 +28,7 @@ interface AdminProps {
   roomData: RoomModel;
   reloadRoomData: () => void;
   onUpdateRoom: (err: string) => void;
+  isAdmin: boolean;
 }
 
 interface HandleUpdateRoomProps {
@@ -56,6 +57,7 @@ function Admin({
   roomData,
   reloadRoomData,
   onUpdateRoom,
+  isAdmin,
 }: AdminProps) {
   const [defaultIsPlaying, setDefaultIsPlaying] = useState(false);
 
@@ -113,7 +115,7 @@ function Admin({
       sx={{ backgroundColor: "background.default" }}
       className={styles.admin}
     >
-      <InfoComponent />
+      <DescriptionComponent />
 
       <ShareButtons />
 
@@ -142,6 +144,7 @@ function Admin({
         onVoteSuccess={onVoteSuccess}
         onVoteError={onVoteError}
         indexCurrentSong={indexCurrentSong}
+        isAdmin={isAdmin}
       />
       <Box component="section" className={styles.admin__buttonsContainer}>
         <Button

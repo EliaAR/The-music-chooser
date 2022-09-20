@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import AnnouncementIcon from "@mui/icons-material/Announcement";
+import DangerousOutlinedIcon from "@mui/icons-material/DangerousOutlined";
 import styles from "./ErrorComponent.module.scss";
 
 interface ErrorComponentProps {
@@ -14,7 +14,7 @@ function ErrorComponent({ message }: ErrorComponentProps) {
       sx={{ backgroundColor: "background.paper" }}
       className={styles.errorComponent}
     >
-      <AnnouncementIcon sx={{ height: 45, width: 45 }} />
+      <DangerousOutlinedIcon sx={{ height: 45, width: 45 }} />
       <Typography
         variant="body1"
         component="p"

@@ -58,7 +58,7 @@ function HomePage() {
         <Typography
           component="h3"
           variant="h6"
-          sx={{ color: "secondary.main", fontSize: 36.8 }}
+          sx={{ fontSize: 36.8, color: "secondary.main" }}
           className={`${styles.HomePage__title} ${
             theme.palette.mode === "dark"
               ? styles["HomePage__title--dark"]
@@ -69,19 +69,20 @@ function HomePage() {
         </Typography>
         <Box
           component="section"
-          sx={{ backgroundColor: "background.paper", boxShadow: 3 }}
+          sx={{ boxShadow: 3, backgroundColor: "background.paper" }}
           className={styles.HomePage__instructionsContainer}
         >
           <Typography
-            component="h6"
             variant="h6"
-            lineHeight="2"
-            sx={{ color: "text.secondary" }}
+            sx={{ lineHeight: 2, color: "text.secondary" }}
           >
             Pasos para hacer la playlist
           </Typography>
           <Divider orientation="horizontal" variant="middle" />
-          <Typography variant="body1" sx={{ color: "text.secondary" }}>
+          <Typography
+            variant="body1"
+            sx={{ paddingTop: 0.2, color: "text.secondary" }}
+          >
             1. Crea una Sala
           </Typography>
           <Typography variant="body1" sx={{ color: "text.secondary" }}>

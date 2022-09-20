@@ -61,6 +61,7 @@ function CardVote({
             onVoteError={onVoteError}
             isVoted={idVotadas.includes(song.id_song)}
             indexCurrentSong={indexCurrentSong}
+            isAdmin={isAdmin}
           />
         ))}
       </Box>

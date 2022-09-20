@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: 0 1.25rem;
+  gap: 2rem;
+  padding: 1.25rem;
   min-height: calc(100vh - 5rem);
 
   &__buttonsContainer {

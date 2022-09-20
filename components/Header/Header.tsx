@@ -30,7 +30,7 @@ function Header({ title }: HeaderProps) {
       <Toolbar
         component="section"
         variant="dense"
-        sx={{ minHeight: matches ? 60 : 80, justifyContent: "space-between" }}
+        sx={{ justifyContent: "space-between", minHeight: matches ? 60 : 80 }}
       >
         <Link href={"/"}>
           <a>
@@ -49,13 +49,12 @@ function Header({ title }: HeaderProps) {
         <Typography
           component="h1"
           variant="h5"
-          color="inherit"
           sx={{
+            textAlign: "center",
             pl: 5,
             fontWeight: "bold",
             color: "text.disabled",
           }}
-          align="center"
         >
           {title}
         </Typography>

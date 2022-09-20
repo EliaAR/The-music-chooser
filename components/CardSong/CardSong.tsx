@@ -1,6 +1,4 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -22,6 +20,7 @@ interface CardSongProps {
   onVoteError: (err: string) => void;
   isVoted: boolean;
   indexCurrentSong: number;
+  isAdmin: boolean;
 }
 
 interface HandleUpdateSongProps {
@@ -38,6 +37,7 @@ function CardSong({
   onVoteError,
   isVoted,
   indexCurrentSong,
+  isAdmin,
 }: CardSongProps) {
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
     updateSong({ votos, idSong })
@@ -90,16 +90,17 @@ function CardSong({
       }}
       className={styles.cardSong}
     >
-      <CardContent component="article">
-        <Typography
-          component="p"
-          variant="body1"
-          title={song.name_song}
-          className={styles.cardSong__title}
-        >
-          {song.name_song}
-        </Typography>
-      </CardContent>
+      <Typography
+        component="p"
+        variant="body1"
+        title={song.name_song}
+        sx={{
+          width: isClosed && !isAdmin ? 200 : 150,
+        }}
+        className={styles.cardSong__title}
+      >
+        {song.name_song}
+      </Typography>
       <CardMedia
         component="img"
         image={song.img}
@@ -108,29 +109,31 @@ function CardSong({
       />
       {!isClosed ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
-          <CardActions sx={{ p: 0 }}>
-            <IconButton
-              component="button"
-              aria-label="voto"
-              color="secondary"
-              sx={{ pt: 0, pr: 1, pb: 0, pl: 1 }}
-              onClick={() => handleVote(song)}
-            >
-              {isVoted ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
-            </IconButton>
-          </CardActions>
+          <IconButton
+            component="button"
+            aria-label="voto"
+            color="secondary"
+            sx={{ padding: 0 }}
+            onClick={() => handleVote(song)}
+          >
+            {isVoted ? (
+              <ThumbUpIcon sx={{ height: 30, width: 30 }} />
+            ) : (
+              <ThumbUpOutlinedIcon sx={{ height: 30, width: 30 }} />
+            )}
+          </IconButton>
           <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
             {song.votos}
           </Typography>
         </Box>
-      ) : (
-        <IconButton aria-label="play">
+      ) : isAdmin ? (
+        <IconButton aria-label="play" sx={{ paddingInline: 0 }}>
           <PlayArrowRoundedIcon
             sx={{ height: 38, width: 38 }}
             color="success"
           />
         </IconButton>
-      )}
+      ) : null}
     </Card>
   );
 }

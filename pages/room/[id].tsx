@@ -114,6 +114,7 @@ function RoomById() {
               roomData={data}
               reloadRoomData={() => setFetchRoom(true)}
               onUpdateRoom={(err) => setError(err)}
+              isAdmin={isAdmin}
             />
           ) : (
             <Room
