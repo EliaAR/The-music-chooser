@@ -1,15 +1,15 @@
-.room {
+.admin {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   padding: 0 1.25rem;
   min-height: calc(100vh - 5rem);
-}
 
-@media screen and (max-height: 667px) {
-  .room {
-    justify-content: space-around;
-    min-height: calc(100vh - 3.75rem);
+  &__buttonsContainer {
+    flex-grow: 0.3;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
   }
 }

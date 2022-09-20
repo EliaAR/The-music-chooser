@@ -6,7 +6,6 @@ const themeOptionsDark = {
   palette: {
     primary: {
       main: "#4F4580",
-      contrastText: "#968b7f",
     },
     secondary: {
       main: "#758045",
@@ -19,6 +18,9 @@ const themeOptionsDark = {
     background: {
       default: "#303030",
       paper: "#424242",
+    },
+    warning: {
+      main: "##968b7f",
     },
     info: {
       main: "#545454",
@@ -39,7 +41,6 @@ const themeOptionsLight = {
   palette: {
     primary: {
       main: "#8c7ed0",
-      contrastText: "#545454",
     },
     secondary: {
       main: "#7d894a",
@@ -52,6 +53,9 @@ const themeOptionsLight = {
     background: {
       default: "rgba(251, 246, 243, 0.49)",
       paper: "#e8e2db",
+    },
+    warning: {
+      main: "#545454",
     },
     info: {
       main: "#968b7f",

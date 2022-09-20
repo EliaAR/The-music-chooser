@@ -1,13 +1,12 @@
 .cardSong {
   display: flex;
   align-items: center;
-  margin: 0 5px 5px;
   height: 55px;
   overflow: visible;
 
   &__title {
-    width: 150px;
-    font-size: 15px;
+    width: 9.4rem;
+    font-size: 1rem;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -20,7 +19,7 @@
   }
 
   &__img {
-    max-height: 50px;
-    max-width: 89px;
+    max-height: 3.1rem;
+    max-width: 5.5rem;
   }
 }

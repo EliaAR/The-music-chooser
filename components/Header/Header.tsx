@@ -47,9 +47,9 @@ function Header({ title }: HeaderProps) {
           </a>
         </Link>
         <Typography
+          component="h1"
           variant="h5"
           color="inherit"
-          component="h1"
           sx={{
             pl: 5,
             fontWeight: "bold",

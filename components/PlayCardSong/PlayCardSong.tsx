@@ -30,7 +30,6 @@ function PlayCardSong({
 
   const audioRef = useRef(new Audio(song.audio));
   const intervalRef = useRef<NodeJS.Timer>();
-  // const isReady = useRef(false);
 
   const { duration } = audioRef.current;
 
@@ -39,9 +38,7 @@ function PlayCardSong({
       clearInterval(intervalRef.current);
     }
     audioRef.current.pause();
-    // setIsPlaying(false);
     audioRef.current = new Audio(song.audio);
-    audioRef.current.play();
   }, [song]);
 
   useEffect(() => {

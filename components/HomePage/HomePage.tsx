@@ -7,6 +7,7 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import { createRoom } from "../../services";
+import { GetLocalStorage, SetLocalStorage } from "../../services/localStorage";
 import { Alert } from "../Common/Alert/Alert";
 import styles from "./HomePage.module.scss";
 
@@ -23,7 +24,14 @@ function HomePage() {
     try {
       const data = await createRoom({ nameRoom });
       if ("id_room" in data) {
-        await router.push(`/room/${data.id_room}/vote`);
+        SetLocalStorage({
+          key: "idsAdmin",
+          value: [
+            ...GetLocalStorage({ key: "idsAdmin", defaultValue: [] }),
+            data.id_room,
+          ],
+        });
+        await router.push(`/room/${data.id_room}`);
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -50,7 +58,7 @@ function HomePage() {
         <Typography
           component="h3"
           variant="h6"
-          sx={{ color: "secondary.main" }}
+          sx={{ color: "secondary.main", fontSize: 36.8 }}
           className={`${styles.HomePage__title} ${
             theme.palette.mode === "dark"
               ? styles["HomePage__title--dark"]

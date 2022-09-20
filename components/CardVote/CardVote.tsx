@@ -9,9 +9,10 @@ interface CardVoteProps {
   isClosed: boolean;
   idVotadas: number[];
   handleIdVotadas: (idVotadas: number[]) => void;
-  handleVoteSuccess: () => void;
-  handleVoteError: (err: string) => void;
-  isCurrentSong: boolean;
+  onVoteSuccess: () => void;
+  onVoteError: (err: string) => void;
+  indexCurrentSong: number;
+  isAdmin: boolean;
 }
 
 function CardVote({
@@ -19,12 +20,13 @@ function CardVote({
   isClosed,
   idVotadas,
   handleIdVotadas,
-  handleVoteSuccess,
-  handleVoteError,
-  isCurrentSong,
+  onVoteSuccess,
+  onVoteError,
+  indexCurrentSong,
+  isAdmin,
 }: CardVoteProps) {
   return (
-    <Box component="section" sx={{ flexGrow: 0.4 }}>
+    <Box component="section" sx={{ flexGrow: isAdmin ? "null" : 0.4 }}>
       <Box
         component="article"
         sx={{ backgroundColor: "info.main", boxShadow: 3 }}
@@ -55,10 +57,10 @@ function CardVote({
             isClosed={isClosed}
             idVotadas={idVotadas}
             handleIdVotadas={handleIdVotadas}
-            handleVoteSuccess={handleVoteSuccess}
-            handleVoteError={handleVoteError}
+            onVoteSuccess={onVoteSuccess}
+            onVoteError={onVoteError}
             isVoted={idVotadas.includes(song.id_song)}
-            isCurrentSong={isCurrentSong}
+            indexCurrentSong={indexCurrentSong}
           />
         ))}
       </Box>

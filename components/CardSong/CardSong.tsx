@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { updateSong } from "../../services";
 import { SetLocalStorage } from "../../services/localStorage";
 import { SongModel } from "../../types/model";
@@ -17,9 +18,10 @@ interface CardSongProps {
   isClosed: boolean;
   idVotadas: number[];
   handleIdVotadas: (idVotadas: number[]) => void;
-  handleVoteSuccess: () => void;
-  handleVoteError: (err: string) => void;
+  onVoteSuccess: () => void;
+  onVoteError: (err: string) => void;
   isVoted: boolean;
+  indexCurrentSong: number;
 }
 
 interface HandleUpdateSongProps {
@@ -32,19 +34,20 @@ function CardSong({
   isClosed,
   idVotadas,
   handleIdVotadas,
-  handleVoteSuccess,
-  handleVoteError,
+  onVoteSuccess,
+  onVoteError,
   isVoted,
+  indexCurrentSong,
 }: CardSongProps) {
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
     updateSong({ votos, idSong })
       .then((data) => {
         console.log(data);
-        handleVoteSuccess();
+        onVoteSuccess();
       })
       .catch((err) => {
         if (err instanceof Error) {
-          handleVoteError(err.message);
+          onVoteError(err.message);
           console.error(err);
         }
       });
@@ -78,13 +81,19 @@ function CardSong({
   return (
     <Card
       component="article"
+      sx={{
+        overflow: "visible",
+        backgroundColor:
+          song.id_song === indexCurrentSong
+            ? "warning.main"
+            : "background.paper",
+      }}
       className={styles.cardSong}
-      sx={{ overflow: "visible" }}
     >
-      <CardContent component="section">
+      <CardContent component="article">
         <Typography
-          variant="body1"
           component="p"
+          variant="body1"
           title={song.name_song}
           className={styles.cardSong__title}
         >
@@ -98,10 +107,10 @@ function CardSong({
         className={styles.cardSong__img}
       />
       {!isClosed ? (
-        <Box component="section" className={styles.cardSong__voteContainer}>
+        <Box component="article" className={styles.cardSong__voteContainer}>
           <CardActions sx={{ p: 0 }}>
             <IconButton
-              component="section"
+              component="button"
               aria-label="voto"
               color="secondary"
               sx={{ pt: 0, pr: 1, pb: 0, pl: 1 }}
@@ -110,11 +119,18 @@ function CardSong({
               {isVoted ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
             </IconButton>
           </CardActions>
-          <Typography variant="body1" component="p" sx={{ fontSize: 12 }}>
+          <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
             {song.votos}
           </Typography>
         </Box>
-      ) : null}
+      ) : (
+        <IconButton aria-label="play">
+          <PlayArrowRoundedIcon
+            sx={{ height: 38, width: 38 }}
+            color="success"
+          />
+        </IconButton>
+      )}
     </Card>
   );
 }
