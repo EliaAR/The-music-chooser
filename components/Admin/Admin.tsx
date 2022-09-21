@@ -115,10 +115,8 @@ function Admin({
       sx={{ backgroundColor: "background.default" }}
       className={styles.admin}
     >
+      <ShareButtons roomData={roomData} />
       <DescriptionComponent />
-
-      <ShareButtons />
-
       {!isClosed ? (
         <AddSongInput
           valueAddSongInput={valueAddSongInput}
@@ -146,7 +144,7 @@ function Admin({
         indexCurrentSong={indexCurrentSong}
         isAdmin={isAdmin}
       />
-      <Box component="section" className={styles.admin__buttonsContainer}>
+      <Box component="section" className={styles.admin__voteContainer}>
         <Button
           variant="contained"
           onClick={() =>

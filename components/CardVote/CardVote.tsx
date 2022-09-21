@@ -26,7 +26,10 @@ function CardVote({
   isAdmin,
 }: CardVoteProps) {
   return (
-    <Box component="section" sx={{ flexGrow: isAdmin ? "null" : 0.4 }}>
+    <Box
+      component="section"
+      sx={{ flexGrow: isAdmin ? "null" : 0.4, width: "20.4rem" }}
+    >
       <Box
         component="article"
         sx={{ backgroundColor: "info.main", boxShadow: 3 }}

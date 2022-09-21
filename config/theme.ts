@@ -6,12 +6,13 @@ const themeOptionsDark = {
   palette: {
     primary: {
       main: "#4F4580",
+      light: "#8870B9",
     },
     secondary: {
       main: "#758045",
     },
     text: {
-      primary: "rgba(255, 255, 255, 0.9)",
+      primary: "rgba(255, 255, 255, 0.7)",
       secondary: "rgba(255, 255, 255, 0.4)",
       disabled: "#fff",
     },
@@ -41,6 +42,7 @@ const themeOptionsLight = {
   palette: {
     primary: {
       main: "#8c7ed0",
+      light: "#8870B9",
     },
     secondary: {
       main: "#7d894a",

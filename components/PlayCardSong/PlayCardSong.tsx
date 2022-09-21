@@ -80,7 +80,11 @@ function PlayCardSong({
   };
 
   return (
-    <Card component="section" className={styles.playCardSong}>
+    <Card
+      component="section"
+      sx={{ boxShadow: 3 }}
+      className={styles.playCardSong}
+    >
       <CardMedia
         component="img"
         image={song.img}
