@@ -9,11 +9,8 @@ interface SetLocalStorageProps {
 
 function GetLocalStorage<T>({ key, defaultValue }: GetLocalStorageProps<T>): T {
   const data = localStorage.getItem(key);
-  if (data === null) {
-    return defaultValue;
-  } else {
-    return JSON.parse(data) as T;
-  }
+  if (data === null) return defaultValue;
+  return JSON.parse(data) as T;
 }
 
 function SetLocalStorage({ key, value }: SetLocalStorageProps) {

@@ -29,7 +29,7 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
   };
 
   return (
-    <Box component="article" sx={{ position: "absolute", top: 88, left: 8 }}>
+    <Box component="article" sx={{ position: "absolute", top: 12, left: 8 }}>
       <SpeedDial
         ariaLabel="SpeedDial controlador"
         icon={<ShareIcon sx={{ color: "text.primary" }} />}

@@ -112,7 +112,7 @@ function Admin({
   return (
     <Box
       component="main"
-      sx={{ backgroundColor: "background.default" }}
+      sx={{ backgroundColor: "background.default", position: "relative" }}
       className={styles.admin}
     >
       <ShareButtons roomData={roomData} />
