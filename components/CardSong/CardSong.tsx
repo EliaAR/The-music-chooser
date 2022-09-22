@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { updateSong } from "../../services";
 import { SetLocalStorage } from "../../services/localStorage";
@@ -95,7 +96,7 @@ function CardSong({
         variant="body1"
         title={song.name_song}
         sx={{
-          width: isClosed && !isAdmin ? 200 : 150,
+          width: isClosed && !isAdmin ? 170 : 150,
         }}
         className={styles.cardSong__title}
       >
@@ -117,7 +118,7 @@ function CardSong({
             onClick={() => handleVote(song)}
           >
             {isVoted ? (
-              <ThumbUpIcon sx={{ height: 30, width: 30 }} />
+              <HowToRegIcon sx={{ height: 30, width: 30 }} />
             ) : (
               <ThumbUpOutlinedIcon sx={{ height: 30, width: 30 }} />
             )}
@@ -126,13 +127,29 @@ function CardSong({
             {song.votos}
           </Typography>
         </Box>
-      ) : isAdmin ? (
-        <IconButton aria-label="play" sx={{ paddingInline: 0 }}>
-          <PlayArrowRoundedIcon
-            sx={{ height: 38, width: 38 }}
-            color="success"
-          />
-        </IconButton>
+      ) : null}
+
+      {isClosed && !isAdmin ? (
+        <Box component="article" className={styles.cardSong__voteContainer}>
+          <HowToVoteIcon sx={{ color: "secondary.main" }} />
+          <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
+            {song.votos}
+          </Typography>
+        </Box>
+      ) : null}
+
+      {isClosed && isAdmin ? (
+        <Box component="article" className={styles.cardSong__voteContainer}>
+          <IconButton aria-label="play" sx={{ padding: 0 }}>
+            <PlayArrowRoundedIcon
+              sx={{ height: 38, width: 38 }}
+              color="success"
+            />
+          </IconButton>
+          <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
+            {song.votos}
+          </Typography>
+        </Box>
       ) : null}
     </Card>
   );

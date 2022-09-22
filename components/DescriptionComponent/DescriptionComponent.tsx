@@ -11,7 +11,8 @@ import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import AppBlockingOutlinedIcon from "@mui/icons-material/AppBlockingOutlined";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 
 function DescriptionComponent() {
@@ -101,6 +102,10 @@ function DescriptionComponent() {
               Las canciones se añaden poniendo en el campo de texto la URL
               copiada de Youtube.
             </Typography>
+            <Typography variant="body1">
+              Ojo! No añadas una canción de una lista de reproducción de
+              Youtube.
+            </Typography>
           </Box>
           <Box component="article">
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
@@ -108,6 +113,10 @@ function DescriptionComponent() {
                 Votar canciones
               </Typography>
               <ThumbUpOutlinedIcon sx={{ color: "primary.main" }} />
+              <Typography variant="body1" sx={{ color: "primary.main" }}>
+                /
+              </Typography>
+              <HowToRegIcon sx={{ color: "primary.main" }} />
             </Box>
             <Typography variant="body1">
               Después toca votar las canciones que más os gusten, pero sólo una
@@ -119,7 +128,7 @@ function DescriptionComponent() {
               <Typography variant="h6" sx={{ color: "#212121" }}>
                 Cerrar votaciones
               </Typography>
-              <TaskAltIcon sx={{ color: "primary.main" }} />
+              <AppBlockingOutlinedIcon sx={{ color: "primary.main" }} />
             </Box>
             <Typography variant="body1">
               Cuando queráis finalizar las votaciones, quien sea Admin se

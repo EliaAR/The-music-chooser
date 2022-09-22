@@ -26,7 +26,11 @@ function InfoComponent() {
         sx={{ height: 30, width: 30, color: "error.main", cursor: "pointer" }}
       />
       {showInfo ? (
-        <Box component="article" sx={{ display: "flex", gap: 2 }}>
+        <Box
+          component="article"
+          sx={{ display: "flex", gap: 2 }}
+          onClick={() => setShowInfo(false)}
+        >
           <Divider orientation="vertical" flexItem />
           <Box
             component="article"
@@ -47,7 +51,7 @@ function InfoComponent() {
               variant="body1"
               sx={{ textAlign: "center", fontSize: 14 }}
             >
-              No puedes añadir más canciones
+              No puedes votar ni añadir canciones
             </Typography>
           </Box>
         </Box>

@@ -50,6 +50,15 @@ function PlayCardSong({
     }
   }, [isPlaying, onSkipNext]);
 
+  useEffect(() => {
+    return () => {
+      audioRef.current.pause();
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
   const controlProgressTrack = ({ onSkipNext }: controlProgressTrackProps) => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
