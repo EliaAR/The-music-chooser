@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { getRoom, getSongs, createSong } from "../services/index";
-import { GetLocalStorage } from "../services/localStorage";
-import { RoomModel, SongModel } from "../types/model";
+import { getRoom } from "../services/front/room/getRoom";
+import { createSong } from "../services/front/song/createSong";
+import { getSongs } from "../services/front/song/getSongs";
+import { GetLocalStorage } from "../utils/localStorage";
+import { RoomModel } from "../types/room";
+import { SongModel } from "../types/song";
 
 interface UseRoomDataProps {
   id: string | string[] | undefined;
@@ -45,10 +48,17 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
   useEffect(() => {
     if (fetchRoom) {
       if (id && typeof id === "string")
-        getRoom({ id }).then((data) => {
-          setRoom(data);
-          setFetchRoom(false);
-        });
+        getRoom({ id_room: id })
+          .then((data) => {
+            setRoom(data);
+            setFetchRoom(false);
+          })
+          .catch((err) => {
+            if (err instanceof Error) {
+              setError(err.message);
+              console.error(err);
+            }
+          });
     }
   }, [fetchRoom, id]);
 
@@ -72,9 +82,14 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
   useEffect(() => {
     if (callAPIGet && room) {
       setCallAPIGet(false);
-      getSongs({ id: room.id_room })
+      getSongs({ id_room: room.id_room })
         .then((data) => setSongs(data))
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (err instanceof Error) {
+            setError(err.message);
+            console.error(err);
+          }
+        });
     }
   }, [callAPIGet, id, room]);
 
@@ -83,7 +98,7 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
     if (callAPIPost && room) {
       setError("");
       setCallAPIPost(false);
-      createSong({ idRoom: room.id_room, urlSong })
+      createSong({ id_room: room.id_room, url_song: urlSong })
         .then((data) => {
           console.log(data);
           setCallAPIGet(true);

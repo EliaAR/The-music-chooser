@@ -1,8 +1,9 @@
 import { useState, ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { updateRoom } from "../../services";
-import { RoomModel, SongModel } from "../../types/model";
+import { updateRoom } from "../../services/front/room/updateRoom";
+import { RoomModel } from "../../types/room";
+import { SongModel } from "../../types/song";
 import { DescriptionComponent } from "../DescriptionComponent/DescriptionComponent";
 import { ShareButtons } from "../ShareButtons/ShareButtons";
 import { AddSongInput } from "../AddSongInput/AddSongInput";
@@ -33,7 +34,7 @@ interface AdminProps {
 
 interface HandleUpdateRoomProps {
   isClosed: boolean;
-  idRoom: string | number;
+  idRoom: number;
 }
 
 interface HandleUpdateCurrentSongDBProps extends HandleUpdateRoomProps {
@@ -60,7 +61,11 @@ function Admin({
   const [defaultIsPlaying, setDefaultIsPlaying] = useState(false);
 
   const handleUpdateRoom = ({ isClosed, idRoom }: HandleUpdateRoomProps) => {
-    updateRoom({ isClosed, idRoom, currentSong: songs[0].id_song })
+    updateRoom({
+      is_closed: isClosed,
+      current_song: songs[0].id_song,
+      id_room: idRoom,
+    })
       .then(() => {
         reloadRoomData();
       })
@@ -77,13 +82,20 @@ function Admin({
     idRoom,
     currentSong,
   }: HandleUpdateCurrentSongDBProps) => {
-    updateRoom({ isClosed, idRoom, currentSong })
+    updateRoom({
+      is_closed: isClosed,
+      current_song: currentSong,
+      id_room: idRoom,
+    })
       .then(() => {
         reloadRoomData();
         setDefaultIsPlaying(true);
       })
       .catch((err) => {
-        console.error(err);
+        if (err instanceof Error) {
+          onUpdateRoom(err.message);
+          console.error(err);
+        }
       });
   };
 

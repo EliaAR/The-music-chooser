@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
-import { SongModel } from "../../types/model";
+import { SongModel } from "../../types/song";
 import { AddSongInput } from "../AddSongInput/AddSongInput";
 import { InfoComponent } from "../InfoComponent/InfoComponent";
 import { CardVote } from "../CardVote/CardVote";

@@ -6,8 +6,8 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import { createRoom } from "../../services";
-import { GetLocalStorage, SetLocalStorage } from "../../services/localStorage";
+import { createRoom } from "../../services/front/room/createRoom";
+import { GetLocalStorage, SetLocalStorage } from "../../utils/localStorage";
 import { Alert } from "../Common/Alert/Alert";
 import styles from "./HomePage.module.scss";
 
@@ -22,7 +22,7 @@ function HomePage() {
 
   const handleCreateRoom = async () => {
     try {
-      const data = await createRoom({ nameRoom });
+      const data = await createRoom({ name_room: nameRoom });
       if ("id_room" in data) {
         SetLocalStorage({
           key: "idsAdmin",

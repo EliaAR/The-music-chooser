@@ -7,9 +7,9 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import { updateSong } from "../../services";
-import { SetLocalStorage } from "../../services/localStorage";
-import { SongModel } from "../../types/model";
+import { updateSong } from "../../services/front/song/updateSong";
+import { SetLocalStorage } from "../../utils/localStorage";
+import { SongModel } from "../../types/song";
 import styles from "./CardSong.module.scss";
 
 interface CardSongProps {
@@ -41,7 +41,7 @@ function CardSong({
   isAdmin,
 }: CardSongProps) {
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
-    updateSong({ votos, idSong })
+    updateSong({ votos, id_song: idSong })
       .then((data) => {
         console.log(data);
         onVoteSuccess();

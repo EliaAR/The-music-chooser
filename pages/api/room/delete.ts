@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import { pool } from "../../../lib/db";
-import { RoomModel } from "../../../types/model";
+import { RoomModel } from "../../../types/room";
 
 interface DeleteRoomRequest {
   id_room: number;

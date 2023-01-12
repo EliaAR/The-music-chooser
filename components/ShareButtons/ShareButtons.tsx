@@ -5,7 +5,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import { RoomModel } from "../../types/model";
+import { RoomModel } from "../../types/room";
 
 interface ShareButtonsProps {
   roomData: RoomModel;

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import Divider from "@mui/material/Divider";
-import { SongModel } from "../../types/model";
+import { SongModel } from "../../types/song";
 import { ButtonsSong } from "../ButtonsSong/ButtonsSong";
 import styles from "./PlayCardSong.module.scss";
 

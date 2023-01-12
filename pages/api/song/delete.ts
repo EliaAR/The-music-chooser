@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import { pool } from "../../../lib/db";
-import { SongModel } from "../../../types/model";
+import { SongModel } from "../../../types/song";
 
 interface DeleteSongRequest {
   id_song: number;
