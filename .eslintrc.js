@@ -57,5 +57,11 @@ module.exports = {
         "prefer-template": "off",
       },
     },
+    {
+      files: ["config/theme.ts"],
+      rules: {
+        "@typescript-eslint/no-empty-function": "off",
+      },
+    },
   ],
 };

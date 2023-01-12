@@ -36,9 +36,7 @@ interface HandleUpdateRoomProps {
   idRoom: string | number;
 }
 
-interface HandleUpdateCurrentSongDBProps {
-  isClosed: boolean;
-  idRoom: string | number;
+interface HandleUpdateCurrentSongDBProps extends HandleUpdateRoomProps {
   currentSong: number;
 }
 

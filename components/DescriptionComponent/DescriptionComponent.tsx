@@ -8,6 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -70,13 +72,24 @@ function DescriptionComponent() {
           }}
         >
           <Box component="article">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 0.5,
-              }}
-            >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <Typography variant="h6" sx={{ color: "#212121" }}>
+                Tema claro u oscuro
+              </Typography>
+              <Brightness7Icon sx={{ color: "primary.main" }} />
+              <Typography variant="body1" sx={{ color: "primary.main" }}>
+                /
+              </Typography>
+              <ModeNightOutlinedIcon sx={{ color: "primary.main" }} />
+            </Box>
+            <Typography variant="body1">
+              Podrás escoger entre tema claro u oscuro. Para cambiarlo sólo
+              tienes que pulsar el botón de la luna o el sol arriba a la
+              izquierda.
+            </Typography>
+          </Box>
+          <Box component="article">
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
               <Typography variant="h6" sx={{ color: "#212121" }}>
                 Compartir la Sala
               </Typography>
@@ -119,8 +132,13 @@ function DescriptionComponent() {
               <HowToRegIcon sx={{ color: "primary.main" }} />
             </Box>
             <Typography variant="body1">
-              Después toca votar las canciones que más os gusten, pero sólo una
-              por persona.
+              Después toca votar las canciones que más os gusten.
+            </Typography>
+            <Typography variant="body1">
+              Para ello pulsa el botón de la manita y cambiará a check.
+            </Typography>
+            <Typography variant="body1">
+              Si quieres quitar tu voto, pulsa el check.
             </Typography>
           </Box>
           <Box component="article">

@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
+import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ColorModeContext } from "../../config/theme";
 import darkChoosy from "../../public/darkChoosy.png";
@@ -64,7 +64,7 @@ function Header({ title }: HeaderProps) {
             onChange={colorMode.toggleColorMode}
           />
           {theme.palette.mode === "dark" ? (
-            <Brightness4Icon className={styles.Header__switchMoon} />
+            <ModeNightOutlinedIcon className={styles.Header__switchMoon} />
           ) : (
             <Brightness7Icon className={styles.Header__switchSun} />
           )}
