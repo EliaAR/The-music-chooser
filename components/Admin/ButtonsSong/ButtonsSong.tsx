@@ -24,13 +24,15 @@ function ButtonsSong({
       <IconButton aria-label="previous" onClick={onSkipPrevious}>
         <SkipPreviousRoundedIcon />
       </IconButton>
+
       <IconButton aria-label="play/pause" onClick={onPlayPauseClick}>
         {isPlaying ? (
-          <PauseRoundedIcon sx={{ height: 38, width: 38 }} />
+          <PauseRoundedIcon sx={{ fontSize: "2.4rem" }} />
         ) : (
-          <PlayArrowRoundedIcon sx={{ height: 38, width: 38 }} />
+          <PlayArrowRoundedIcon sx={{ fontSize: "2.4rem" }} />
         )}
       </IconButton>
+
       <IconButton aria-label="next" onClick={onSkipNext}>
         <SkipNextRoundedIcon />
       </IconButton>

@@ -11,10 +11,10 @@ function ErrorComponent({ message }: ErrorComponentProps) {
   return (
     <Box
       component="section"
-      sx={{ backgroundColor: "background.paper" }}
+      sx={{ backgroundColor: "background.paper", color: "error.main" }}
       className={styles.errorComponent}
     >
-      <DangerousOutlinedIcon sx={{ height: 45, width: 45 }} />
+      <DangerousOutlinedIcon sx={{ fontSize: "2.8rem" }} />
       <Typography
         variant="body1"
         component="p"

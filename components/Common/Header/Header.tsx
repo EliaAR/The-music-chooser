@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
@@ -10,8 +9,8 @@ import Switch from "@mui/material/Switch";
 import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ColorModeContext } from "../../../config/theme";
-import darkChoosy from "../../public/darkChoosy.png";
-import lightChoosy from "../../public/lightChoosy.png";
+import darkChoosy from "../../../public/darkChoosy.png";
+import lightChoosy from "../../../public/lightChoosy.png";
 import styles from "./Header.module.scss";
 
 interface HeaderProps {
@@ -23,14 +22,16 @@ function Header({ title }: HeaderProps) {
 
   const colorMode = useContext(ColorModeContext);
 
-  const matches = useMediaQuery("(max-height: 667px)");
-
   return (
-    <AppBar position="static" sx={{ backgroundColor: "primary.main" }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "primary.main" }}
+      className={styles.header}
+    >
       <Toolbar
         component="section"
         variant="dense"
-        sx={{ justifyContent: "space-between", minHeight: matches ? 60 : 80 }}
+        className={styles.header__toolbar}
       >
         <Link href={"/"}>
           <a>
@@ -42,31 +43,41 @@ function Header({ title }: HeaderProps) {
               alt="Choosy (logo)"
               title="Choosy (logo)"
               role=""
-              sx={{ width: 40, cursor: "pointer" }}
+              sx={{ width: "2.5rem", cursor: "pointer" }}
             ></Box>
           </a>
         </Link>
+
         <Typography
           component="h1"
           variant="h5"
           sx={{
             textAlign: "center",
-            pl: 5,
-            fontWeight: "bold",
+            paddingLeft: "2.5rem",
+            fontWeight: 700,
             color: "text.disabled",
           }}
         >
           {title}
         </Typography>
-        <Box component="article" className={styles.Header__switchContainer}>
+
+        <Box component="article" sx={{ display: "flex", alignItems: "center" }}>
           <Switch
             checked={theme.palette.mode === "dark"}
             onChange={colorMode.toggleColorMode}
+            sx={{
+              "& .MuiButtonBase-root.MuiSwitch-switchBase": {
+                color: "tertiary.main",
+                "&.Mui-checked": {
+                  color: "primary.contrastText",
+                },
+              },
+            }}
           />
           {theme.palette.mode === "dark" ? (
-            <ModeNightOutlinedIcon className={styles.Header__switchMoon} />
+            <ModeNightOutlinedIcon sx={{ color: "primary.contrastText" }} />
           ) : (
-            <Brightness7Icon className={styles.Header__switchSun} />
+            <Brightness7Icon sx={{ color: "tertiary.main" }} />
           )}
         </Box>
       </Toolbar>

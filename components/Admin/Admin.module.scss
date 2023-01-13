@@ -6,17 +6,16 @@
   gap: 2rem;
   padding: 1.25rem;
   min-height: calc(100vh - 5rem);
-
-  // &__buttonsContainer {
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 1rem;
-  // }
-
   &__voteContainer {
     flex-grow: 0.3;
     display: flex;
     align-items: center;
     gap: 0.7rem;
+  }
+}
+
+@media screen and (max-height: 667px) {
+  .admin {
+    min-height: calc(100vh - 3.75rem);
   }
 }

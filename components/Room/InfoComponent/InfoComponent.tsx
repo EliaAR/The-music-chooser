@@ -13,7 +13,7 @@ function InfoComponent() {
       sx={{
         display: "flex",
         alignItems: "center",
-        gap: 2,
+        gap: "1rem",
         paddingBlock: 0.8,
         paddingInline: 2,
         borderRadius: 1.2,
@@ -23,12 +23,13 @@ function InfoComponent() {
     >
       <InfoOutlinedIcon
         onClick={() => setShowInfo(!showInfo)}
-        sx={{ height: 30, width: 30, color: "error.main", cursor: "pointer" }}
+        sx={{ fontSize: "1.8rem", color: "error.main", cursor: "pointer" }}
       />
+
       {showInfo ? (
         <Box
           component="article"
-          sx={{ display: "flex", gap: 2 }}
+          sx={{ display: "flex", gap: "1rem" }}
           onClick={() => setShowInfo(false)}
         >
           <Divider orientation="vertical" flexItem />
@@ -43,13 +44,13 @@ function InfoComponent() {
           >
             <Typography
               variant="body1"
-              sx={{ textAlign: "center", fontSize: 14 }}
+              sx={{ textAlign: "center", fontSize: "0.9rem" }}
             >
               Las votaciones se han cerrado
             </Typography>
             <Typography
               variant="body1"
-              sx={{ textAlign: "center", fontSize: 14 }}
+              sx={{ textAlign: "center", fontSize: "0.9rem" }}
             >
               No puedes votar ni añadir canciones
             </Typography>

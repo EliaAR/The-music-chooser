@@ -1,4 +1,3 @@
-import {} from "../../../pages/api/song/update";
 import { UpdateSongDTO, UpdateSongResponse } from "../../../types/song";
 
 async function updateSong({ votos, id_song }: UpdateSongDTO) {

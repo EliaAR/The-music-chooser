@@ -32,7 +32,11 @@ function CardVote({
     >
       <Box
         component="article"
-        sx={{ backgroundColor: "info.main", boxShadow: 3 }}
+        sx={{
+          boxShadow: 3,
+          backgroundColor: "tertiary.light",
+          color: "tertiary.contrastText",
+        }}
         className={styles.CardVote__title}
       >
         <Typography

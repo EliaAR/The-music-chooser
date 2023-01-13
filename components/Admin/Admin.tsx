@@ -126,7 +126,9 @@ function Admin({
       className={styles.admin}
     >
       <ShareButtons roomData={roomData} />
+
       <DescriptionComponent />
+
       {!isClosed ? (
         <AddSongInput
           valueAddSongInput={valueAddSongInput}
@@ -154,6 +156,7 @@ function Admin({
         indexCurrentSong={indexCurrentSong}
         isAdmin={isAdmin}
       />
+
       <Box component="section" className={styles.admin__voteContainer}>
         <Button
           variant="contained"

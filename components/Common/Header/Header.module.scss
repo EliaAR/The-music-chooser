@@ -1,12 +1,13 @@
-.Header {
-  &__switchContainer {
+.header {
+  &__toolbar {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    min-height: 5rem;
   }
-  &__switchMoon {
-    color: #fff;
-  }
-  &__switchSun {
-    color: #3a3838;
+}
+
+@media screen and (max-height: 667px) {
+  .header {
+    min-height: 3.75rem;
   }
 }

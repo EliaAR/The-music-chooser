@@ -86,7 +86,7 @@ function CardSong({
         overflow: "visible",
         backgroundColor:
           song.id_song === indexCurrentSong
-            ? "warning.main"
+            ? "quaternary.main"
             : "background.paper",
       }}
       className={styles.cardSong}
@@ -96,7 +96,7 @@ function CardSong({
         variant="body1"
         title={song.name_song}
         sx={{
-          width: isClosed && !isAdmin ? 170 : 150,
+          width: isClosed && !isAdmin ? "10.6" : "9.3rem",
         }}
         className={styles.cardSong__title}
       >
@@ -118,12 +118,16 @@ function CardSong({
             onClick={() => handleVote(song)}
           >
             {isVoted ? (
-              <HowToRegIcon sx={{ height: 30, width: 30 }} />
+              <HowToRegIcon sx={{ fontSize: "1.8rem" }} />
             ) : (
-              <ThumbUpOutlinedIcon sx={{ height: 30, width: 30 }} />
+              <ThumbUpOutlinedIcon sx={{ fontSize: "1.8rem" }} />
             )}
           </IconButton>
-          <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
+          <Typography
+            component="p"
+            variant="body1"
+            sx={{ fontSize: "0.75rem" }}
+          >
             {song.votos}
           </Typography>
         </Box>
@@ -132,7 +136,7 @@ function CardSong({
       {isClosed && !isAdmin ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <HowToVoteIcon sx={{ color: "secondary.main" }} />
-          <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
+          <Typography variant="body1" sx={{ fontSize: "0.75rem" }}>
             {song.votos}
           </Typography>
         </Box>
@@ -142,11 +146,13 @@ function CardSong({
         <Box component="article" className={styles.cardSong__voteContainer}>
           <IconButton aria-label="play" sx={{ padding: 0 }}>
             <PlayArrowRoundedIcon
-              sx={{ height: 38, width: 38 }}
-              color="success"
+              sx={{
+                fontSize: "2.4rem",
+                color: "text.secondary",
+              }}
             />
           </IconButton>
-          <Typography component="p" variant="body1" sx={{ fontSize: 12 }}>
+          <Typography variant="body1" sx={{ fontSize: "0.75rem" }}>
             {song.votos}
           </Typography>
         </Box>

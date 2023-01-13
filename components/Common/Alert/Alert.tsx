@@ -35,7 +35,7 @@ function Alert({ alertMsg, handleCloseAlert, open }: AlertProps) {
         ></Button>
         <IconButton
           size="small"
-          aria-label="close"
+          aria-label="cerrar"
           color="inherit"
           onClick={handleCloseAlert}
         >

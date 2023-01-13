@@ -1,7 +1,7 @@
 import { CreateRoomDTO, CreateRoomResponse } from "../../../types/room";
 
 async function createRoom({ name_room }: CreateRoomDTO) {
-  const ENDPOINT = `${location.origin}/api/rooms/create`;
+  const ENDPOINT = `${location.origin}/api/room/create`;
 
   const response = await fetch(ENDPOINT, {
     method: "POST",

@@ -98,27 +98,32 @@ function PlayCardSong({
         component="img"
         image={song.img}
         alt={song.name_song}
-        sx={{ height: 120, width: "auto", objectFit: "fill" }}
+        sx={{ height: "7.5rem", width: "auto", objectFit: "fill" }}
         className={styles.playCardSong__img}
       />
+
       <Box component="article" className={styles.playCardSong__songContainer}>
         <Typography
           component="h6"
           variant="h6"
-          sx={{ fontSize: 15 }}
+          sx={{ fontSize: "0.9rem" }}
           className={styles.playCardSong__songTitle}
           title={song.name_song}
         >
           {song.name_song}
         </Typography>
-        <Divider sx={{ width: 230 }} />
+
+        <Divider sx={{ width: "14rem" }} />
+
         <ButtonsSong
           isPlaying={isPlaying}
           onPlayPauseClick={() => setIsPlaying(!isPlaying)}
           onSkipPrevious={onSkipPrevious}
           onSkipNext={onSkipNext}
         />
-        <Divider sx={{ width: 230 }} />
+
+        <Divider sx={{ width: "14rem" }} />
+
         <Slider
           aria-label="time-indicator"
           value={progressTrack}
@@ -127,7 +132,7 @@ function PlayCardSong({
           max={duration ? duration : 0}
           onChange={(_, value) => onScrub(value as number)}
           onChangeCommitted={() => onScrubEnd()}
-          sx={{ width: 200, height: 10 }}
+          sx={{ width: "12.5rem", height: "0.6rem" }}
         />
       </Box>
     </Card>

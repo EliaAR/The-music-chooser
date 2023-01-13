@@ -53,13 +53,13 @@ function HomePage() {
       <Box
         component="main"
         sx={{ backgroundColor: "background.default" }}
-        className={styles.HomePage}
+        className={styles.homePage}
       >
         <Typography
           component="h3"
           variant="h6"
-          sx={{ fontSize: 36.8, color: "secondary.main" }}
-          className={`${styles.HomePage__title} ${
+          sx={{ fontSize: "2.3rem", color: "secondary.main" }}
+          className={`${styles.homePage__title} ${
             theme.palette.mode === "dark"
               ? styles["HomePage__title--dark"]
               : styles["HomePage__title--light"]
@@ -67,10 +67,11 @@ function HomePage() {
         >
           Pick out your song!
         </Typography>
+
         <Box
           component="section"
           sx={{ boxShadow: 3, backgroundColor: "background.paper" }}
-          className={styles.HomePage__instructionsContainer}
+          className={styles.homePage__instructionsContainer}
         >
           <Typography
             variant="h6"
@@ -81,7 +82,7 @@ function HomePage() {
           <Divider orientation="horizontal" variant="middle" />
           <Typography
             variant="body1"
-            sx={{ paddingTop: 0.2, color: "text.secondary" }}
+            sx={{ paddingTop: "0.2rem", color: "text.secondary" }}
           >
             1. Crea una Sala
           </Typography>
@@ -95,7 +96,8 @@ function HomePage() {
             4. ¡Disfrutad de la música!
           </Typography>
         </Box>
-        <Box component="section" className={styles.HomePage__room}>
+
+        <Box component="section" className={styles.homePage__room}>
           <TextField
             label="Nombre Sala"
             color="secondary"
@@ -109,6 +111,7 @@ function HomePage() {
           </Button>
         </Box>
       </Box>
+
       <Alert
         open={error !== ""}
         alertMsg="Ese nombre de sala ya existe. Prueba con otro"

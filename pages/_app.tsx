@@ -35,14 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         components: {
           MuiSwitch: {
             styleOverrides: {
-              switchBase: {
-                color: "#3a3838",
-              },
-              colorPrimary: {
-                "&.Mui-checked": {
-                  color: "#fff",
-                },
-              },
               track: {
                 opacity: 0.2,
                 backgroundColor: "#fff",

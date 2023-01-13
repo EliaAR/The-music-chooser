@@ -27,7 +27,7 @@ function DescriptionComponent() {
         onClick={() => setShowDescription(!showDescription)}
         sx={{
           display: "flex",
-          gap: 1,
+          gap: "0.5rem",
           color: "primary.light",
           borderColor: "primary.light",
         }}
@@ -35,6 +35,7 @@ function DescriptionComponent() {
         <InfoOutlinedIcon />
         Tutorial
       </Button>
+
       <Dialog
         open={showDescription}
         aria-labelledby="título descripción"
@@ -44,36 +45,40 @@ function DescriptionComponent() {
           id="título descripción"
           sx={{
             textTransform: "uppercase",
-            fontWeight: "bold",
-            color: "black",
+            fontWeight: 700,
+            color: "common.black",
           }}
         >
           Tutorial para la App
           <IconButton
-            aria-label="close"
+            aria-label="cerrar modal descripción"
             onClick={() => setShowDescription(false)}
             sx={{
               position: "absolute",
-              right: 8,
-              top: 8,
+              right: "0.5rem",
+              top: "0.5rem",
             }}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
+
         <DialogContent
           dividers
           id="contenido descripción"
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 2,
+            gap: "1rem",
             textAlign: "justify",
           }}
         >
           <Box component="article">
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <Typography variant="h6" sx={{ color: "#212121" }}>
+            <Box
+              component="article"
+              sx={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+            >
+              <Typography variant="h6" sx={{ color: "tertiary.dark" }}>
                 Tema claro u oscuro
               </Typography>
               <Brightness7Icon sx={{ color: "primary.main" }} />
@@ -89,8 +94,11 @@ function DescriptionComponent() {
             </Typography>
           </Box>
           <Box component="article">
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <Typography variant="h6" sx={{ color: "#212121" }}>
+            <Box
+              component="article"
+              sx={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+            >
+              <Typography variant="h6" sx={{ color: "tertiary.dark" }}>
                 Compartir la Sala
               </Typography>
               <ShareIcon sx={{ color: "primary.main" }} />
@@ -101,8 +109,11 @@ function DescriptionComponent() {
             </Typography>
           </Box>
           <Box component="article">
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <Typography variant="h6" sx={{ color: "#212121" }}>
+            <Box
+              component="article"
+              sx={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+            >
+              <Typography variant="h6" sx={{ color: "tertiary.dark" }}>
                 Añadir canciones
               </Typography>
               <QueueMusicIcon sx={{ color: "primary.main" }} />
@@ -121,8 +132,11 @@ function DescriptionComponent() {
             </Typography>
           </Box>
           <Box component="article">
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <Typography variant="h6" sx={{ color: "#212121" }}>
+            <Box
+              component="article"
+              sx={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+            >
+              <Typography variant="h6" sx={{ color: "tertiary.dark" }}>
                 Votar canciones
               </Typography>
               <ThumbUpOutlinedIcon sx={{ color: "primary.main" }} />
@@ -142,8 +156,11 @@ function DescriptionComponent() {
             </Typography>
           </Box>
           <Box component="article">
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <Typography variant="h6" sx={{ color: "#212121" }}>
+            <Box
+              component="article"
+              sx={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+            >
+              <Typography variant="h6" sx={{ color: "tertiary.dark" }}>
                 Cerrar votaciones
               </Typography>
               <AppBlockingOutlinedIcon sx={{ color: "primary.main" }} />
@@ -157,8 +174,11 @@ function DescriptionComponent() {
             </Typography>
           </Box>
           <Box component="article">
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <Typography variant="h6" sx={{ color: "#212121" }}>
+            <Box
+              component="article"
+              sx={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+            >
+              <Typography variant="h6" sx={{ color: "tertiary.dark" }}>
                 Reproducir canciones
               </Typography>
               <PlayArrowRoundedIcon
