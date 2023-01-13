@@ -3,9 +3,9 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Slider from "@mui/material/Slider";
 import Divider from "@mui/material/Divider";
-import { SongModel } from "../../types/song";
+import Slider from "@mui/material/Slider";
+import { SongModel } from "../../../types/song";
 import { ButtonsSong } from "../ButtonsSong/ButtonsSong";
 import styles from "./PlayCardSong.module.scss";
 

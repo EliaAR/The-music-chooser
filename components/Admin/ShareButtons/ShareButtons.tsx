@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
+import SpeedDial from "@mui/material/SpeedDial";
 import ShareIcon from "@mui/icons-material/Share";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import { RoomModel } from "../../types/room";
+import { RoomModel } from "../../../types/room";
 
 interface ShareButtonsProps {
   roomData: RoomModel;

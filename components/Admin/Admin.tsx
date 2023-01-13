@@ -4,12 +4,12 @@ import Button from "@mui/material/Button";
 import { updateRoom } from "../../services/front/room/updateRoom";
 import { RoomModel } from "../../types/room";
 import { SongModel } from "../../types/song";
-import { DescriptionComponent } from "../DescriptionComponent/DescriptionComponent";
-import { ShareButtons } from "../ShareButtons/ShareButtons";
-import { AddSongInput } from "../AddSongInput/AddSongInput";
-import { PlayCardSong } from "../PlayCardSong/PlayCardSong";
+import { ShareButtons } from "./ShareButtons/ShareButtons";
+import { DescriptionComponent } from "./DescriptionComponent/DescriptionComponent";
+import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
+import { PlayCardSong } from "./PlayCardSong/PlayCardSong";
 import { ErrorComponent } from "../Common/ErrorComponent/ErrorComponent";
-import { CardVote } from "../CardVote/CardVote";
+import { CardVote } from "../Common/CardVote/CardVote";
 import styles from "./Admin.module.scss";
 
 interface AdminProps {

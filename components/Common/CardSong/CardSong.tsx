@@ -1,15 +1,15 @@
 import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import { updateSong } from "../../services/front/song/updateSong";
-import { SetLocalStorage } from "../../utils/localStorage";
-import { SongModel } from "../../types/song";
+import { updateSong } from "../../../services/front/song/updateSong";
+import { SetLocalStorage } from "../../../utils/localStorage";
+import { SongModel } from "../../../types/song";
 import styles from "./CardSong.module.scss";
 
 interface CardSongProps {

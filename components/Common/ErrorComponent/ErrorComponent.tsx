@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import DangerousOutlinedIcon from "@mui/icons-material/DangerousOutlined";
+import Typography from "@mui/material/Typography";
 import styles from "./ErrorComponent.module.scss";
 
 interface ErrorComponentProps {

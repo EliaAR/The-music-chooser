@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { SongModel } from "../../types/song";
+import { SongModel } from "../../../types/song";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./CardVote.module.scss";
 

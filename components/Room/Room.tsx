@@ -1,9 +1,9 @@
 import { ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
 import { SongModel } from "../../types/song";
-import { AddSongInput } from "../AddSongInput/AddSongInput";
-import { InfoComponent } from "../InfoComponent/InfoComponent";
-import { CardVote } from "../CardVote/CardVote";
+import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
+import { InfoComponent } from "./InfoComponent/InfoComponent";
+import { CardVote } from "../Common/CardVote/CardVote";
 import styles from "./Room.module.scss";
 
 interface RoomProps {

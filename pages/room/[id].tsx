@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useRoomData } from "../../hooks/useRoomData";
-import { Header } from "../../components/Header/Header";
+import { Header } from "../../components/Common/Header/Header";
 import { Room } from "../../components/Room/Room";
 import { Admin } from "../../components/Admin/Admin";
 import { Alert } from "../../components/Common/Alert/Alert";

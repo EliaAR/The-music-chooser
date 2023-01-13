@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
 import SkipPreviousRoundedIcon from "@mui/icons-material/SkipPreviousRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
 import styles from "./ButtonsSong.module.scss";
 
 interface ButtonsSongProps {
