@@ -1,3 +1,4 @@
+import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SongModel } from "../../../types/song";
@@ -25,10 +26,13 @@ function CardVote({
   indexCurrentSong,
   isAdmin,
 }: CardVoteProps) {
+  const theme = useTheme();
+
   return (
     <Box
       component="section"
-      sx={{ flexGrow: isAdmin ? "null" : 0.4, width: "20.4rem" }}
+      // sx={{ flexGrow: isAdmin ? "null" : 0.4 }}
+      className={isAdmin ? styles.cardVote : styles["cardVote--noAdmin"]}
     >
       <Box
         component="article"
@@ -37,25 +41,28 @@ function CardVote({
           backgroundColor: "tertiary.light",
           color: "tertiary.contrastText",
         }}
-        className={styles.CardVote__title}
+        className={styles.cardVote__titleContainer}
       >
         <Typography
           component="h6"
           variant="body1"
-          sx={{
-            fontWeight: 700,
-          }}
+          className={styles.cardVote__titleParagraph}
         >
           Listado canciones
         </Typography>
       </Box>
+
       <Box
         component="article"
         sx={{
           backgroundColor: "background.paper",
           boxShadow: 2,
         }}
-        className={styles.CardVote__songs}
+        className={`${styles.cardVote__songs} ${
+          theme.palette.mode === "dark"
+            ? styles["cardVote__songs--dark"]
+            : styles["cardVote__songs--light"]
+        }`}
       >
         {songs.map((song) => (
           <CardSong

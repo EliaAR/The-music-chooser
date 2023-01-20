@@ -1,6 +1,9 @@
 import { useState, ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import AppBlockingOutlinedIcon from "@mui/icons-material/AppBlockingOutlined";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import { updateRoom } from "../../services/front/room/updateRoom";
 import { RoomModel } from "../../types/room";
 import { SongModel } from "../../types/song";
@@ -13,6 +16,7 @@ import { CardVote } from "../Common/CardVote/CardVote";
 import styles from "./Admin.module.scss";
 
 interface AdminProps {
+  title: string;
   valueAddSongInput: string;
   onChangeAddSongInput: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -42,6 +46,7 @@ interface HandleUpdateCurrentSongDBProps extends HandleUpdateRoomProps {
 }
 
 function Admin({
+  title,
   valueAddSongInput,
   onChangeAddSongInput,
   onClickCallAPIPost,
@@ -122,12 +127,25 @@ function Admin({
   return (
     <Box
       component="main"
-      sx={{ backgroundColor: "background.default", position: "relative" }}
-      className={styles.admin}
+      sx={{ backgroundColor: "background.default" }}
+      className={`${styles.admin} ${
+        !isClosed ? styles["admin--open"] : styles["admin--closed"]
+      }`}
     >
-      <ShareButtons roomData={roomData} />
+      <Box component="section" className={styles.admin__titleContainer}>
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ color: "quaternary.contrastText" }}
+          className={styles.admin__title}
+        >
+          sala admin <span className={styles.admin__titleSpan}>{title}</span>
+        </Typography>
 
-      <DescriptionComponent />
+        <ShareButtons roomData={roomData} />
+      </Box>
+
+      {!isClosed ? <DescriptionComponent /> : null}
 
       {!isClosed ? (
         <AddSongInput
@@ -157,21 +175,24 @@ function Admin({
         isAdmin={isAdmin}
       />
 
-      <Box component="section" className={styles.admin__voteContainer}>
-        <Button
-          variant="contained"
-          onClick={() =>
-            handleUpdateRoom({
-              isClosed: !roomData.is_closed,
-              idRoom: roomData.id_room,
-            })
-          }
-        >
-          {roomData.is_closed
-            ? "Abrir votaciones"
-            : "Cerrar votaciones y Cambiar a reproducción"}
-        </Button>
-      </Box>
+      <Button
+        onClick={() =>
+          handleUpdateRoom({
+            isClosed: !roomData.is_closed,
+            idRoom: roomData.id_room,
+          })
+        }
+        variant="contained"
+        className={styles.admin__closeButton}
+      >
+        {roomData.is_closed ? (
+          <ThumbUpOutlinedIcon className={styles.admin__closeIcon} />
+        ) : (
+          <AppBlockingOutlinedIcon className={styles.admin__closeIcon} />
+        )}
+
+        {roomData.is_closed ? "Abrir votaciones" : "Cerrar votaciones "}
+      </Button>
     </Box>
   );
 }

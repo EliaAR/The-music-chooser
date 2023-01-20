@@ -29,15 +29,15 @@ function Alert({ alertMsg, handleCloseAlert, open }: AlertProps) {
       <MuiAlert variant="filled" severity="error">
         <span>{alertMsg}</span>
         <Button
+          onClick={handleCloseAlert}
           color="secondary"
           size="small"
-          onClick={handleCloseAlert}
         ></Button>
         <IconButton
-          size="small"
-          aria-label="cerrar"
-          color="inherit"
           onClick={handleCloseAlert}
+          aria-label="cerrar"
+          size="small"
+          color="inherit"
         >
           <CloseIcon fontSize="small" />
         </IconButton>

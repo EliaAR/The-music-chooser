@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -94,26 +94,27 @@ function PlayCardSong({
       sx={{ boxShadow: 3 }}
       className={styles.playCardSong}
     >
-      <CardMedia
-        component="img"
-        image={song.img}
-        alt={song.name_song}
-        sx={{ height: "7.5rem", width: "auto", objectFit: "fill" }}
-        className={styles.playCardSong__img}
-      />
+      <Box component="article" className={styles.playCardSong__imageContainer}>
+        <Image
+          src={song.img}
+          alt={song.name_song}
+          title={song.name_song}
+          layout="fill"
+          objectFit="contain"
+        />
+      </Box>
 
       <Box component="article" className={styles.playCardSong__songContainer}>
         <Typography
           component="h6"
           variant="h6"
-          sx={{ fontSize: "0.9rem" }}
-          className={styles.playCardSong__songTitle}
           title={song.name_song}
+          className={styles.playCardSong__songTitle}
         >
           {song.name_song}
         </Typography>
 
-        <Divider sx={{ width: "14rem" }} />
+        <Divider className={styles.playCardSong__songDivider} />
 
         <ButtonsSong
           isPlaying={isPlaying}
@@ -122,7 +123,7 @@ function PlayCardSong({
           onSkipNext={onSkipNext}
         />
 
-        <Divider sx={{ width: "14rem" }} />
+        <Divider className={styles.playCardSong__songDivider} />
 
         <Slider
           aria-label="time-indicator"
@@ -132,7 +133,7 @@ function PlayCardSong({
           max={duration ? duration : 0}
           onChange={(_, value) => onScrub(value as number)}
           onChangeCommitted={() => onScrubEnd()}
-          sx={{ width: "12.5rem", height: "0.6rem" }}
+          className={styles.playCardSong__songSlider}
         />
       </Box>
     </Card>

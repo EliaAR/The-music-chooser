@@ -1,5 +1,6 @@
 import { ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { SongModel } from "../../types/song";
 import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
 import { InfoComponent } from "./InfoComponent/InfoComponent";
@@ -7,6 +8,7 @@ import { CardVote } from "../Common/CardVote/CardVote";
 import styles from "./Room.module.scss";
 
 interface RoomProps {
+  title: string;
   valueAddSongInput: string;
   onChangeAddSongInput: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -23,6 +25,7 @@ interface RoomProps {
 }
 
 function Room({
+  title,
   valueAddSongInput,
   onChangeAddSongInput,
   onClickCallAPIPost,
@@ -39,8 +42,21 @@ function Room({
     <Box
       component="main"
       sx={{ backgroundColor: "background.default" }}
-      className={styles.room}
+      className={`${styles.room} ${
+        !isClosed ? styles["room--open"] : styles["room--closed"]
+      }`}
     >
+      <Typography
+        component="h1"
+        variant="h5"
+        sx={{ color: "quaternary.contrastText" }}
+        className={styles.room__title}
+      >
+        <span className={styles.room__titleSpan}>sala</span>
+        {"  "}
+        {title}
+      </Typography>
+
       {!isClosed ? (
         <AddSongInput
           valueAddSongInput={valueAddSongInput}

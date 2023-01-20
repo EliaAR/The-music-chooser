@@ -2,6 +2,8 @@ import { ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import QueueMusicIcon from "@mui/icons-material/QueueMusic";
+import styles from "./AddSongInput.module.scss";
 
 interface AddSongInputProps {
   valueAddSongInput: string;
@@ -17,15 +19,7 @@ function AddSongInput({
   onClickCallAPIPost,
 }: AddSongInputProps) {
   return (
-    <Box
-      component="section"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        gap: "1rem",
-      }}
-    >
+    <Box component="section" className={styles.addSongInput}>
       <TextField
         label="URL Canción"
         color="secondary"
@@ -33,8 +27,15 @@ function AddSongInput({
         focused
         onChange={onChangeAddSongInput}
         value={valueAddSongInput}
+        className={styles.addSongInput__textfield}
       />
-      <Button variant="contained" onClick={onClickCallAPIPost}>
+
+      <Button
+        onClick={onClickCallAPIPost}
+        variant="contained"
+        className={styles.addSongInput__button}
+      >
+        <QueueMusicIcon className={styles.addSongInput__buttonIcon} />
         Añadir Canción
       </Button>
     </Box>

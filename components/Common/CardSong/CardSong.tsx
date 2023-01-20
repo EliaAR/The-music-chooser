@@ -83,7 +83,6 @@ function CardSong({
     <Card
       component="article"
       sx={{
-        overflow: "visible",
         backgroundColor:
           song.id_song === indexCurrentSong
             ? "quaternary.main"
@@ -95,38 +94,41 @@ function CardSong({
         component="p"
         variant="body1"
         title={song.name_song}
-        sx={{
-          width: isClosed && !isAdmin ? "10.6" : "9.3rem",
-        }}
-        className={styles.cardSong__title}
+        className={
+          isClosed && !isAdmin
+            ? styles.cardSong__title
+            : styles.cardSong__titleThin
+        }
       >
         {song.name_song}
       </Typography>
+
       <CardMedia
         component="img"
         image={song.img}
         alt={song.name_song}
         className={styles.cardSong__img}
       />
+
       {!isClosed ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <IconButton
             component="button"
+            onClick={() => handleVote(song)}
             aria-label="voto"
             color="secondary"
-            sx={{ padding: 0 }}
-            onClick={() => handleVote(song)}
+            className={styles.cardSong__voteButton}
           >
             {isVoted ? (
-              <HowToRegIcon sx={{ fontSize: "1.8rem" }} />
+              <HowToRegIcon className={styles.cardSong__voteIcon} />
             ) : (
-              <ThumbUpOutlinedIcon sx={{ fontSize: "1.8rem" }} />
+              <ThumbUpOutlinedIcon className={styles.cardSong__voteIcon} />
             )}
           </IconButton>
           <Typography
             component="p"
             variant="body1"
-            sx={{ fontSize: "0.75rem" }}
+            className={styles.cardSong__voteParagraph}
           >
             {song.votos}
           </Typography>
@@ -136,23 +138,27 @@ function CardSong({
       {isClosed && !isAdmin ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <HowToVoteIcon sx={{ color: "secondary.main" }} />
-          <Typography variant="body1" sx={{ fontSize: "0.75rem" }}>
+          <Typography
+            variant="body1"
+            className={styles.cardSong__voteParagraph}
+          >
             {song.votos}
           </Typography>
         </Box>
       ) : null}
 
       {isClosed && isAdmin ? (
-        <Box component="article" className={styles.cardSong__voteContainer}>
-          <IconButton aria-label="play" sx={{ padding: 0 }}>
+        <Box component="article" className={styles.cardSong__playContainer}>
+          <IconButton aria-label="play" className={styles.cardSong__playButton}>
             <PlayArrowRoundedIcon
-              sx={{
-                fontSize: "2.4rem",
-                color: "text.secondary",
-              }}
+              sx={{ color: "text.secondary" }}
+              className={styles.cardSong__playIcon}
             />
           </IconButton>
-          <Typography variant="body1" sx={{ fontSize: "0.75rem" }}>
+          <Typography
+            variant="body1"
+            className={styles.cardSong__playParagraph}
+          >
             {song.votos}
           </Typography>
         </Box>

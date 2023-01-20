@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { useState, useMemo } from "react";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material";
 import {
   themeOptionsDark,
@@ -51,11 +51,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <StyledEngineProvider injectFirst>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ColorModeContext.Provider>
+    </StyledEngineProvider>
   );
 }
 

@@ -14,11 +14,11 @@ function ErrorComponent({ message }: ErrorComponentProps) {
       sx={{ backgroundColor: "background.paper", color: "error.main" }}
       className={styles.errorComponent}
     >
-      <DangerousOutlinedIcon sx={{ fontSize: "2.8rem" }} />
+      <DangerousOutlinedIcon className={styles.errorComponent__icon} />
+
       <Typography
         variant="body1"
         component="p"
-        sx={{ fontWeight: 500 }}
         className={styles.errorComponent__paragraph}
       >
         {message}

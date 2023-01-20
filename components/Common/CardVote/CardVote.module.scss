@@ -1,5 +1,9 @@
-.CardVote {
-  &__title {
+.cardVote {
+  width: 20.4rem;
+  &--noAdmin {
+    flex-grow: 0.4;
+  }
+  &__titleContainer {
     position: relative;
     display: flex;
     align-items: center;
@@ -10,15 +14,36 @@
     text-transform: uppercase;
     z-index: 99;
   }
+  &__titleParagraph {
+    font-weight: 700;
+  }
   &__songs {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     padding: 0.3rem;
-    min-height: 22rem;
+    height: 20.6rem;
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     overflow-y: auto;
     overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 0.3rem;
+    }
+    &--dark::-webkit-scrollbar-thumb {
+      background: rgba(199, 194, 194, 0.6);
+      border-radius: 1.25rem;
+    }
+    &--light::-webkit-scrollbar-thumb {
+      background: #c1b5a7;
+      border-radius: 1.25rem;
+    }
+    scrollbar-width: thin;
+    &--dark {
+      scrollbar-color: rgba(199, 194, 194, 0.6) #424242;
+    }
+    &--light {
+      scrollbar-color: #c1b5a7 #424242;
+    }
   }
 }

@@ -2,12 +2,40 @@
   &__toolbar {
     display: flex;
     justify-content: space-between;
-    min-height: 5rem;
+    min-height: 5rem !important;
+    width: 100%;
+  }
+  &__toolbarImageContainer {
+    position: relative;
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+  }
+  &__toolbarTitle {
+    text-align: center;
+    font-weight: 900;
+    padding-left: 2.5rem;
+    font-family: "Poppins", sans-serif;
+  }
+  &__toolbarTitle {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  &__toolbarTitleSpan {
+    text-transform: capitalize;
+    font-size: 1rem;
+  }
+  &__toolbarSwitchContainer {
+    display: flex;
+    align-items: center;
   }
 }
 
-@media screen and (max-height: 667px) {
+@media screen and (max-width: 767px) {
   .header {
-    min-height: 3.75rem;
+    &__toolbarTitle {
+      font-size: 1.2rem;
+    }
   }
 }

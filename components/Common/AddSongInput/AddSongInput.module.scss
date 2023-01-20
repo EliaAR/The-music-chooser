@@ -1,0 +1,22 @@
+.addSongInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__buttonIcon {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .addSongInput {
+    &__textfield {
+      width: 12.5rem;
+    }
+  }
+}

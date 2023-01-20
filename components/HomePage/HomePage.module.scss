@@ -14,6 +14,8 @@
     display: flex;
     align-items: center;
     transform: rotate(-5deg);
+    font-family: "Lato", sans-serif;
+    font-size: 2.3rem;
   }
   &__title--dark {
     text-shadow: 0.2rem 0.12rem 0.2rem rgba(144, 153, 106, 0.2);
@@ -33,11 +35,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-  }
-}
-
-@media screen and (max-height: 667px) {
-  .homePage {
-    min-height: calc(100vh - 3.75rem);
   }
 }

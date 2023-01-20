@@ -31,15 +31,11 @@ function RoomById() {
     <>
       {room ? (
         <>
-          <Header
-            title={
-              isAdmin
-                ? `SALA ADMIN ${room.name_room}`
-                : `SALA ${room.name_room}`
-            }
-          />
+          <Header />
+
           {isAdmin ? (
             <Admin
+              title={room.name_room}
               valueAddSongInput={urlSong}
               onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
               onClickCallAPIPost={() => setCallAPIPost(true)}
@@ -60,6 +56,7 @@ function RoomById() {
             />
           ) : (
             <Room
+              title={room.name_room}
               valueAddSongInput={urlSong}
               onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
               onClickCallAPIPost={() => setCallAPIPost(true)}

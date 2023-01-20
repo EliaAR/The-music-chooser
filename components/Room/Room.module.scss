@@ -1,14 +1,36 @@
 .room {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  padding: 0 1.25rem;
   min-height: calc(100vh - 5rem);
+  &--open {
+    justify-content: space-evenly;
+    padding: 0 1.25rem;
+  }
+  &--closed {
+    justify-content: flex-start;
+    gap: 2.5rem;
+    padding: 3rem 1.25rem 0;
+  }
+  &__title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-family: "Lato", sans-serif;
+  }
+  &__titleSpan {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+  }
 }
 
-@media screen and (max-height: 667px) {
+@media screen and (max-width: 767px) {
   .room {
-    min-height: calc(100vh - 3.75rem);
+    &__title {
+      font-size: 1.5rem;
+    }
+    &__titleSpan {
+      font-size: 1rem;
+    }
   }
 }

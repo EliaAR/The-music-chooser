@@ -29,8 +29,8 @@ function InfoComponent() {
       {showInfo ? (
         <Box
           component="article"
-          sx={{ display: "flex", gap: "1rem" }}
           onClick={() => setShowInfo(false)}
+          sx={{ display: "flex", gap: "1rem" }}
         >
           <Divider orientation="vertical" flexItem />
           <Box

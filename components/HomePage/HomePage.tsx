@@ -58,11 +58,11 @@ function HomePage() {
         <Typography
           component="h3"
           variant="h6"
-          sx={{ fontSize: "2.3rem", color: "secondary.main" }}
+          sx={{ color: "secondary.main" }}
           className={`${styles.homePage__title} ${
             theme.palette.mode === "dark"
-              ? styles["HomePage__title--dark"]
-              : styles["HomePage__title--light"]
+              ? styles["homePage__title--dark"]
+              : styles["homePage__title--light"]
           }`}
         >
           Pick out your song!
@@ -106,7 +106,7 @@ function HomePage() {
             onChange={(e) => setNameRoom(e.currentTarget.value)}
             value={nameRoom}
           />
-          <Button variant="contained" onClick={() => setCallAPI(true)}>
+          <Button onClick={() => setCallAPI(true)} variant="contained">
             Crear Sala
           </Button>
         </Box>

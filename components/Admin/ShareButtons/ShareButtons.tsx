@@ -6,6 +6,7 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { RoomModel } from "../../../types/room";
+import styles from "./ShareButtons.module.scss";
 
 interface ShareButtonsProps {
   roomData: RoomModel;
@@ -29,30 +30,36 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
   };
 
   return (
-    <Box
-      component="section"
-      sx={{ position: "absolute", top: "0.75rem", left: "0.5rem" }}
-    >
+    <Box component="section" className={styles.shareButtons}>
       <SpeedDial
+        onClick={() => setShowShareButtons(!showShareButtons)}
         ariaLabel="SpeedDial controlador"
         icon={<ShareIcon sx={{ color: "text.primary" }} />}
-        onClick={() => setShowShareButtons(!showShareButtons)}
         open={showShareButtons}
         direction="down"
-        FabProps={{
-          style: { backgroundColor: "transparent" },
+        sx={{
+          height: "2.75rem",
+          width: "2.75rem",
+          "& .MuiButtonBase-root": {
+            height: "2.75rem",
+            width: "2.75rem",
+            backgroundColor: "transparent",
+            boxShadow: 1,
+            color: "primary.light",
+            "&:hover": { backgroundColor: "transparent" },
+          },
         }}
       >
         <SpeedDialAction
+          onClick={() => handleShareTelegram()}
           icon={<TelegramIcon />}
           tooltipTitle="Comparte por Telegram"
-          onClick={() => handleShareTelegram()}
           FabProps={{ style: { color: "white", backgroundColor: "#0088cc" } }}
         />
         <SpeedDialAction
+          onClick={() => handleShareWhatsApp()}
           icon={<WhatsAppIcon />}
           tooltipTitle="Comparte por WhatsApp"
-          onClick={() => handleShareWhatsApp()}
           FabProps={{ style: { color: "white", backgroundColor: "#25D366" } }}
         />
       </SpeedDial>
