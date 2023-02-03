@@ -35,9 +35,16 @@ const themeOptionsDark = {
     },
     error: {
       main: "#592a2a",
-      contrastText: "#E4E6EB",
+      contrastText: "#723838",
+    },
+    info: {
+      main: "#fff0db",
+      contrastText: "#303030",
     },
     divider: "rgba(255, 255, 255, 0.15)",
+    action: {
+      disabledBackground: "#292532",
+    },
   },
 };
 
@@ -75,9 +82,16 @@ const themeOptionsLight = {
     },
     error: {
       main: "#592a2a",
-      contrastText: "#E4E6EB",
+      contrastText: "#592a2a",
+    },
+    info: {
+      main: "#F57C00",
+      contrastText: "#f6f6f6",
     },
     divider: "rgba(0, 0, 0, 0.25)",
+    action: {
+      disabledBackground: "#d8cfec",
+    },
   },
 };
 

@@ -16,13 +16,30 @@ import AppBlockingOutlinedIcon from "@mui/icons-material/AppBlockingOutlined";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import styles from "./DescriptionComponent.module.scss";
 
-function DescriptionComponent() {
+interface DescriptionComponentProps {
+  textTitle: string;
+  textAddSongs: string;
+  textCloseVoting: string;
+  textCloseVoting2: string;
+  textPlaySongs: string;
+  textPlaySongs2: string;
+}
+
+function DescriptionComponent({
+  textTitle,
+  textAddSongs,
+  textCloseVoting,
+  textCloseVoting2,
+  textPlaySongs,
+  textPlaySongs2,
+}: DescriptionComponentProps) {
   const [showDescription, setShowDescription] = useState(false);
 
   return (
     <Box component="section" className={styles.descriptionComponent}>
       <Button
         onClick={() => setShowDescription(!showDescription)}
+        aria-label="abrir modal descripción"
         variant="outlined"
         sx={{ color: "primary.light", borderColor: "primary.light" }}
         className={styles.descriptionComponent__buttonContainer}
@@ -33,15 +50,15 @@ function DescriptionComponent() {
 
       <Dialog
         open={showDescription}
-        aria-labelledby="título descripción"
-        aria-describedby="contenido descripción"
+        aria-labelledby="título-descripción"
+        aria-describedby="contenido-descripción"
       >
         <DialogTitle
-          id="título descripción"
+          id="título-descripción"
           sx={{ color: "common.black" }}
           className={styles.descriptionComponent__dialogTitle}
         >
-          Tutorial para la App
+          {textTitle}
           <IconButton
             onClick={() => setShowDescription(false)}
             aria-label="cerrar modal descripción"
@@ -53,7 +70,7 @@ function DescriptionComponent() {
 
         <DialogContent
           dividers
-          id="contenido descripción"
+          id="contenido-descripción"
           className={styles.descriptionComponent__dialogContentContainer}
         >
           <Box
@@ -105,8 +122,7 @@ function DescriptionComponent() {
                   styles.descriptionComponent__dialogContentBlockParagraph
                 }
               >
-                Accede a la sala con la dirección compartida y añade canciones a
-                la playlist.
+                {textAddSongs}
               </Typography>
               <Typography
                 variant="body1"
@@ -204,8 +220,7 @@ function DescriptionComponent() {
                   styles.descriptionComponent__dialogContentBlockParagraph
                 }
               >
-                Cuando queráis finalizar las votaciones, quien sea Admin se
-                encargará de cerrarlas.
+                Cuando queráis finalizar las votaciones, {textCloseVoting}
               </Typography>
               <Typography
                 variant="body1"
@@ -215,7 +230,7 @@ function DescriptionComponent() {
               >
                 A partir de ese momento no podréis añadir ni votar más
                 canciones. Aunque siempre se puede volver a abrir las
-                votaciones.
+                votaciones. {textCloseVoting2}
               </Typography>
             </Box>
           </Box>
@@ -238,7 +253,7 @@ function DescriptionComponent() {
             <Box
               component="article"
               className={
-                styles.descriptionComponent__dialogContentBlockParagraphContainer
+                styles.descriptionComponent__dialogContentBlockParagraphContainerLast
               }
             >
               <Typography
@@ -247,8 +262,7 @@ function DescriptionComponent() {
                   styles.descriptionComponent__dialogContentBlockParagraph
                 }
               >
-                Una vez cerradas las votaciones, podréis empezar a reproducir la
-                playlist ordenada por el número de votos.
+                Una vez cerradas las votaciones, {textPlaySongs}
               </Typography>
               <Typography
                 variant="body1"
@@ -256,9 +270,7 @@ function DescriptionComponent() {
                   styles.descriptionComponent__dialogContentBlockParagraph
                 }
               >
-                Sólo quien sea Admin podrá reproducir la playlist, pausarla,
-                saltar canciones y avanzar o retroceder la canción. El resto, a
-                disfrutar!
+                {textPlaySongs2}
               </Typography>
             </Box>
           </Box>

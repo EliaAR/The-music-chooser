@@ -2,20 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  padding: 3rem 1.25rem 1.25rem;
   min-height: calc(100vh - 5rem);
   &--open {
-    justify-content: space-evenly;
-    padding: 0 1.25rem;
+    gap: 2.5rem;
   }
   &--closed {
-    justify-content: flex-start;
-    gap: 2.5rem;
-    padding: 3rem 1.25rem 0;
+    gap: 3.5rem;
   }
   &__title {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 2rem;
     font-family: "Lato", sans-serif;
   }
   &__titleSpan {

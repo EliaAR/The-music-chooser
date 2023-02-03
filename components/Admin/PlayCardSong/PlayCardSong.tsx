@@ -107,7 +107,7 @@ function PlayCardSong({
       <Box component="article" className={styles.playCardSong__songContainer}>
         <Typography
           component="h6"
-          variant="h6"
+          variant="subtitle2"
           title={song.name_song}
           className={styles.playCardSong__songTitle}
         >
@@ -126,13 +126,13 @@ function PlayCardSong({
         <Divider className={styles.playCardSong__songDivider} />
 
         <Slider
-          aria-label="time-indicator"
+          onChange={(_, value) => onScrub(value as number)}
+          onChangeCommitted={() => onScrubEnd()}
           value={progressTrack}
           min={0}
           step={1}
           max={duration ? duration : 0}
-          onChange={(_, value) => onScrub(value as number)}
-          onChangeCommitted={() => onScrubEnd()}
+          aria-label="indicador de por dónde va la canción"
           className={styles.playCardSong__songSlider}
         />
       </Box>

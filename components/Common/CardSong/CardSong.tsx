@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
@@ -91,31 +91,33 @@ function CardSong({
       className={styles.cardSong}
     >
       <Typography
-        component="p"
         variant="body1"
         title={song.name_song}
-        className={
-          isClosed && !isAdmin
-            ? styles.cardSong__title
-            : styles.cardSong__titleThin
-        }
+        className={`${styles.cardSong__title} ${
+          !isClosed
+            ? styles["cardSong__title--bold"]
+            : styles["cardSong__title--thin"]
+        }`}
       >
         {song.name_song}
       </Typography>
 
-      <CardMedia
-        component="img"
-        image={song.img}
-        alt={song.name_song}
-        className={styles.cardSong__img}
-      />
+      <Box component="article" className={styles.cardSong__imageContainer}>
+        <Image
+          src={song.img}
+          alt={song.name_song}
+          title={song.name_song}
+          layout="fill"
+          objectFit="contain"
+        />
+      </Box>
 
       {!isClosed ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <IconButton
             component="button"
             onClick={() => handleVote(song)}
-            aria-label="voto"
+            aria-label="votar por la canción"
             color="secondary"
             className={styles.cardSong__voteButton}
           >
@@ -126,7 +128,6 @@ function CardSong({
             )}
           </IconButton>
           <Typography
-            component="p"
             variant="body1"
             className={styles.cardSong__voteParagraph}
           >

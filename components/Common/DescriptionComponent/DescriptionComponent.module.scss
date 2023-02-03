@@ -33,10 +33,14 @@
     align-items: center;
     gap: 0.25rem;
   }
-  &__dialogContentBlockParagraphContainer {
+  &__dialogContentBlockParagraphContainer,
+  &__dialogContentBlockParagraphContainerLast {
     display: flex;
     flex-direction: column;
     text-align: justify;
+  }
+  &__dialogContentBlockParagraphContainerLast {
+    position: relative;
   }
   &__dialogContentBlockParagraph {
     text-align: justify;

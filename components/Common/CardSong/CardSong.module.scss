@@ -6,17 +6,22 @@
   padding: 0 0.6rem;
   height: 3.5rem;
   overflow: visible;
-  &__title,
-  &__titleThin {
+  &__title {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    &--bold {
+      width: 10.6rem;
+    }
+    &--thin {
+      width: 9.3rem;
+    }
   }
-  &__title {
-    width: 10.6rem;
-  }
-  &__titleThin {
-    width: 9.3rem;
+  &__imageContainer {
+    position: relative;
+    display: block;
+    width: 5.5rem;
+    height: 3.5rem;
   }
   &__voteContainer,
   &__playContainer {
@@ -28,18 +33,14 @@
   &__playButton {
     padding: 0;
   }
-  &__voteIcon {
-    font-size: 1.8rem;
-  }
   &__voteParagraph,
   &__playParagraph {
     font-size: 0.75rem;
   }
-  &__playIcon {
-    font-size: 2.4rem;
+  &__voteIcon {
+    font-size: 2rem;
   }
-  &__img {
-    max-height: 3.1rem;
-    max-width: 5.5rem;
+  &__playIcon {
+    font-size: 2.3rem;
   }
 }

@@ -21,11 +21,14 @@ function ButtonsSong({
 }: ButtonsSongProps) {
   return (
     <Box component="article" className={styles.buttonsSong}>
-      <IconButton onClick={onSkipPrevious} aria-label="previous">
+      <IconButton
+        onClick={onSkipPrevious}
+        aria-label="volver a la canción anterior"
+      >
         <SkipPreviousRoundedIcon />
       </IconButton>
 
-      <IconButton onClick={onPlayPauseClick} aria-label="play/pause">
+      <IconButton onClick={onPlayPauseClick} aria-label="play-pause">
         {isPlaying ? (
           <PauseRoundedIcon className={styles.buttonsSong__pause} />
         ) : (
@@ -33,7 +36,10 @@ function ButtonsSong({
         )}
       </IconButton>
 
-      <IconButton onClick={onSkipNext} aria-label="next">
+      <IconButton
+        onClick={onSkipNext}
+        aria-label="pasar a la siguiente canción"
+      >
         <SkipNextRoundedIcon />
       </IconButton>
     </Box>

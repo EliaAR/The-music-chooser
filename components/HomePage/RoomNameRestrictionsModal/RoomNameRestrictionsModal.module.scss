@@ -1,0 +1,49 @@
+.roomNameRestrictionsModal {
+  display: grid;
+  grid-template-areas:
+    "a b"
+    "c d"
+    "e f"
+    "g h";
+  grid-template-columns: 0.5rem 20rem;
+  grid-template-rows: 2.5rem repeat(3, 1.2rem);
+  grid-row-gap: 0.3rem;
+  grid-column-gap: 0.3rem;
+  border-radius: 0.3rem;
+  padding: 0.75rem 0.75rem 0.5rem 0.5rem;
+  &__paragraphOne,
+  &__paragraphTwo,
+  &__paragraphThree,
+  &__paragraphFour,
+  &__hyphensOne,
+  &__hyphensTwo,
+  &__hyphensThree,
+  &__hyphensFour {
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+  }
+  &__hyphensOne {
+    grid-area: a;
+  }
+  &__paragraphOne {
+    grid-area: b;
+  }
+  &__hyphensTwo {
+    grid-area: c;
+  }
+  &__paragraphTwo {
+    grid-area: d;
+  }
+  &__hyphensThree {
+    grid-area: e;
+  }
+  &__paragraphThree {
+    grid-area: f;
+  }
+  &__hyphensFour {
+    grid-area: g;
+  }
+  &__paragraphFour {
+    grid-area: h;
+  }
+}

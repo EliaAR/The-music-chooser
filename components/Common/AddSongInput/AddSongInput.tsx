@@ -33,7 +33,7 @@ function AddSongInput({
       <Button
         onClick={onClickCallAPIPost}
         variant="contained"
-        className={styles.addSongInput__button}
+        className={styles.addSongInput__buttonContainer}
       >
         <QueueMusicIcon className={styles.addSongInput__buttonIcon} />
         Añadir Canción

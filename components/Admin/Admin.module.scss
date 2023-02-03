@@ -19,22 +19,19 @@
     position: relative;
   }
   &__title {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 2rem;
     font-family: "Lato", sans-serif;
   }
   &__titleSpan {
     text-transform: capitalize;
     font-size: 1.5rem;
   }
-  &__closeButton {
+  &__closeButtonContainer {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     text-transform: uppercase;
   }
-  &__closeIcon {
+  &__closeButtonIcon {
     font-size: 1.1rem;
   }
 }
@@ -50,7 +47,7 @@
       padding-bottom: 1rem;
     }
     &__title {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
     &__titleSpan {
       font-size: 1rem;

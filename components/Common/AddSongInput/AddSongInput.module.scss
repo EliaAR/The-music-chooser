@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  &__button {
+  &__buttonContainer {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -17,6 +17,9 @@
   .addSongInput {
     &__textfield {
       width: 12.5rem;
+    }
+    &__buttonContainer {
+      font-size: 0.75rem;
     }
   }
 }

@@ -16,11 +16,7 @@ function ErrorComponent({ message }: ErrorComponentProps) {
     >
       <DangerousOutlinedIcon className={styles.errorComponent__icon} />
 
-      <Typography
-        variant="body1"
-        component="p"
-        className={styles.errorComponent__paragraph}
-      >
+      <Typography variant="body1" className={styles.errorComponent__paragraph}>
         {message}
       </Typography>
     </Box>

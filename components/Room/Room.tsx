@@ -2,9 +2,10 @@ import { ChangeEventHandler } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SongModel } from "../../types/song";
+import { DescriptionComponent } from "../Common/DescriptionComponent/DescriptionComponent";
 import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
 import { InfoComponent } from "./InfoComponent/InfoComponent";
-import { CardVote } from "../Common/CardVote/CardVote";
+import { Playlist } from "../Common/Playlist/Playlist";
 import styles from "./Room.module.scss";
 
 interface RoomProps {
@@ -48,7 +49,7 @@ function Room({
     >
       <Typography
         component="h1"
-        variant="h5"
+        variant="h1"
         sx={{ color: "quaternary.contrastText" }}
         className={styles.room__title}
       >
@@ -56,6 +57,17 @@ function Room({
         {"  "}
         {title}
       </Typography>
+
+      {!isClosed ? (
+        <DescriptionComponent
+          textTitle="Tutorial para Users"
+          textAddSongs="Accede a la sala con la dirección compartida y añade canciones a la playlist."
+          textCloseVoting="quien sea Admin se encargará de cerrarlas."
+          textCloseVoting2="De nuevo, le toca a quien sea Admin."
+          textPlaySongs="podréis empezar a reproducir la playlist ordenada por el número de votos."
+          textPlaySongs2="Sólo quien sea Admin podrá reproducir la playlist, pausarla, saltar canciones y avanzar o retroceder la canción. El resto, a disfrutar!"
+        />
+      ) : null}
 
       {!isClosed ? (
         <AddSongInput
@@ -67,7 +79,7 @@ function Room({
         <InfoComponent />
       )}
 
-      <CardVote
+      <Playlist
         songs={songs}
         isClosed={isClosed}
         idVotadas={idVotadas}

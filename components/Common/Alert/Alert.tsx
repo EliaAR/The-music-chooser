@@ -1,8 +1,6 @@
 import Snackbar from "@mui/material/Snackbar";
-import Slide, { SlideProps } from "@mui/material/Slide";
-import Fade from "@mui/material/Fade";
+import Grow, { GrowProps } from "@mui/material/Grow";
 import MuiAlert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -12,8 +10,8 @@ interface AlertProps {
   open: boolean;
 }
 
-function SlideTransition(props: SlideProps) {
-  return <Slide {...props} direction="up" />;
+function GrowTransition(props: GrowProps) {
+  return <Grow {...props} />;
 }
 
 function Alert({ alertMsg, handleCloseAlert, open }: AlertProps) {
@@ -21,21 +19,32 @@ function Alert({ alertMsg, handleCloseAlert, open }: AlertProps) {
     <Snackbar
       open={open}
       onClose={handleCloseAlert}
-      TransitionComponent={open ? SlideTransition : Fade}
-      key={Fade.name}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      autoHideDuration={15000}
+      TransitionComponent={GrowTransition}
+      anchorOrigin={{ vertical: "top", horizontal: "left" }}
+      autoHideDuration={150000}
     >
-      <MuiAlert variant="filled" severity="error">
-        <span>{alertMsg}</span>
-        <Button
-          onClick={handleCloseAlert}
-          color="secondary"
-          size="small"
-        ></Button>
+      <MuiAlert
+        variant="filled"
+        severity="error"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          "& .MuiAlert-icon": {
+            fontSize: "2rem",
+          },
+          "& .MuiAlert-message": {
+            display: "flex",
+            alignItems: "center",
+            gap: "0.3rem",
+          },
+        }}
+      >
+        {alertMsg}
+
         <IconButton
           onClick={handleCloseAlert}
-          aria-label="cerrar"
+          aria-label="cerrar el alert"
           size="small"
           color="inherit"
         >

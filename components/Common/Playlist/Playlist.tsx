@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SongModel } from "../../../types/song";
 import { CardSong } from "../CardSong/CardSong";
-import styles from "./CardVote.module.scss";
+import styles from "./Playlist.module.scss";
 
-interface CardVoteProps {
+interface PlaylistProps {
   songs: SongModel[];
   isClosed: boolean;
   idVotadas: number[];
@@ -16,7 +16,7 @@ interface CardVoteProps {
   isAdmin: boolean;
 }
 
-function CardVote({
+function Playlist({
   songs,
   isClosed,
   idVotadas,
@@ -25,15 +25,11 @@ function CardVote({
   onVoteError,
   indexCurrentSong,
   isAdmin,
-}: CardVoteProps) {
+}: PlaylistProps) {
   const theme = useTheme();
 
   return (
-    <Box
-      component="section"
-      // sx={{ flexGrow: isAdmin ? "null" : 0.4 }}
-      className={isAdmin ? styles.cardVote : styles["cardVote--noAdmin"]}
-    >
+    <Box component="section" className={styles.playlist}>
       <Box
         component="article"
         sx={{
@@ -41,13 +37,9 @@ function CardVote({
           backgroundColor: "tertiary.light",
           color: "tertiary.contrastText",
         }}
-        className={styles.cardVote__titleContainer}
+        className={styles.playlist__titleContainer}
       >
-        <Typography
-          component="h6"
-          variant="body1"
-          className={styles.cardVote__titleParagraph}
-        >
+        <Typography component="h2" variant="h2">
           Listado canciones
         </Typography>
       </Box>
@@ -58,10 +50,10 @@ function CardVote({
           backgroundColor: "background.paper",
           boxShadow: 2,
         }}
-        className={`${styles.cardVote__songs} ${
+        className={`${styles.playlist__songs} ${
           theme.palette.mode === "dark"
-            ? styles["cardVote__songs--dark"]
-            : styles["cardVote__songs--light"]
+            ? styles["playlist__songs--dark"]
+            : styles["playlist__songs--light"]
         }`}
       >
         {songs.map((song) => (
@@ -83,4 +75,4 @@ function CardVote({
   );
 }
 
-export { CardVote };
+export { Playlist };

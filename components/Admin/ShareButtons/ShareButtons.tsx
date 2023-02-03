@@ -34,8 +34,8 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
       <SpeedDial
         onClick={() => setShowShareButtons(!showShareButtons)}
         ariaLabel="SpeedDial controlador"
-        icon={<ShareIcon sx={{ color: "text.primary" }} />}
         open={showShareButtons}
+        icon={<ShareIcon sx={{ color: "text.primary" }} />}
         direction="down"
         sx={{
           height: "2.75rem",
@@ -43,10 +43,10 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
           "& .MuiButtonBase-root": {
             height: "2.75rem",
             width: "2.75rem",
-            backgroundColor: "transparent",
+            backgroundColor: "inherit",
             boxShadow: 1,
             color: "primary.light",
-            "&:hover": { backgroundColor: "transparent" },
+            "&:hover": { backgroundColor: "inherit" },
           },
         }}
       >

@@ -53,8 +53,8 @@ function Header() {
         </Link>
 
         <Typography
-          component="h1"
-          variant="h5"
+          component="h3"
+          variant="h3"
           sx={{ color: "primary.contrastText" }}
           className={styles.header__toolbarTitle}
         >

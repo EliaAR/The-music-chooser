@@ -1,0 +1,10 @@
+.addNameRoomComponent {
+  position: relative;
+  &__buttonContainer {
+    position: absolute;
+    top: -1rem;
+    right: -2.5rem;
+    align-items: flex-start;
+    padding-top: 0;
+  }
+}

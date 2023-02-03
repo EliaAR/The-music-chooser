@@ -8,11 +8,11 @@ import { updateRoom } from "../../services/front/room/updateRoom";
 import { RoomModel } from "../../types/room";
 import { SongModel } from "../../types/song";
 import { ShareButtons } from "./ShareButtons/ShareButtons";
-import { DescriptionComponent } from "./DescriptionComponent/DescriptionComponent";
+import { DescriptionComponent } from "../Common/DescriptionComponent/DescriptionComponent";
 import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
 import { PlayCardSong } from "./PlayCardSong/PlayCardSong";
 import { ErrorComponent } from "../Common/ErrorComponent/ErrorComponent";
-import { CardVote } from "../Common/CardVote/CardVote";
+import { Playlist } from "../Common/Playlist/Playlist";
 import styles from "./Admin.module.scss";
 
 interface AdminProps {
@@ -135,7 +135,7 @@ function Admin({
       <Box component="section" className={styles.admin__titleContainer}>
         <Typography
           component="h1"
-          variant="h5"
+          variant="h1"
           sx={{ color: "quaternary.contrastText" }}
           className={styles.admin__title}
         >
@@ -145,7 +145,16 @@ function Admin({
         <ShareButtons roomData={roomData} />
       </Box>
 
-      {!isClosed ? <DescriptionComponent /> : null}
+      {!isClosed ? (
+        <DescriptionComponent
+          textTitle="Tutorial para Admin"
+          textAddSongs=""
+          textCloseVoting="tú te encargarás de cerrarlas pulsando el botón de 	'cerrar votaciones'."
+          textCloseVoting2="Tú lo podrás hacer pulsando el botón de 'abrir votaciones'."
+          textPlaySongs="se cambiará automáticamente el campo de añadir canciones por el reproductor. Las canciones aparecerán en orden de votación."
+          textPlaySongs2="Sólo tú podrás reproducir la playlist, pausarla, saltar canciones y avanzar o retroceder la canción. No abuses de este poder!"
+        />
+      ) : null}
 
       {!isClosed ? (
         <AddSongInput
@@ -164,7 +173,7 @@ function Admin({
         <ErrorComponent message="No existe canción para reproducir" />
       )}
 
-      <CardVote
+      <Playlist
         songs={songs}
         isClosed={isClosed}
         idVotadas={idVotadas}
@@ -183,12 +192,12 @@ function Admin({
           })
         }
         variant="contained"
-        className={styles.admin__closeButton}
+        className={styles.admin__closeButtonContainer}
       >
         {roomData.is_closed ? (
-          <ThumbUpOutlinedIcon className={styles.admin__closeIcon} />
+          <ThumbUpOutlinedIcon className={styles.admin__closeButtonIcon} />
         ) : (
-          <AppBlockingOutlinedIcon className={styles.admin__closeIcon} />
+          <AppBlockingOutlinedIcon className={styles.admin__closeButtonIcon} />
         )}
 
         {roomData.is_closed ? "Abrir votaciones" : "Cerrar votaciones "}

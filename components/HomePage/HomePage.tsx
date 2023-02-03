@@ -4,21 +4,60 @@ import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { createRoom } from "../../services/front/room/createRoom";
 import { GetLocalStorage, SetLocalStorage } from "../../utils/localStorage";
+import { errorMessage } from "../../utils/errorMessages";
+import { AddNameRoomComponent } from "./AddNameRoomComponent/AddNameRoomComponent";
 import { Alert } from "../Common/Alert/Alert";
 import styles from "./HomePage.module.scss";
 
 function HomePage() {
-  const [nameRoom, setNameRoom] = useState("");
-  const [error, setError] = useState("");
-  const [callAPI, setCallAPI] = useState(false);
+  const router = useRouter();
 
   const theme = useTheme();
 
-  const router = useRouter();
+  const [nameRoom, setNameRoom] = useState("");
+  const [nameRoomErrors, setNameRoomErrors] = useState<React.ReactNode[]>([]);
+  const [error, setError] = useState("");
+  const [callAPI, setCallAPI] = useState(false);
+
+  const isDisabled = nameRoom.length === 0 || nameRoomErrors.length > 0;
+  const isError = !!nameRoomErrors.length;
+
+  const handleValueNameRoom = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNameRoom(e.currentTarget.value);
+  };
+
+  const handleBlurError = () => {
+    const nameErrors = [];
+    if (!nameRoom) {
+      nameErrors.push("Es necesario un nombre de Sala");
+    } else {
+      const roomNameSizeValid = nameRoom.length > 2 && nameRoom.length < 20;
+      const roomNameCharactersValid = /^[a-zA-Z0-9._-]+$/.test(nameRoom);
+      if (!roomNameSizeValid) {
+        nameErrors.push(
+          <span key={1}>
+            El nombre de la Sala debe tener entre 3 y 20 caracteres
+          </span>,
+        );
+      }
+      if (!roomNameCharactersValid) {
+        nameErrors.push(
+          <span key={2}>
+            El nombre de la Sala debe contener caracteres válidos
+          </span>,
+        );
+      }
+    }
+    setNameRoomErrors(nameErrors);
+  };
+
+  const handleClickReset = () => {
+    setNameRoom("");
+    setNameRoomErrors([]);
+  };
 
   const handleCreateRoom = async () => {
     try {
@@ -56,8 +95,8 @@ function HomePage() {
         className={styles.homePage}
       >
         <Typography
-          component="h3"
-          variant="h6"
+          component="h1"
+          variant="h2"
           sx={{ color: "secondary.main" }}
           className={`${styles.homePage__title} ${
             theme.palette.mode === "dark"
@@ -74,12 +113,14 @@ function HomePage() {
           className={styles.homePage__instructionsContainer}
         >
           <Typography
+            component="h2"
             variant="h6"
-            sx={{ lineHeight: 2, color: "text.secondary" }}
+            sx={{ color: "text.secondary" }}
+            className={styles.homePage__instructionsTitle}
           >
             Pasos para hacer la playlist
           </Typography>
-          <Divider orientation="horizontal" variant="middle" />
+          <Divider orientation="horizontal" />
           <Typography
             variant="body1"
             sx={{ paddingTop: "0.2rem", color: "text.secondary" }}
@@ -90,23 +131,27 @@ function HomePage() {
             2. Comparte la URL con tu gente
           </Typography>
           <Typography variant="body1" sx={{ color: "text.secondary" }}>
-            3. Votad por vuestras canciones favoritas
+            3. Vota por vuestras canciones favoritas
           </Typography>
           <Typography variant="body1" sx={{ color: "text.secondary" }}>
-            4. ¡Disfrutad de la música!
+            4. ¡Disfruta de la música!
           </Typography>
         </Box>
 
-        <Box component="section" className={styles.homePage__room}>
-          <TextField
-            label="Nombre Sala"
-            color="secondary"
-            placeholder="Escríbelo aquí"
-            focused
-            onChange={(e) => setNameRoom(e.currentTarget.value)}
-            value={nameRoom}
+        <Box component="section" className={styles.homePage__createContainer}>
+          <AddNameRoomComponent
+            handleValueNameRoom={handleValueNameRoom}
+            nameRoom={nameRoom}
+            handleBlurError={handleBlurError}
+            isError={isError}
+            nameRoomErrors={nameRoomErrors}
+            handleClickReset={handleClickReset}
           />
-          <Button onClick={() => setCallAPI(true)} variant="contained">
+          <Button
+            onClick={() => setCallAPI(true)}
+            variant="contained"
+            disabled={isDisabled}
+          >
             Crear Sala
           </Button>
         </Box>
@@ -114,7 +159,7 @@ function HomePage() {
 
       <Alert
         open={error !== ""}
-        alertMsg="Ese nombre de sala ya existe. Prueba con otro"
+        alertMsg={errorMessage(error)}
         handleCloseAlert={() => setError("")}
       />
     </>
