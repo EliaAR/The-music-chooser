@@ -7,6 +7,8 @@ const selectRoom: NextApiHandler<GetRoomResponse> = async (req, res) => {
     const { id_room } = req.query as unknown as GetRoomsDTO;
     const results = await getRoom({ id_room });
 
+    if (!results)
+      return res.status(404).json({ error: "No se encontró la sala" });
     if ("error" in results) {
       return res.status(400).json({ error: results.error });
     }
