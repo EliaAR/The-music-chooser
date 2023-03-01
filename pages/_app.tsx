@@ -32,6 +32,37 @@ function MyApp({ Component, pageProps }: AppProps) {
             ? themeOptionsLight.palette
             : themeOptionsDark.palette),
         },
+        typography: {
+          h1: {
+            textTransform: "uppercase",
+            fontWeight: 700,
+            fontSize: "2rem",
+          },
+          h2: {
+            textTransform: "uppercase",
+            fontWeight: 700,
+            fontSize: "1.15rem",
+          },
+          h3: {
+            textTransform: "uppercase",
+            fontWeight: 700,
+            fontSize: "1.5rem",
+            lineHeight: 1.334,
+          },
+          subtitle2: {
+            fontWeight: 500,
+            fontSize: "0.9rem",
+            lineHeight: 1.6,
+            letterSpacing: "0.0075em",
+          },
+          body3: {
+            fontFamily: "'Roboto', sans-serif",
+            fontWeight: 400,
+            fontSize: "0.75rem",
+            lineHeight: 1.43,
+            letterSpacing: "0.01071em",
+          },
+        },
         components: {
           MuiSwitch: {
             styleOverrides: {

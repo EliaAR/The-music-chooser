@@ -127,24 +127,14 @@ function CardSong({
               <ThumbUpOutlinedIcon className={styles.cardSong__voteIcon} />
             )}
           </IconButton>
-          <Typography
-            variant="body1"
-            className={styles.cardSong__voteParagraph}
-          >
-            {song.votos}
-          </Typography>
+          <Typography variant="body3">{song.votos}</Typography>
         </Box>
       ) : null}
 
       {isClosed && !isAdmin ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <HowToVoteIcon sx={{ color: "secondary.main" }} />
-          <Typography
-            variant="body1"
-            className={styles.cardSong__voteParagraph}
-          >
-            {song.votos}
-          </Typography>
+          <Typography variant="body3">{song.votos}</Typography>
         </Box>
       ) : null}
 
@@ -156,12 +146,7 @@ function CardSong({
               className={styles.cardSong__playIcon}
             />
           </IconButton>
-          <Typography
-            variant="body1"
-            className={styles.cardSong__playParagraph}
-          >
-            {song.votos}
-          </Typography>
+          <Typography variant="body3">{song.votos}</Typography>
         </Box>
       ) : null}
     </Card>
