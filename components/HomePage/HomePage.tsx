@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -59,7 +59,7 @@ function HomePage() {
     setNameRoomErrors([]);
   };
 
-  const handleCreateRoom = async () => {
+  const handleCreateRoom = useCallback(async () => {
     try {
       const data = await createRoom({ name_room: nameRoom });
       if ("id_room" in data) {
@@ -77,7 +77,7 @@ function HomePage() {
         setError(err.message);
       }
     }
-  };
+  }, [nameRoom, router]);
 
   useEffect(() => {
     if (callAPI) {
@@ -85,7 +85,7 @@ function HomePage() {
       setCallAPI(false);
       handleCreateRoom();
     }
-  }, [callAPI, nameRoom]);
+  }, [callAPI, handleCreateRoom]);
 
   return (
     <>

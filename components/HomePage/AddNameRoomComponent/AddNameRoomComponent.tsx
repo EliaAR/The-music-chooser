@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
-import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import Popper from "@mui/material/Popper";
 import { RoomNameRestrictionsModal } from "../RoomNameRestrictionsModal/RoomNameRestrictionsModal";
