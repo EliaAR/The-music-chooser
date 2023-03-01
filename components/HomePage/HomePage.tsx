@@ -26,7 +26,9 @@ function HomePage() {
   const isError = !!nameRoomErrors.length;
 
   const handleValueNameRoom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNameRoom(e.currentTarget.value);
+    const value = e.currentTarget.value;
+    const newValue = value.replace(/\s/g, "-");
+    setNameRoom(newValue);
   };
 
   const handleBlurError = () => {

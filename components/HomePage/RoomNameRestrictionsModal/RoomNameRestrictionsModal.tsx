@@ -39,7 +39,7 @@ function RoomNameRestrictionsModal() {
         variant="body2"
         className={styles.roomNameRestrictionsModal__paragraphTwo}
       >
-        No puede contener espacios
+        No puede contener espacios. Se sustituirán por guiones
       </Typography>
 
       <Typography
