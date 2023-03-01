@@ -4,7 +4,7 @@ async function fetchYoutubeData(url: string) {
   const youtubeOptions = await youtubedl(url, {
     dumpSingleJson: true,
     noWarnings: true,
-    noCheckCertificate: true,
+    noCheckCertificates: true,
     preferFreeFormats: true,
     youtubeSkipDashManifest: true,
   });
