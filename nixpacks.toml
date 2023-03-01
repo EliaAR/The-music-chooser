@@ -1,8 +1,4 @@
-[phases.setup]
-nixPkgs = ['nodejs', 'python']
-
-[phases.build]
-cmds = ['npm run build']
+providers = ["...", "python"]
 
 [start]
 cmd = 'npm start'
