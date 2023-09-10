@@ -8,5 +8,6 @@
   "editor.padding.top": 10,
   "editor.padding.bottom": 10,
   "editor.lineHeight": 22,
-  "editor.scrollbar.verticalScrollbarSize": 20
+  "editor.scrollbar.verticalScrollbarSize": 20,
+  "cSpell.words": ["ISLOCAL", "sslmode"]
 }

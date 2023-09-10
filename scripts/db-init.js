@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const { Pool } = require("pg");
 
+let pool;
+
 const dropTableRooms = "DROP TABLE IF EXISTS rooms CASCADE";
 const dropTableSongs = "DROP TABLE IF EXISTS songs CASCADE";
 
@@ -15,7 +17,16 @@ const alterTableRooms =
 
 async function main() {
   try {
-    const pool = new Pool();
+    if (process.env.ISLOCAL === "true") {
+      pool = new Pool();
+    } else {
+      if (!process.env.POSTGRES_URL) {
+        throw new Error("POSTGRES_URL not found");
+      }
+      pool = new Pool({
+        connectionString: `${process.env.POSTGRES_URL}?sslmode=require`,
+      });
+    }
     await pool.query(dropTableRooms);
     await pool.query(dropTableSongs);
     await pool.query(createTableRooms);
