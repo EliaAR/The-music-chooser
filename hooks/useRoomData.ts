@@ -7,11 +7,12 @@ import { RoomModel } from "../types/room";
 import { SongModel } from "../types/song";
 
 interface UseRoomDataProps {
-  id: string | string[] | undefined;
+  roomServer: RoomModel;
 }
 
 interface UseRoomDataResult {
-  room: RoomModel | undefined;
+  room: RoomModel;
+  isLoading: boolean;
   setFetchRoom: React.Dispatch<React.SetStateAction<boolean>>;
   setCallAPIPost: React.Dispatch<React.SetStateAction<boolean>>;
   setCallAPIGet: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,9 +28,10 @@ interface UseRoomDataResult {
   currentSong: SongModel;
 }
 
-function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
-  const [room, setRoom] = useState<RoomModel | undefined>();
-  const [fetchRoom, setFetchRoom] = useState(true);
+function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
+  const [room, setRoom] = useState<RoomModel>(roomServer);
+  const [fetchRoom, setFetchRoom] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [callAPIPost, setCallAPIPost] = useState(false);
   const [callAPIGet, setCallAPIGet] = useState(true);
   const [urlSong, setUrlSong] = useState("");
@@ -47,20 +49,20 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
   //   Obtener Room. fetchRoom → semáforo de Admin en botón de cerrar/abrir votaciones y sala + botones retroceder avanzar canción
   useEffect(() => {
     if (fetchRoom) {
-      if (id && typeof id === "string")
-        getRoom({ id_room: id })
-          .then((data) => {
-            setRoom(data);
-            setFetchRoom(false);
-          })
-          .catch((err) => {
-            if (err instanceof Error) {
-              setError(err.message);
-              console.error(err);
-            }
-          });
+      getRoom({ id_room: roomServer.id_room.toString() })
+        .then((data) => {
+          setRoom(data);
+          setFetchRoom(false);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          if (err instanceof Error) {
+            setError(err.message);
+            console.error(err);
+          }
+        });
     }
-  }, [fetchRoom, id]);
+  }, [fetchRoom, roomServer]);
 
   // Obtener los datos de localStorage de idVotadas e isAdmin
   useEffect(() => {
@@ -75,6 +77,7 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
     });
     if (room && localStorageIsAdmins.includes(room.id_room)) {
       setIsAdmin(true);
+      setIsLoading(false);
     }
   }, [room]);
 
@@ -91,7 +94,7 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
           }
         });
     }
-  }, [callAPIGet, id, room]);
+  }, [callAPIGet, room]);
 
   // Crear canción. callAPIPost → semáforo desde AddSongInput cuando se añade una canción (onClickCallAPIPost) ... Semáforo CallGetAPI
   useEffect(() => {
@@ -111,10 +114,11 @@ function useRoomData({ id }: UseRoomDataProps): UseRoomDataResult {
           }
         });
     }
-  }, [callAPIPost, id, urlSong, room]);
+  }, [callAPIPost, urlSong, room]);
 
   return {
     room,
+    isLoading,
     setFetchRoom,
     setCallAPIPost,
     setCallAPIGet,

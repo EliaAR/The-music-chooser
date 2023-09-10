@@ -21,12 +21,12 @@ function AddSongInput({
   return (
     <Box component="section" className={styles.addSongInput}>
       <TextField
-        label="URL Canción"
-        color="secondary"
-        placeholder="Escríbela aquí"
-        focused
         onChange={onChangeAddSongInput}
         value={valueAddSongInput}
+        label="URL Canción"
+        placeholder="Escríbela aquí"
+        focused
+        color="secondary"
         className={styles.addSongInput__textfield}
       />
 

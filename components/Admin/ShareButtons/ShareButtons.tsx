@@ -33,18 +33,18 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
     <Box component="section" className={styles.shareButtons}>
       <SpeedDial
         onClick={() => setShowShareButtons(!showShareButtons)}
-        ariaLabel="SpeedDial controlador"
         open={showShareButtons}
+        ariaLabel="Compartir la URL de la sala por WhatsApp y Telegram"
         icon={<ShareIcon sx={{ color: "text.primary" }} />}
         direction="down"
         sx={{
           height: "2.75rem",
           width: "2.75rem",
           "& .MuiButtonBase-root": {
+            boxShadow: 1,
             height: "2.75rem",
             width: "2.75rem",
             backgroundColor: "inherit",
-            boxShadow: 1,
             color: "primary.light",
             "&:hover": { backgroundColor: "inherit" },
           },
@@ -52,14 +52,14 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
       >
         <SpeedDialAction
           onClick={() => handleShareTelegram()}
-          icon={<TelegramIcon />}
           tooltipTitle="Comparte por Telegram"
+          icon={<TelegramIcon />}
           FabProps={{ style: { color: "white", backgroundColor: "#0088cc" } }}
         />
         <SpeedDialAction
           onClick={() => handleShareWhatsApp()}
-          icon={<WhatsAppIcon />}
           tooltipTitle="Comparte por WhatsApp"
+          icon={<WhatsAppIcon />}
           FabProps={{ style: { color: "white", backgroundColor: "#25D366" } }}
         />
       </SpeedDial>

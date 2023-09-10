@@ -1,17 +1,23 @@
-import { useRouter } from "next/router";
+import { getServerRoom } from "../../services/back/getServerSideProps/getServerRoom";
+import { errorMessage } from "../../utils/errorMessages";
 import { useRoomData } from "../../hooks/useRoomData";
+import { RoomModel } from "../../types/room";
+import { LoaderComponent } from "../../components/Common/LoaderComponent/LoaderComponent";
 import { Header } from "../../components/Common/Header/Header";
 import { Room } from "../../components/Room/Room";
 import { Admin } from "../../components/Admin/Admin";
 import { Alert } from "../../components/Common/Alert/Alert";
 
-function RoomById() {
-  const router = useRouter();
+export const getServerSideProps = getServerRoom;
 
-  const { id } = router.query;
+interface RoomByIdProps {
+  roomDataPN: RoomModel;
+}
 
+function RoomById({ roomDataPN }: RoomByIdProps) {
   const {
     room,
+    isLoading,
     setFetchRoom,
     setCallAPIPost,
     setCallAPIGet,
@@ -25,61 +31,59 @@ function RoomById() {
     setError,
     indexCurrentSong,
     currentSong,
-  } = useRoomData({ id });
+  } = useRoomData({ roomServer: roomDataPN });
 
   return (
     <>
-      {room ? (
-        <>
-          <Header />
+      <Header />
 
-          {isAdmin ? (
-            <Admin
-              title={room.name_room}
-              valueAddSongInput={urlSong}
-              onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
-              onClickCallAPIPost={() => setCallAPIPost(true)}
-              currentSong={currentSong}
-              songs={songs}
-              isClosed={room.is_closed}
-              idVotadas={idVotadas}
-              handleIdVotadas={(newIdArrayVotadas) =>
-                setIdVotadas(newIdArrayVotadas)
-              }
-              onVoteSuccess={() => setCallAPIGet(true)}
-              onVoteError={(err) => setError(err)}
-              indexCurrentSong={indexCurrentSong}
-              roomData={room}
-              reloadRoomData={() => setFetchRoom(true)}
-              onUpdateRoom={(err) => setError(err)}
-              isAdmin={isAdmin}
-            />
-          ) : (
-            <Room
-              title={room.name_room}
-              valueAddSongInput={urlSong}
-              onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
-              onClickCallAPIPost={() => setCallAPIPost(true)}
-              songs={songs}
-              isClosed={room.is_closed}
-              idVotadas={idVotadas}
-              handleIdVotadas={(newIdArrayVotadas) =>
-                setIdVotadas(newIdArrayVotadas)
-              }
-              onVoteSuccess={() => setCallAPIGet(true)}
-              onVoteError={(err) => setError(err)}
-              indexCurrentSong={indexCurrentSong}
-              isAdmin={isAdmin}
-            />
-          )}
+      {isLoading ? (
+        <LoaderComponent />
+      ) : isAdmin ? (
+        <Admin
+          title={roomDataPN.name_room}
+          valueAddSongInput={urlSong}
+          onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
+          onClickCallAPIPost={() => setCallAPIPost(true)}
+          currentSong={currentSong}
+          songs={songs}
+          isClosed={room.is_closed}
+          idVotadas={idVotadas}
+          handleIdVotadas={(newIdArrayVotadas) =>
+            setIdVotadas(newIdArrayVotadas)
+          }
+          onVoteSuccess={() => setCallAPIGet(true)}
+          onVoteError={(err) => setError(err)}
+          indexCurrentSong={indexCurrentSong}
+          roomData={room}
+          reloadRoomData={() => setFetchRoom(true)}
+          onUpdateRoom={(err) => setError(err)}
+          isAdmin={isAdmin}
+        />
+      ) : (
+        <Room
+          title={roomDataPN.name_room}
+          valueAddSongInput={urlSong}
+          onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
+          onClickCallAPIPost={() => setCallAPIPost(true)}
+          songs={songs}
+          isClosed={room.is_closed}
+          idVotadas={idVotadas}
+          handleIdVotadas={(newIdArrayVotadas) =>
+            setIdVotadas(newIdArrayVotadas)
+          }
+          onVoteSuccess={() => setCallAPIGet(true)}
+          onVoteError={(err) => setError(err)}
+          indexCurrentSong={indexCurrentSong}
+          isAdmin={isAdmin}
+        />
+      )}
 
-          <Alert
-            open={error !== ""}
-            alertMsg={error}
-            handleCloseAlert={() => setError("")}
-          />
-        </>
-      ) : null}
+      <Alert
+        open={error !== ""}
+        alertMsg={errorMessage(error)}
+        handleCloseAlert={() => setError("")}
+      />
     </>
   );
 }

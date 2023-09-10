@@ -8,9 +8,9 @@
     position: relative;
     display: block;
     border-radius: 0.2rem;
-    background-color: black;
     width: 10rem;
     height: 8rem;
+    background-color: black;
   }
   &__songContainer {
     display: flex;
@@ -21,10 +21,10 @@
   &__songTitle {
     padding-bottom: 1rem;
     width: 13.75rem;
+    overflow: hidden;
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
   }
   &__songDivider {
     width: 14rem;

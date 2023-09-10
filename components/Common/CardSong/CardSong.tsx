@@ -65,7 +65,7 @@ function CardSong({
           idSong: song.id_song,
         });
         handleIdVotadas([...idVotadas, song.id_song]);
-      } else {
+      } else if (song.votos > 0) {
         SetLocalStorage({
           key: "idVotadas",
           value: idVotadas.filter((id) => id !== song.id_song),
@@ -75,6 +75,8 @@ function CardSong({
           idSong: song.id_song,
         });
         handleIdVotadas(idVotadas.filter((id) => id !== song.id_song));
+      } else {
+        return;
       }
     }
   };
