@@ -39,6 +39,8 @@ function Room({
   indexCurrentSong,
   isAdmin,
 }: RoomProps) {
+  const titleNoHyphens = title.replace(/-/g, " ");
+
   return (
     <Box
       component="main"
@@ -55,7 +57,7 @@ function Room({
       >
         <span className={styles.room__titleSpan}>sala</span>
         {"  "}
-        {title}
+        {titleNoHyphens}
       </Typography>
 
       {!isClosed ? (

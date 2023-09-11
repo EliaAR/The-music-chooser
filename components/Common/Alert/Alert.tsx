@@ -17,8 +17,8 @@ function GrowTransition(props: GrowProps) {
 function Alert({ alertMsg, handleCloseAlert, open }: AlertProps) {
   return (
     <Snackbar
-      open={open}
       onClose={handleCloseAlert}
+      open={open}
       TransitionComponent={GrowTransition}
       anchorOrigin={{ vertical: "top", horizontal: "left" }}
       autoHideDuration={150000}

@@ -65,6 +65,8 @@ function Admin({
 }: AdminProps) {
   const [defaultIsPlaying, setDefaultIsPlaying] = useState(false);
 
+  const titleNoHyphens = title.replace(/-/g, " ");
+
   const handleUpdateRoom = ({ isClosed, idRoom }: HandleUpdateRoomProps) => {
     updateRoom({
       is_closed: isClosed,
@@ -139,7 +141,8 @@ function Admin({
           sx={{ color: "quaternary.contrastText" }}
           className={styles.admin__title}
         >
-          sala admin <span className={styles.admin__titleSpan}>{title}</span>
+          sala admin{" "}
+          <span className={styles.admin__titleSpan}>{titleNoHyphens}</span>
         </Typography>
 
         <ShareButtons roomData={roomData} />
