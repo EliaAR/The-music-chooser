@@ -1,0 +1,91 @@
+.notFoundPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100vw;
+  height: 100vh;
+  &__infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 30rem;
+  }
+  &__infoChoosyContainer {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  &__infoChoosyImageContainer {
+    position: relative;
+    display: block;
+    width: 5rem;
+    height: 5rem;
+  }
+  &__infoChoosyBubble {
+    position: absolute;
+    top: -75%;
+    right: -6.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.1rem;
+    width: 8.3rem;
+    border-radius: 50%;
+    box-shadow: 1px 12px 20px rgb(0 0 0 / 25%);
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    &--dark {
+      background-color: #f6f6f6;
+      &::before {
+        border: 15px solid #f6f6f6;
+      }
+    }
+    &--light {
+      background-color: #e8e2db;
+      &::before {
+        border: 15px solid #e8e2db;
+      }
+    }
+  }
+  &__infoChoosyBubble:before {
+    content: "";
+    position: absolute;
+    bottom: -1.4rem;
+    right: 6rem;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    transform: rotate(21deg);
+  }
+  &__infoParagraph {
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+  &__buttonContainer {
+    flex-grow: 0.1;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  &__buttonHomePage,
+  &__buttonBack {
+    text-transform: none;
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .notFoundPage {
+    padding-inline: 0.5rem;
+    &__infoParagraph {
+      font-size: 1.75rem;
+    }
+  }
+}

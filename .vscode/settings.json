@@ -5,9 +5,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "explorer.compactFolders": false,
   "editor.padding.top": 10,
   "editor.padding.bottom": 10,
   "editor.lineHeight": 22,
   "editor.scrollbar.verticalScrollbarSize": 20,
-  "cSpell.words": ["ISLOCAL", "sslmode"]
+  "workbench.list.horizontalScrolling": true,
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true
 }
