@@ -56,7 +56,7 @@ function Playlist({
             : styles["playlist__songs--light"]
         }`}
       >
-        {songs.map((song) => (
+        {songs.map((song, index) => (
           <CardSong
             key={song.id_song}
             song={song}
@@ -66,7 +66,7 @@ function Playlist({
             onVoteSuccess={onVoteSuccess}
             onVoteError={onVoteError}
             isVoted={idVotadas.includes(song.id_song)}
-            indexCurrentSong={indexCurrentSong}
+            selectedSong={indexCurrentSong === index}
             isAdmin={isAdmin}
           />
         ))}

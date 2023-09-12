@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEventHandler } from "react";
 import { getRoom } from "../services/front/room/getRoom";
 import { createSong } from "../services/front/song/createSong";
 import { getSongs } from "../services/front/song/getSongs";
@@ -14,7 +14,7 @@ interface UseRoomDataResult {
   room: RoomModel;
   isLoading: boolean;
   setFetchRoom: React.Dispatch<React.SetStateAction<boolean>>;
-  setCallAPIPost: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmitSong: FormEventHandler<HTMLDivElement>;
   setCallAPIGet: React.Dispatch<React.SetStateAction<boolean>>;
   urlSong: string;
   setUrlSong: React.Dispatch<React.SetStateAction<string>>;
@@ -45,6 +45,11 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
   );
 
   const currentSong = songs[indexCurrentSong];
+
+  const handleSubmitSong: FormEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    setCallAPIPost(true);
+  };
 
   //   Obtener Room. fetchRoom → semáforo de Admin en botón de cerrar/abrir votaciones y sala + botones retroceder avanzar canción
   useEffect(() => {
@@ -77,8 +82,8 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
     });
     if (room && localStorageIsAdmins.includes(room.id_room)) {
       setIsAdmin(true);
-      setIsLoading(false);
     }
+    setIsLoading(false);
   }, [room]);
 
   //Obtener canciones. callAPIGet → semáforo desde CardSong cuando se votan canciones (handleVote→handleUpdateSong→onVoteSuccess)
@@ -120,7 +125,7 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
     room,
     isLoading,
     setFetchRoom,
-    setCallAPIPost,
+    handleSubmitSong,
     setCallAPIGet,
     urlSong,
     setUrlSong,

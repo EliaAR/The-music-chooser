@@ -4,7 +4,7 @@ import { useRoomData } from "../../hooks/useRoomData";
 import { RoomModel } from "../../types/room";
 import { LoaderComponent } from "../../components/Common/LoaderComponent/LoaderComponent";
 import { Header } from "../../components/Common/Header/Header";
-import { Room } from "../../components/Room/Room";
+import { User } from "../../components/User/User";
 import { Admin } from "../../components/Admin/Admin";
 import { Alert } from "../../components/Common/Alert/Alert";
 
@@ -19,7 +19,7 @@ function RoomById({ roomDataPN }: RoomByIdProps) {
     room,
     isLoading,
     setFetchRoom,
-    setCallAPIPost,
+    handleSubmitSong,
     setCallAPIGet,
     urlSong,
     setUrlSong,
@@ -44,7 +44,7 @@ function RoomById({ roomDataPN }: RoomByIdProps) {
           title={roomDataPN.name_room}
           valueAddSongInput={urlSong}
           onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
-          onClickCallAPIPost={() => setCallAPIPost(true)}
+          handleSubmitSong={handleSubmitSong}
           currentSong={currentSong}
           songs={songs}
           isClosed={room.is_closed}
@@ -61,11 +61,11 @@ function RoomById({ roomDataPN }: RoomByIdProps) {
           isAdmin={isAdmin}
         />
       ) : (
-        <Room
+        <User
           title={roomDataPN.name_room}
           valueAddSongInput={urlSong}
           onChangeAddSongInput={(e) => setUrlSong(e.target.value)}
-          onClickCallAPIPost={() => setCallAPIPost(true)}
+          handleSubmitSong={handleSubmitSong}
           songs={songs}
           isClosed={room.is_closed}
           idVotadas={idVotadas}

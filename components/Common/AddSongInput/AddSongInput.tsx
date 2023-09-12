@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, FormEventHandler } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -10,16 +10,20 @@ interface AddSongInputProps {
   onChangeAddSongInput: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   >;
-  onClickCallAPIPost: () => void;
+  handleSubmitSong: FormEventHandler<HTMLDivElement>;
 }
 
 function AddSongInput({
   valueAddSongInput,
   onChangeAddSongInput,
-  onClickCallAPIPost,
+  handleSubmitSong,
 }: AddSongInputProps) {
   return (
-    <Box component="section" className={styles.addSongInput}>
+    <Box
+      component="form"
+      onSubmit={handleSubmitSong}
+      className={styles.addSongInput}
+    >
       <TextField
         onChange={onChangeAddSongInput}
         value={valueAddSongInput}
@@ -31,7 +35,7 @@ function AddSongInput({
       />
 
       <Button
-        onClick={onClickCallAPIPost}
+        type="submit"
         variant="contained"
         className={styles.addSongInput__buttonContainer}
       >

@@ -1,4 +1,4 @@
-import { useState, ChangeEventHandler } from "react";
+import { useState, ChangeEventHandler, FormEventHandler } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -21,7 +21,7 @@ interface AdminProps {
   onChangeAddSongInput: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   >;
-  onClickCallAPIPost: () => void;
+  handleSubmitSong: FormEventHandler<HTMLDivElement>;
   currentSong: SongModel;
   songs: SongModel[];
   isClosed: boolean;
@@ -49,7 +49,7 @@ function Admin({
   title,
   valueAddSongInput,
   onChangeAddSongInput,
-  onClickCallAPIPost,
+  handleSubmitSong,
   currentSong,
   songs,
   isClosed,
@@ -134,17 +134,28 @@ function Admin({
         !isClosed ? styles["admin--open"] : styles["admin--closed"]
       }`}
     >
-      <Box component="section" className={styles.admin__titleContainer}>
-        <Typography
-          component="h1"
-          variant="h1"
-          sx={{ color: "quaternary.contrastText" }}
-          className={styles.admin__title}
+      <Box component="section" className={styles.admin__headlineContainer}>
+        <Box
+          component="article"
+          className={styles.admin__headlineTitleContainer}
         >
-          sala admin{" "}
-          <span className={styles.admin__titleSpan}>{titleNoHyphens}</span>
-        </Typography>
-
+          <Typography
+            component="h1"
+            variant="h1"
+            sx={{ color: "quaternary.contrastText" }}
+            className={styles.admin__headlineTitle}
+          >
+            sala admin{" "}
+          </Typography>
+          <Typography
+            component="h2"
+            variant="h2"
+            sx={{ color: "quaternary.contrastText" }}
+            className={styles.admin__headlineSubtitle}
+          >
+            {titleNoHyphens}
+          </Typography>
+        </Box>
         <ShareButtons roomData={roomData} />
       </Box>
 
@@ -163,7 +174,7 @@ function Admin({
         <AddSongInput
           valueAddSongInput={valueAddSongInput}
           onChangeAddSongInput={onChangeAddSongInput}
-          onClickCallAPIPost={onClickCallAPIPost}
+          handleSubmitSong={handleSubmitSong}
         />
       ) : currentSong ? (
         <PlayCardSong
@@ -194,6 +205,7 @@ function Admin({
             idRoom: roomData.id_room,
           })
         }
+        disabled={songs.length === 0}
         variant="contained"
         className={styles.admin__closeButtonContainer}
       >

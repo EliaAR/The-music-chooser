@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, FormEventHandler } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SongModel } from "../../types/song";
@@ -6,15 +6,15 @@ import { DescriptionComponent } from "../Common/DescriptionComponent/Description
 import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
 import { InfoComponent } from "./InfoComponent/InfoComponent";
 import { Playlist } from "../Common/Playlist/Playlist";
-import styles from "./Room.module.scss";
+import styles from "./User.module.scss";
 
-interface RoomProps {
+interface UserProps {
   title: string;
   valueAddSongInput: string;
   onChangeAddSongInput: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   >;
-  onClickCallAPIPost: () => void;
+  handleSubmitSong: FormEventHandler<HTMLDivElement>;
   songs: SongModel[];
   isClosed: boolean;
   idVotadas: number[];
@@ -25,11 +25,11 @@ interface RoomProps {
   isAdmin: boolean;
 }
 
-function Room({
+function User({
   title,
   valueAddSongInput,
   onChangeAddSongInput,
-  onClickCallAPIPost,
+  handleSubmitSong,
   songs,
   isClosed,
   idVotadas,
@@ -38,27 +38,36 @@ function Room({
   onVoteError,
   indexCurrentSong,
   isAdmin,
-}: RoomProps) {
+}: UserProps) {
   const titleNoHyphens = title.replace(/-/g, " ");
 
   return (
     <Box
       component="main"
       sx={{ backgroundColor: "background.default" }}
-      className={`${styles.room} ${
-        !isClosed ? styles["room--open"] : styles["room--closed"]
+      className={`${styles.user} ${
+        !isClosed ? styles["user--open"] : styles["user--closed"]
       }`}
     >
-      <Typography
-        component="h1"
-        variant="h1"
-        sx={{ color: "quaternary.contrastText" }}
-        className={styles.room__title}
-      >
-        <span className={styles.room__titleSpan}>sala</span>
-        {"  "}
-        {titleNoHyphens}
-      </Typography>
+      <Box component="section" className={styles.user__headlineContainer}>
+        <Typography
+          component="h2"
+          variant="h2"
+          sx={{ color: "quaternary.contrastText" }}
+          className={styles.user__headlineSubtitle}
+        >
+          sala
+        </Typography>
+        <Typography
+          component="h1"
+          variant="h1"
+          sx={{ color: "quaternary.contrastText" }}
+          className={styles.user__headlineTitle}
+        >
+          {"  "}
+          {titleNoHyphens}
+        </Typography>
+      </Box>
 
       {!isClosed ? (
         <DescriptionComponent
@@ -75,7 +84,7 @@ function Room({
         <AddSongInput
           valueAddSongInput={valueAddSongInput}
           onChangeAddSongInput={onChangeAddSongInput}
-          onClickCallAPIPost={onClickCallAPIPost}
+          handleSubmitSong={handleSubmitSong}
         />
       ) : (
         <InfoComponent />
@@ -95,4 +104,4 @@ function Room({
   );
 }
 
-export { Room };
+export { User };

@@ -1,7 +1,8 @@
 import { pool } from "../../../lib/db";
 import { GetSongsDTO, SongModel } from "../../../types/song";
 
-const text = "SELECT * FROM songs WHERE id_room = $1 ORDER BY votos DESC";
+const text =
+  "SELECT * FROM songs WHERE id_room = $1 ORDER BY votos DESC, id_song ASC";
 
 async function getSongs({ id_room }: GetSongsDTO) {
   try {

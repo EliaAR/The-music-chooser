@@ -20,7 +20,7 @@ interface CardSongProps {
   onVoteSuccess: () => void;
   onVoteError: (err: string) => void;
   isVoted: boolean;
-  indexCurrentSong: number;
+  selectedSong: boolean;
   isAdmin: boolean;
 }
 
@@ -37,7 +37,7 @@ function CardSong({
   onVoteSuccess,
   onVoteError,
   isVoted,
-  indexCurrentSong,
+  selectedSong,
   isAdmin,
 }: CardSongProps) {
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
@@ -85,10 +85,7 @@ function CardSong({
     <Card
       component="article"
       sx={{
-        backgroundColor:
-          song.id_song === indexCurrentSong
-            ? "quaternary.main"
-            : "background.paper",
+        backgroundColor: selectedSong ? "quaternary.main" : "background.paper",
       }}
       className={styles.cardSong}
     >

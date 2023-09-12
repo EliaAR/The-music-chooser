@@ -30,7 +30,7 @@ function ShareButtons({ roomData }: ShareButtonsProps) {
   };
 
   return (
-    <Box component="section" className={styles.shareButtons}>
+    <Box component="article" className={styles.shareButtons}>
       <SpeedDial
         onClick={() => setShowShareButtons(!showShareButtons)}
         open={showShareButtons}

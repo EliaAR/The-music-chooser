@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, FormEventHandler } from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -22,7 +22,8 @@ function HomePage() {
   const [error, setError] = useState("");
   const [callAPI, setCallAPI] = useState(false);
 
-  const isDisabled = nameRoom.length === 0 || nameRoomErrors.length > 0;
+  const isDisabledCreateRoom =
+    nameRoom.length === 0 || nameRoomErrors.length > 0;
   const isError = !!nameRoomErrors.length;
 
   const handleValueNameRoom = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +55,11 @@ function HomePage() {
       }
     }
     setNameRoomErrors(nameErrors);
+  };
+
+  const handleSubmitRoomName: FormEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    setCallAPI(true);
   };
 
   const handleClickReset = () => {
@@ -140,7 +146,11 @@ function HomePage() {
           </Typography>
         </Box>
 
-        <Box component="section" className={styles.homePage__createContainer}>
+        <Box
+          component="form"
+          onSubmit={handleSubmitRoomName}
+          className={styles.homePage__createContainer}
+        >
           <AddNameRoomComponent
             handleValueNameRoom={handleValueNameRoom}
             nameRoom={nameRoom}
@@ -150,9 +160,9 @@ function HomePage() {
             handleClickReset={handleClickReset}
           />
           <Button
-            onClick={() => setCallAPI(true)}
+            type="submit"
+            disabled={isDisabledCreateRoom}
             variant="contained"
-            disabled={isDisabled}
           >
             Crear Sala
           </Button>
