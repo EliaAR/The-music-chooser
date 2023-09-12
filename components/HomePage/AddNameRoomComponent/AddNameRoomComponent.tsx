@@ -99,7 +99,11 @@ function AddNameRoomComponent({
         sx={{ "&:hover": { backgroundColor: "inherit" } }}
         className={styles.addNameRoomComponent__buttonContainer}
       >
-        <HelpOutlineRoundedIcon sx={{ color: "text.secondary" }} />
+        {openPopper ? (
+          <HighlightOffRoundedIcon sx={{ color: "text.secondary" }} />
+        ) : (
+          <HelpOutlineRoundedIcon sx={{ color: "text.secondary" }} />
+        )}
       </IconButton>
 
       <Popper

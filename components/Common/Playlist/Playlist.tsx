@@ -2,6 +2,8 @@ import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SongModel } from "../../../types/song";
+import { HandleUpdateCurrentSongDBProps } from "../../../hooks/useListenSongs";
+import { RoomModel } from "../../../types/room";
 import { CardSong } from "../CardSong/CardSong";
 import styles from "./Playlist.module.scss";
 
@@ -14,6 +16,12 @@ interface PlaylistProps {
   onVoteError: (err: string) => void;
   indexCurrentSong: number;
   isAdmin: boolean;
+  isPlaying: boolean;
+  onPlayPauseClick: () => void;
+  handleUpdateCurrentSongDB: (
+    props: HandleUpdateCurrentSongDBProps,
+  ) => Promise<void>;
+  roomData: RoomModel;
 }
 
 function Playlist({
@@ -25,6 +33,10 @@ function Playlist({
   onVoteError,
   indexCurrentSong,
   isAdmin,
+  isPlaying,
+  onPlayPauseClick,
+  handleUpdateCurrentSongDB,
+  roomData,
 }: PlaylistProps) {
   const theme = useTheme();
 
@@ -68,6 +80,19 @@ function Playlist({
             isVoted={idVotadas.includes(song.id_song)}
             selectedSong={indexCurrentSong === index}
             isAdmin={isAdmin}
+            isPlaying={isPlaying && indexCurrentSong === index}
+            onPlayPauseClick={async () => {
+              if (indexCurrentSong === index) {
+                onPlayPauseClick();
+              } else {
+                await handleUpdateCurrentSongDB({
+                  currentSong: song.id_song,
+                  isClosed: true,
+                  idRoom: roomData.id_room,
+                });
+                // onPlayPauseClick(true);
+              }
+            }}
           />
         ))}
       </Box>

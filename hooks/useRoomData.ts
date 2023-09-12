@@ -26,6 +26,7 @@ interface UseRoomDataResult {
   setError: React.Dispatch<React.SetStateAction<string>>;
   indexCurrentSong: number;
   currentSong: SongModel;
+  asyncReloadRoomData: () => Promise<void>;
 }
 
 function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
@@ -52,20 +53,23 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
   };
 
   //   Obtener Room. fetchRoom → semáforo de Admin en botón de cerrar/abrir votaciones y sala + botones retroceder avanzar canción
+  const asyncReloadRoomData = async () =>
+    getRoom({ id_room: roomServer.id_room.toString() })
+      .then((data) => {
+        setRoom(data);
+        setFetchRoom(false);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err instanceof Error) {
+          setError(err.message);
+          console.error(err);
+        }
+      });
+
   useEffect(() => {
     if (fetchRoom) {
-      getRoom({ id_room: roomServer.id_room.toString() })
-        .then((data) => {
-          setRoom(data);
-          setFetchRoom(false);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          if (err instanceof Error) {
-            setError(err.message);
-            console.error(err);
-          }
-        });
+      asyncReloadRoomData();
     }
   }, [fetchRoom, roomServer]);
 
@@ -137,6 +141,7 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
     setError,
     indexCurrentSong,
     currentSong,
+    asyncReloadRoomData,
   };
 }
 

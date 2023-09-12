@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -11,85 +10,27 @@ import styles from "./PlayCardSong.module.scss";
 
 interface PlayCardSongProps {
   song: SongModel;
-  onSkipNext: () => void;
+  isPlaying: boolean;
+  onPlayPauseClick: () => void;
   onSkipPrevious: () => void;
-  defaultIsPlaying?: boolean;
-}
-interface controlProgressTrackProps {
   onSkipNext: () => void;
+  onChangeScrub: (event: Event, value: number | number[]) => void;
+  onChangeScrubEnd: () => void;
+  progressTrack: number;
+  maxSliderSong: number;
 }
 
 function PlayCardSong({
   song,
-  onSkipNext,
+  isPlaying,
+  onPlayPauseClick,
   onSkipPrevious,
-  defaultIsPlaying,
+  onSkipNext,
+  onChangeScrub,
+  onChangeScrubEnd,
+  progressTrack,
+  maxSliderSong,
 }: PlayCardSongProps) {
-  const [progressTrack, setProgressTrack] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(defaultIsPlaying || false);
-
-  const audioRef = useRef(new Audio());
-  const intervalRef = useRef<NodeJS.Timer>();
-
-  const { duration } = audioRef.current;
-
-  useEffect(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    if (audioRef.current.src !== song.audio) {
-      audioRef.current.pause();
-      audioRef.current = new Audio(song.audio);
-    }
-  }, [song]);
-
-  useEffect(() => {
-    if (isPlaying) {
-      audioRef.current.play();
-      controlProgressTrack({ onSkipNext });
-    } else {
-      audioRef.current.pause();
-    }
-  }, [isPlaying, onSkipNext]);
-
-  useEffect(() => {
-    return () => {
-      audioRef.current.pause();
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  const controlProgressTrack = ({ onSkipNext }: controlProgressTrackProps) => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = setInterval(() => {
-      if (audioRef.current.ended) {
-        onSkipNext();
-        setProgressTrack(0);
-      } else {
-        setProgressTrack(audioRef.current.currentTime);
-      }
-    }, 1000);
-  };
-
-  const onScrub = (value: number) => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      audioRef.current.currentTime = value;
-      setProgressTrack(audioRef.current.currentTime);
-    }
-  };
-
-  const onScrubEnd = () => {
-    if (!isPlaying) {
-      setIsPlaying(true);
-    }
-    controlProgressTrack({ onSkipNext });
-  };
-
   return (
     <Card
       component="section"
@@ -101,6 +42,7 @@ function PlayCardSong({
           src={song.img}
           alt={song.name_song}
           title={song.name_song}
+          priority={true}
           layout="fill"
           objectFit="contain"
         />
@@ -120,7 +62,7 @@ function PlayCardSong({
 
         <ButtonsSong
           isPlaying={isPlaying}
-          onPlayPauseClick={() => setIsPlaying(!isPlaying)}
+          onPlayPauseClick={onPlayPauseClick}
           onSkipPrevious={onSkipPrevious}
           onSkipNext={onSkipNext}
         />
@@ -128,12 +70,12 @@ function PlayCardSong({
         <Divider className={styles.playCardSong__songDivider} />
 
         <Slider
-          onChange={(_, value) => onScrub(value as number)}
-          onChangeCommitted={() => onScrubEnd()}
+          onChange={onChangeScrub}
+          onChangeCommitted={onChangeScrubEnd}
           value={progressTrack}
           min={0}
+          max={maxSliderSong}
           step={1}
-          max={duration ? duration : 0}
           aria-label="indicador de por dónde va la canción"
           className={styles.playCardSong__songSlider}
         />

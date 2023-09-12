@@ -1,10 +1,11 @@
-import { useState, ChangeEventHandler, FormEventHandler } from "react";
+import { ChangeEventHandler, FormEventHandler } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AppBlockingOutlinedIcon from "@mui/icons-material/AppBlockingOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import { updateRoom } from "../../services/front/room/updateRoom";
+import { useListenSongs } from "../../hooks/useListenSongs";
 import { RoomModel } from "../../types/room";
 import { SongModel } from "../../types/song";
 import { ShareButtons } from "./ShareButtons/ShareButtons";
@@ -32,6 +33,7 @@ interface AdminProps {
   indexCurrentSong: number;
   roomData: RoomModel;
   reloadRoomData: () => void;
+  asyncReloadRoomData: () => Promise<void>;
   onUpdateRoom: (err: string) => void;
   isAdmin: boolean;
 }
@@ -39,10 +41,6 @@ interface AdminProps {
 interface HandleUpdateRoomProps {
   isClosed: boolean;
   idRoom: number;
-}
-
-interface HandleUpdateCurrentSongDBProps extends HandleUpdateRoomProps {
-  currentSong: number;
 }
 
 function Admin({
@@ -60,10 +58,28 @@ function Admin({
   indexCurrentSong,
   roomData,
   reloadRoomData,
+  asyncReloadRoomData,
   onUpdateRoom,
   isAdmin,
 }: AdminProps) {
-  const [defaultIsPlaying, setDefaultIsPlaying] = useState(false);
+  const {
+    progressTrack,
+    duration,
+    isPlaying,
+    setIsPlaying,
+    handleChangeScrub,
+    handleChangeScrubEnd,
+    handleUpdateCurrentSongDB,
+    handleSkipPrevious,
+    handleSkipNext,
+  } = useListenSongs({
+    asyncReloadRoomData,
+    song: currentSong,
+    songs,
+    indexCurrentSong,
+    onUpdateRoom,
+    roomData,
+  });
 
   const titleNoHyphens = title.replace(/-/g, " ");
 
@@ -82,48 +98,6 @@ function Admin({
           console.error(err);
         }
       });
-  };
-
-  const handleUpdateCurrentSongDB = ({
-    isClosed,
-    idRoom,
-    currentSong,
-  }: HandleUpdateCurrentSongDBProps) => {
-    updateRoom({
-      is_closed: isClosed,
-      current_song: currentSong,
-      id_room: idRoom,
-    })
-      .then(() => {
-        reloadRoomData();
-        setDefaultIsPlaying(true);
-      })
-      .catch((err) => {
-        if (err instanceof Error) {
-          onUpdateRoom(err.message);
-          console.error(err);
-        }
-      });
-  };
-
-  const handleSkipPrevious = () => {
-    if (songs[indexCurrentSong - 1]) {
-      handleUpdateCurrentSongDB({
-        isClosed: true,
-        idRoom: roomData.id_room,
-        currentSong: songs[indexCurrentSong - 1].id_song,
-      });
-    }
-  };
-
-  const handleSkipNext = () => {
-    if (songs[indexCurrentSong + 1]) {
-      handleUpdateCurrentSongDB({
-        isClosed: true,
-        idRoom: roomData.id_room,
-        currentSong: songs[indexCurrentSong + 1].id_song,
-      });
-    }
   };
 
   return (
@@ -179,9 +153,14 @@ function Admin({
       ) : currentSong ? (
         <PlayCardSong
           song={currentSong}
-          onSkipPrevious={() => handleSkipPrevious()}
-          onSkipNext={() => handleSkipNext()}
-          defaultIsPlaying={defaultIsPlaying}
+          isPlaying={isPlaying}
+          onPlayPauseClick={() => setIsPlaying(!isPlaying)}
+          onSkipPrevious={handleSkipPrevious}
+          onSkipNext={handleSkipNext}
+          onChangeScrub={handleChangeScrub}
+          onChangeScrubEnd={handleChangeScrubEnd}
+          progressTrack={progressTrack}
+          maxSliderSong={duration ? duration : 0}
         />
       ) : (
         <ErrorComponent message="No existe canción para reproducir" />
@@ -196,6 +175,10 @@ function Admin({
         onVoteError={onVoteError}
         indexCurrentSong={indexCurrentSong}
         isAdmin={isAdmin}
+        isPlaying={isPlaying}
+        onPlayPauseClick={() => setIsPlaying(!isPlaying)}
+        roomData={roomData}
+        handleUpdateCurrentSongDB={handleUpdateCurrentSongDB}
       />
 
       <Button

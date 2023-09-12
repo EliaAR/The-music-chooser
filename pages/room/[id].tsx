@@ -31,6 +31,7 @@ function RoomById({ roomDataPN }: RoomByIdProps) {
     setError,
     indexCurrentSong,
     currentSong,
+    asyncReloadRoomData,
   } = useRoomData({ roomServer: roomDataPN });
 
   return (
@@ -57,6 +58,7 @@ function RoomById({ roomDataPN }: RoomByIdProps) {
           indexCurrentSong={indexCurrentSong}
           roomData={room}
           reloadRoomData={() => setFetchRoom(true)}
+          asyncReloadRoomData={asyncReloadRoomData}
           onUpdateRoom={(err) => setError(err)}
           isAdmin={isAdmin}
         />

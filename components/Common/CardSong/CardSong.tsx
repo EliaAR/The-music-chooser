@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { updateSong } from "../../../services/front/song/updateSong";
 import { SetLocalStorage } from "../../../utils/localStorage";
@@ -22,6 +23,8 @@ interface CardSongProps {
   isVoted: boolean;
   selectedSong: boolean;
   isAdmin: boolean;
+  isPlaying: boolean;
+  onPlayPauseClick: () => void;
 }
 
 interface HandleUpdateSongProps {
@@ -39,6 +42,8 @@ function CardSong({
   isVoted,
   selectedSong,
   isAdmin,
+  isPlaying,
+  onPlayPauseClick,
 }: CardSongProps) {
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
     updateSong({ votos, id_song: idSong })
@@ -106,6 +111,7 @@ function CardSong({
           src={song.img}
           alt={song.name_song}
           title={song.name_song}
+          priority={true}
           layout="fill"
           objectFit="contain"
         />
@@ -114,7 +120,6 @@ function CardSong({
       {!isClosed ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <IconButton
-            component="button"
             onClick={() => handleVote(song)}
             aria-label="votar por la canción"
             color="secondary"
@@ -139,11 +144,22 @@ function CardSong({
 
       {isClosed && isAdmin ? (
         <Box component="article" className={styles.cardSong__playContainer}>
-          <IconButton aria-label="play" className={styles.cardSong__playButton}>
-            <PlayArrowRoundedIcon
-              sx={{ color: "text.secondary" }}
-              className={styles.cardSong__playIcon}
-            />
+          <IconButton
+            onClick={onPlayPauseClick}
+            aria-label="play-pause"
+            className={styles.cardSong__playButton}
+          >
+            {isPlaying ? (
+              <PauseRoundedIcon
+                sx={{ color: "text.secondary" }}
+                className={styles.cardSong__playIcon}
+              />
+            ) : (
+              <PlayArrowRoundedIcon
+                sx={{ color: "text.secondary" }}
+                className={styles.cardSong__playIcon}
+              />
+            )}
           </IconButton>
           <Typography variant="body3">{song.votos}</Typography>
         </Box>
