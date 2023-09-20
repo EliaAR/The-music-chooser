@@ -16,12 +16,12 @@ interface PlaylistProps {
   onVoteError: (err: string) => void;
   indexCurrentSong: number;
   isAdmin: boolean;
-  isPlaying: boolean;
-  onPlayPauseClick: () => void;
-  handleUpdateCurrentSongDB: (
+  isPlaying?: boolean;
+  onPlayPauseClick?: () => void;
+  handleUpdateCurrentSongDB?: (
     props: HandleUpdateCurrentSongDBProps,
   ) => Promise<void>;
-  roomData: RoomModel;
+  roomData?: RoomModel;
 }
 
 function Playlist({
@@ -39,6 +39,20 @@ function Playlist({
   roomData,
 }: PlaylistProps) {
   const theme = useTheme();
+
+  const handlePlayPauseClick = async (index: number, song: SongModel) => {
+    if (onPlayPauseClick && handleUpdateCurrentSongDB && roomData) {
+      if (indexCurrentSong === index) {
+        onPlayPauseClick();
+      } else {
+        await handleUpdateCurrentSongDB({
+          currentSong: song.id_song,
+          isClosed: true,
+          idRoom: roomData.id_room,
+        });
+      }
+    }
+  };
 
   return (
     <Box component="section" className={styles.playlist}>
@@ -81,18 +95,7 @@ function Playlist({
             selectedSong={indexCurrentSong === index}
             isAdmin={isAdmin}
             isPlaying={isPlaying && indexCurrentSong === index}
-            onPlayPauseClick={async () => {
-              if (indexCurrentSong === index) {
-                onPlayPauseClick();
-              } else {
-                await handleUpdateCurrentSongDB({
-                  currentSong: song.id_song,
-                  isClosed: true,
-                  idRoom: roomData.id_room,
-                });
-                // onPlayPauseClick(true);
-              }
-            }}
+            onPlayPauseClick={() => handlePlayPauseClick(index, song)}
           />
         ))}
       </Box>

@@ -5,6 +5,7 @@ export interface SongModel {
   url_song: string;
   img: string;
   audio: string;
+  expire: number;
   votos: number;
 }
 
@@ -22,7 +23,9 @@ export interface GetSongsDTO {
 export type GetSongResponse = SongModel[] | { error: string };
 
 export interface UpdateSongDTO {
-  votos: number;
+  votos?: number;
+  audio?: string;
+  expire?: number;
   id_song: number;
 }
 

@@ -23,8 +23,8 @@ interface CardSongProps {
   isVoted: boolean;
   selectedSong: boolean;
   isAdmin: boolean;
-  isPlaying: boolean;
-  onPlayPauseClick: () => void;
+  isPlaying?: boolean;
+  onPlayPauseClick?: () => void;
 }
 
 interface HandleUpdateSongProps {

@@ -3,11 +3,11 @@ import { fetchYoutubeData } from "../youtubedl/fetchYoutubeData";
 import { CreateSongDTO, SongModel } from "../../../types/song";
 
 const text =
-  "INSERT INTO songs(id_room, name_song, url_song, img, audio) VALUES($1, $2,$3,$4,$5) RETURNING *";
+  "INSERT INTO songs(id_room, name_song, url_song, img, audio, expire) VALUES($1,$2,$3,$4,$5,$6) RETURNING *";
 
 async function createSong({ id_room, url_song }: CreateSongDTO) {
   try {
-    const { name_song, img, audio } = await fetchYoutubeData(url_song);
+    const { name_song, img, audio, expire } = await fetchYoutubeData(url_song);
 
     const results = await pool.query<SongModel>(text, [
       id_room,
@@ -15,6 +15,7 @@ async function createSong({ id_room, url_song }: CreateSongDTO) {
       url_song,
       img,
       audio,
+      expire,
     ]);
 
     return results.rows[0];
