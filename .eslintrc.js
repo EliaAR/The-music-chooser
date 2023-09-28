@@ -19,7 +19,7 @@ module.exports = {
     "eslint:recommended",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:prettier/recommended",
   ],
   plugins: ["@typescript-eslint"],
