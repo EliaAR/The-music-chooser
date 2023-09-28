@@ -1,16 +1,18 @@
-import { pool } from "../../../lib/db";
+import prisma from "../../../lib/prismadb";
 import slugify from "slugify";
-import { CreateRoomDTO, RoomModel } from "../../../types/room";
-
-const text =
-  "INSERT INTO rooms(name_room, url_room) VALUES($1, $2) RETURNING *";
+import { CreateRoomDTO } from "../../../types/room";
 
 async function createRoom({ name_room }: CreateRoomDTO) {
   const url_room = slugify(name_room);
   try {
-    const results = await pool.query<RoomModel>(text, [name_room, url_room]);
+    const results = await prisma.rooms.create({
+      data: {
+        name_room,
+        url_room,
+      },
+    });
 
-    return results.rows[0];
+    return results;
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);

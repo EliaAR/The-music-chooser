@@ -1,13 +1,18 @@
-import { pool } from "../../../lib/db";
-import { SongModel, UpdateSongDTO } from "../../../types/song";
-
-const text = "UPDATE songs SET votos = $1 WHERE id_song = $2 RETURNING *";
+import prisma from "../../../lib/prismadb";
+import { UpdateSongDTO } from "../../../types/song";
 
 async function updateSong({ votos, id_song }: UpdateSongDTO) {
   try {
-    const results = await pool.query<SongModel>(text, [votos, id_song]);
+    const results = await prisma.songs.update({
+      where: {
+        id_song,
+      },
+      data: {
+        votos,
+      },
+    });
 
-    return results.rows[0];
+    return results;
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);

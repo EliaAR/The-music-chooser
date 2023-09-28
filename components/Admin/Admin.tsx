@@ -12,7 +12,6 @@ import { ShareButtons } from "./ShareButtons/ShareButtons";
 import { DescriptionComponent } from "../Common/DescriptionComponent/DescriptionComponent";
 import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
 import { PlayCardSong } from "./PlayCardSong/PlayCardSong";
-import { ErrorComponent } from "../Common/ErrorComponent/ErrorComponent";
 import { Playlist } from "../Common/Playlist/Playlist";
 import styles from "./Admin.module.scss";
 
@@ -150,7 +149,7 @@ function Admin({
           onChangeAddSongInput={onChangeAddSongInput}
           handleSubmitSong={handleSubmitSong}
         />
-      ) : currentSong ? (
+      ) : (
         <PlayCardSong
           song={currentSong}
           isPlaying={isPlaying}
@@ -162,8 +161,6 @@ function Admin({
           progressTrack={progressTrack}
           maxSliderSong={duration ? duration : 0}
         />
-      ) : (
-        <ErrorComponent message="No existe canción para reproducir" />
       )}
 
       <Playlist

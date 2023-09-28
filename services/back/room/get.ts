@@ -1,13 +1,15 @@
-import { pool } from "../../../lib/db";
-import { GetRoomsDTO, RoomModel } from "../../../types/room";
-
-const text = "SELECT * FROM rooms WHERE id_room = $1";
+import prisma from "../../../lib/prismadb";
+import { GetRoomsDTO } from "../../../types/room";
 
 async function getRoom({ id_room }: GetRoomsDTO) {
   try {
-    const results = await pool.query<RoomModel>(text, [id_room]);
+    const results = prisma.rooms.findUnique({
+      where: {
+        id_room: parseInt(id_room),
+      },
+    });
 
-    return results.rows[0];
+    return results;
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);

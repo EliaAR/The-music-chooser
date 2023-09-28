@@ -5,7 +5,7 @@ const getServerRoom = async (context: NextPageContext) => {
   try {
     const roomDataPN = await getRoom({ id_room: context.query.id as string });
 
-    if ("error" in roomDataPN) throw new Error(roomDataPN.error);
+    if (roomDataPN && "error" in roomDataPN) throw new Error(roomDataPN.error);
     return {
       props: { roomDataPN },
     };

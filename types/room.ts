@@ -1,10 +1,6 @@
-export interface RoomModel {
-  id_room: number;
-  name_room: string;
-  url_room: string;
-  is_closed: boolean;
-  current_song: number | null;
-}
+import { rooms } from "@prisma/client";
+
+export type RoomModel = rooms;
 
 export interface CreateRoomDTO {
   name_room: string;

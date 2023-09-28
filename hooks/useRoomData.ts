@@ -94,7 +94,7 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
   useEffect(() => {
     if (callAPIGet && room) {
       setCallAPIGet(false);
-      getSongs({ id_room: room.id_room })
+      getSongs({ id_room: room.id_room.toString() })
         .then((data) => setSongs(data))
         .catch((err) => {
           if (err instanceof Error) {

@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING") 
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model rooms {
+  id_room                         Int      @id @default(autoincrement())
+  name_room                       String   @db.VarChar(64)
+  url_room                        String   @unique
+  is_closed                       Boolean @default(false)
+  current_song                    Int?
+  songs_rooms_current_songTosongs songs?   @relation("rooms_current_songTosongs", fields: [current_song], references: [id_song], onUpdate: NoAction, map: "fk_current_song")
+  songs_songs_id_roomTorooms      songs[]  @relation("songs_id_roomTorooms")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model songs {
+  id_song                         Int     @id @default(autoincrement())
+  id_room                         Int
+  name_song                       String
+  url_song                        String
+  img                             String
+  audio                           String
+  expire                          Int
+  votos                           Int    @default(0)
+  rooms_rooms_current_songTosongs rooms[] @relation("rooms_current_songTosongs")
+  rooms_songs_id_roomTorooms      rooms   @relation("songs_id_roomTorooms", fields: [id_room], references: [id_room], onDelete: Cascade, onUpdate: NoAction, map: "fk_idroom")
+
+  @@index([id_song])
+}
