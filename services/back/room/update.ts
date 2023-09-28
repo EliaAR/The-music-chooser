@@ -1,7 +1,7 @@
 import prisma from "../../../lib/prismadb";
 import { UpdateRoomDTO } from "../../../types/room";
 
-async function updateRoom({ is_closed, current_song, id_room }: UpdateRoomDTO) {
+async function updateRoom({ id_room, is_closed, current_song }: UpdateRoomDTO) {
   try {
     const results = await prisma.rooms.update({
       where: {

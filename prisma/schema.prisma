@@ -6,7 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING") 
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model rooms {
@@ -14,6 +14,8 @@ model rooms {
   name_room                       String   @db.VarChar(64)
   url_room                        String   @unique
   is_closed                       Boolean @default(false)
+  is_archived                     Boolean @default(false)
+  created_at                      DateTime @default(now())
   current_song                    Int?
   songs_rooms_current_songTosongs songs?   @relation("rooms_current_songTosongs", fields: [current_song], references: [id_song], onUpdate: NoAction, map: "fk_current_song")
   songs_songs_id_roomTorooms      songs[]  @relation("songs_id_roomTorooms")

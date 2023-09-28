@@ -1,6 +1,6 @@
 import { UpdateRoomDTO, UpdateRoomResponse } from "../../../types/room";
 
-function updateRoom({ is_closed, current_song, id_room }: UpdateRoomDTO) {
+function updateRoom({ id_room, is_closed, current_song }: UpdateRoomDTO) {
   const ENDPOINT = `${location.origin}/api/room/update`;
   return fetch(ENDPOINT, {
     method: "PUT",
@@ -8,9 +8,9 @@ function updateRoom({ is_closed, current_song, id_room }: UpdateRoomDTO) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      id_room,
       is_closed,
       current_song,
-      id_room,
     }),
   })
     .then((response) => response.json())

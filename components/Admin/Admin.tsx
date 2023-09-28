@@ -38,8 +38,8 @@ interface AdminProps {
 }
 
 interface HandleUpdateRoomProps {
-  isClosed: boolean;
   idRoom: number;
+  isClosed: boolean;
 }
 
 function Admin({
@@ -82,11 +82,11 @@ function Admin({
 
   const titleNoHyphens = title.replace(/-/g, " ");
 
-  const handleUpdateRoom = ({ isClosed, idRoom }: HandleUpdateRoomProps) => {
+  const handleUpdateRoom = ({ idRoom, isClosed }: HandleUpdateRoomProps) => {
     updateRoom({
+      id_room: idRoom,
       is_closed: isClosed,
       current_song: songs[0].id_song,
-      id_room: idRoom,
     })
       .then(() => {
         reloadRoomData();
@@ -181,8 +181,8 @@ function Admin({
       <Button
         onClick={() =>
           handleUpdateRoom({
-            isClosed: !roomData.is_closed,
             idRoom: roomData.id_room,
+            isClosed: !roomData.is_closed,
           })
         }
         disabled={songs.length === 0}

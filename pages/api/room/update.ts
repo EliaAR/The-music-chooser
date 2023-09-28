@@ -13,9 +13,9 @@ const updateRoomEndpoint: NextApiHandler<UpdateRoomResponse> = async (
   res,
 ) => {
   try {
-    const { is_closed, current_song, id_room } = req.body as UpdateRoomRequest;
+    const { id_room, is_closed, current_song } = req.body as UpdateRoomRequest;
 
-    const results = await updateRoom({ is_closed, current_song, id_room });
+    const results = await updateRoom({ id_room, is_closed, current_song });
 
     if ("error" in results) {
       return res.status(400).json({ error: results.error });

@@ -31,8 +31,8 @@ interface controlProgressTrackProps {
 }
 
 export interface HandleUpdateCurrentSongDBProps {
-  isClosed: boolean;
   idRoom: number;
+  isClosed: boolean;
   currentSong: number;
 }
 
@@ -85,14 +85,14 @@ function useListenSongs({
   };
 
   const handleUpdateCurrentSongDB = async ({
-    isClosed,
     idRoom,
+    isClosed,
     currentSong,
   }: HandleUpdateCurrentSongDBProps) => {
     return updateRoom({
+      id_room: idRoom,
       is_closed: isClosed,
       current_song: currentSong,
-      id_room: idRoom,
     })
       .then(async () => {
         await asyncReloadRoomData();
@@ -109,8 +109,8 @@ function useListenSongs({
   const handleSkipPrevious = () => {
     if (songs[indexCurrentSong - 1]) {
       handleUpdateCurrentSongDB({
-        isClosed: true,
         idRoom: roomData.id_room,
+        isClosed: true,
         currentSong: songs[indexCurrentSong - 1].id_song,
       });
     }
@@ -119,8 +119,8 @@ function useListenSongs({
   const handleSkipNext = useCallback(() => {
     if (songs[indexCurrentSong + 1]) {
       handleUpdateCurrentSongDB({
-        isClosed: true,
         idRoom: roomData.id_room,
+        isClosed: true,
         currentSong: songs[indexCurrentSong + 1].id_song,
       });
     }
