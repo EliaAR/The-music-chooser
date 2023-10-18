@@ -39,7 +39,7 @@ function RoomById({ roomDataPN }: RoomByIdProps) {
       <Header />
 
       {isLoading ? (
-        <LoaderComponent />
+        <LoaderComponent isAllViewport={true} />
       ) : isAdmin ? (
         <Admin
           title={roomDataPN.name_room}

@@ -17,12 +17,6 @@
       width: 9.3rem;
     }
   }
-  &__imageContainer {
-    position: relative;
-    display: block;
-    width: 5.5rem;
-    height: 3.5rem;
-  }
   &__voteContainer,
   &__playContainer {
     display: flex;
@@ -35,6 +29,9 @@
   }
   &__voteIcon {
     font-size: 2rem;
+  }
+  &__voteNumber {
+    font-size: 0.75rem;
   }
   &__playIcon {
     font-size: 2.3rem;

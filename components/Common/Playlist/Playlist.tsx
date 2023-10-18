@@ -65,7 +65,7 @@ function Playlist({
         }}
         className={styles.playlist__titleContainer}
       >
-        <Typography component="h2" variant="h2">
+        <Typography component="h4" variant="h4">
           Listado canciones
         </Typography>
       </Box>

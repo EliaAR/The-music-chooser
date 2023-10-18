@@ -1,0 +1,30 @@
+.coverImg {
+  position: relative;
+  display: block;
+  border-radius: 0.2rem;
+  background-color: black;
+  &--big {
+    width: 10rem;
+    height: 8rem;
+  }
+  &--small {
+    width: 4.85rem;
+    height: 2.5rem;
+  }
+  &__iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  &__icon--big {
+    // width: 10rem;
+    // height: 8rem;
+    font-size: 6rem;
+  }
+  &__icon--small {
+    // width: 4.85rem;
+    // height: 2.5rem;
+    font-size: 2rem;
+  }
+}

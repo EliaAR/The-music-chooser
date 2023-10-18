@@ -2,12 +2,24 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./LoaderComponent.module.scss";
 
-function LoaderComponent() {
+interface LoaderComponentProps {
+  isAllViewport: boolean;
+}
+
+function LoaderComponent({ isAllViewport }: LoaderComponentProps) {
   return (
     <Box
       component="main"
-      sx={{ backgroundColor: "background.default" }}
-      className={styles.loaderComponent}
+      sx={{
+        backgroundColor: isAllViewport
+          ? "background.default"
+          : "background.paper",
+      }}
+      className={`${styles.loaderComponent} ${
+        isAllViewport
+          ? styles["loaderComponent--big"]
+          : styles["loaderComponent--small"]
+      }`}
     >
       <Box
         component="article"

@@ -7,6 +7,7 @@ import {
   themeOptionsLight,
   ColorModeContext,
 } from "../config/theme";
+import { roboto_flex, open_sans, montserrat } from "./fonts";
 import "../styles/globals.css";
 
 type ColorModeType = "light" | "dark";
@@ -33,21 +34,30 @@ function MyApp({ Component, pageProps }: AppProps) {
             : themeOptionsDark.palette),
         },
         typography: {
+          fontFamily: roboto_flex.style.fontFamily,
           h1: {
+            fontFamily: open_sans.style.fontFamily,
             textTransform: "uppercase",
             fontWeight: 700,
             fontSize: "2rem",
           },
           h2: {
+            fontFamily: open_sans.style.fontFamily,
             textTransform: "uppercase",
             fontWeight: 700,
             fontSize: "1.15rem",
           },
           h3: {
+            fontFamily: montserrat.style.fontFamily,
             textTransform: "uppercase",
             fontWeight: 700,
             fontSize: "1.5rem",
             lineHeight: 1.334,
+          },
+          h4: {
+            textTransform: "uppercase",
+            fontWeight: 700,
+            fontSize: "1.15rem",
           },
           subtitle2: {
             fontWeight: 500,
@@ -56,11 +66,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             letterSpacing: "0.0075em",
           },
           body3: {
-            fontFamily: "'Roboto', sans-serif",
+            fontFamily: open_sans.style.fontFamily,
             fontWeight: 400,
-            fontSize: "0.75rem",
+            fontSize: "1rem",
             lineHeight: 1.43,
-            letterSpacing: "0.01071em",
+            letterSpacing: "0.00938em",
           },
         },
         components: {

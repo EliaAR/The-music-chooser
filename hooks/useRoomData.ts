@@ -25,7 +25,7 @@ interface UseRoomDataResult {
   error: string;
   setError: React.Dispatch<React.SetStateAction<string>>;
   indexCurrentSong: number;
-  currentSong: SongModel;
+  currentSong: SongModel | undefined;
   asyncReloadRoomData: () => Promise<void>;
 }
 
@@ -111,8 +111,7 @@ function useRoomData({ roomServer }: UseRoomDataProps): UseRoomDataResult {
       setError("");
       setCallAPIPost(false);
       createSong({ id_room: room.id_room, url_song: urlSong })
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           setCallAPIGet(true);
           setUrlSong("");
         })

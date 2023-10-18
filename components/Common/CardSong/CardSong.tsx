@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -11,6 +10,7 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { updateSong } from "../../../services/front/song/updateSong";
 import { SetLocalStorage } from "../../../utils/localStorage";
 import { SongModel } from "../../../types/song";
+import { CoverImg } from "../CoverImg/CoverImg";
 import styles from "./CardSong.module.scss";
 
 interface CardSongProps {
@@ -47,8 +47,7 @@ function CardSong({
 }: CardSongProps) {
   const handleUpdateSong = ({ votos, idSong }: HandleUpdateSongProps) => {
     updateSong({ votos, id_song: idSong })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         onVoteSuccess();
       })
       .catch((err) => {
@@ -106,16 +105,12 @@ function CardSong({
         {song.name_song}
       </Typography>
 
-      <Box component="article" className={styles.cardSong__imageContainer}>
-        <Image
-          src={song.img}
-          alt={song.name_song}
-          title={song.name_song}
-          priority={true}
-          layout="fill"
-          objectFit="contain"
-        />
-      </Box>
+      <CoverImg
+        isBigCover={false}
+        img={song.img}
+        name={song.name_song}
+        sizes="5.5rem"
+      />
 
       {!isClosed ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
@@ -131,14 +126,18 @@ function CardSong({
               <ThumbUpOutlinedIcon className={styles.cardSong__voteIcon} />
             )}
           </IconButton>
-          <Typography variant="body3">{song.votos}</Typography>
+          <Typography variant="body2" className={styles.cardSong__voteNumber}>
+            {song.votos}
+          </Typography>
         </Box>
       ) : null}
 
       {isClosed && !isAdmin ? (
         <Box component="article" className={styles.cardSong__voteContainer}>
           <HowToVoteIcon sx={{ color: "secondary.main" }} />
-          <Typography variant="body3">{song.votos}</Typography>
+          <Typography variant="body2" className={styles.cardSong__voteNumber}>
+            {song.votos}
+          </Typography>
         </Box>
       ) : null}
 
@@ -161,7 +160,9 @@ function CardSong({
               />
             )}
           </IconButton>
-          <Typography variant="body3">{song.votos}</Typography>
+          <Typography variant="body2" className={styles.cardSong__voteNumber}>
+            {song.votos}
+          </Typography>
         </Box>
       ) : null}
     </Card>

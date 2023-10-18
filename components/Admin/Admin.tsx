@@ -12,6 +12,7 @@ import { ShareButtons } from "./ShareButtons/ShareButtons";
 import { DescriptionComponent } from "../Common/DescriptionComponent/DescriptionComponent";
 import { AddSongInput } from "../Common/AddSongInput/AddSongInput";
 import { PlayCardSong } from "./PlayCardSong/PlayCardSong";
+import { LoaderComponent } from "../../components/Common/LoaderComponent/LoaderComponent";
 import { Playlist } from "../Common/Playlist/Playlist";
 import styles from "./Admin.module.scss";
 
@@ -22,7 +23,7 @@ interface AdminProps {
     HTMLInputElement | HTMLTextAreaElement
   >;
   handleSubmitSong: FormEventHandler<HTMLDivElement>;
-  currentSong: SongModel;
+  currentSong: SongModel | undefined;
   songs: SongModel[];
   isClosed: boolean;
   idVotadas: number[];
@@ -131,7 +132,6 @@ function Admin({
         </Box>
         <ShareButtons roomData={roomData} />
       </Box>
-
       {!isClosed ? (
         <DescriptionComponent
           textTitle="Tutorial para Admin"
@@ -142,14 +142,13 @@ function Admin({
           textPlaySongs2="Sólo tú podrás reproducir la playlist, pausarla, saltar canciones y avanzar o retroceder la canción. No abuses de este poder!"
         />
       ) : null}
-
       {!isClosed ? (
         <AddSongInput
           valueAddSongInput={valueAddSongInput}
           onChangeAddSongInput={onChangeAddSongInput}
           handleSubmitSong={handleSubmitSong}
         />
-      ) : (
+      ) : currentSong ? (
         <PlayCardSong
           song={currentSong}
           isPlaying={isPlaying}
@@ -161,6 +160,8 @@ function Admin({
           progressTrack={progressTrack}
           maxSliderSong={duration ? duration : 0}
         />
+      ) : (
+        <LoaderComponent isAllViewport={false} />
       )}
 
       <Playlist

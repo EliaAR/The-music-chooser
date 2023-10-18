@@ -4,14 +4,6 @@
   justify-content: flex-start;
   gap: 0.8rem;
   padding: 1rem 0.8rem;
-  &__imageContainer {
-    position: relative;
-    display: block;
-    border-radius: 0.2rem;
-    width: 10rem;
-    height: 8rem;
-    background-color: black;
-  }
   &__songContainer {
     display: flex;
     flex-direction: column;

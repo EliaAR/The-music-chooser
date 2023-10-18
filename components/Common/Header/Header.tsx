@@ -32,24 +32,23 @@ function Header() {
         className={styles.header__toolbar}
       >
         <Link href={"/"}>
-          <a>
-            <Box
-              component="article"
-              className={styles.header__toolbarImageContainer}
-            >
-              <Image
-                src={
-                  theme.palette.mode === "dark"
-                    ? lightChoosy.src
-                    : darkChoosy.src
-                }
-                alt="Choosy (logo)"
-                title="Choosy (logo)"
-                layout="fill"
-                objectFit="contain"
-              />
-            </Box>
-          </a>
+          <Box
+            component="article"
+            className={styles.header__toolbarImageContainer}
+          >
+            <Image
+              src={
+                theme.palette.mode === "dark" ? lightChoosy.src : darkChoosy.src
+              }
+              alt="Choosy (logo)"
+              title="Choosy (logo)"
+              fill
+              sizes="2.5rem"
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </Box>
         </Link>
 
         <Typography

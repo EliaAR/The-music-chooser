@@ -3,10 +3,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 5rem);
+  &--big {
+    min-height: calc(100vh - 5rem);
+  }
+  &--small {
+    border-radius: 0.25rem;
+    box-shadow:
+      0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+      0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+    width: 26.4rem;
+    height: 10.2rem;
+  }
   &__loaderContainer {
     flex-grow: 0.1;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &__loaderIcon {
     width: 3.75rem !important;

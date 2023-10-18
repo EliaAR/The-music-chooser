@@ -4,4 +4,14 @@ module.exports = {
   images: {
     domains: ["i.ytimg.com"],
   },
+  experimental: {
+    swcPlugins: [
+      [
+        "next-superjson-plugin",
+        {
+          excluded: [],
+        },
+      ],
+    ],
+  },
 };

@@ -37,12 +37,15 @@ function NotFoundPage() {
               }
               alt="Choosy (logo)"
               title="Choosy (logo)"
-              layout="fill"
-              objectFit="contain"
+              fill
+              sizes="5rem"
+              style={{
+                objectFit: "contain",
+              }}
             />
           </Box>
           <Typography
-            variant="body1"
+            variant="body3"
             sx={{ color: "primary.main" }}
             className={`${styles.notFoundPage__infoChoosyBubble} ${
               theme.palette.mode === "dark"
@@ -55,7 +58,7 @@ function NotFoundPage() {
         </Box>
 
         <Typography
-          variant="body1"
+          variant="body3"
           sx={{ color: "primary.main" }}
           className={styles.notFoundPage__infoParagraph}
         >
@@ -65,15 +68,13 @@ function NotFoundPage() {
 
       <Box component="section" className={styles.notFoundPage__buttonContainer}>
         <Link href={"/"}>
-          <a>
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={styles.notFoundPage__buttonHomePage}
-            >
-              Volver a la página principal
-            </Button>
-          </a>
+          <Button
+            variant="outlined"
+            color="secondary"
+            className={styles.notFoundPage__buttonHomePage}
+          >
+            Volver a la página principal
+          </Button>
         </Link>
         <Button
           onClick={() => router.back()}

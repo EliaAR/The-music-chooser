@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Slider from "@mui/material/Slider";
 import { SongModel } from "../../../types/song";
+import { CoverImg } from "../../Common/CoverImg/CoverImg";
 import { ButtonsSong } from "../ButtonsSong/ButtonsSong";
 import styles from "./PlayCardSong.module.scss";
 
@@ -37,16 +37,12 @@ function PlayCardSong({
       sx={{ boxShadow: 3 }}
       className={styles.playCardSong}
     >
-      <Box component="article" className={styles.playCardSong__imageContainer}>
-        <Image
-          src={song.img}
-          alt={song.name_song}
-          title={song.name_song}
-          priority={true}
-          layout="fill"
-          objectFit="contain"
-        />
-      </Box>
+      <CoverImg
+        isBigCover={true}
+        img={song.img}
+        name={song.name_song}
+        sizes="10rem"
+      />
 
       <Box component="article" className={styles.playCardSong__songContainer}>
         <Typography
