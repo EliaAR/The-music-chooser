@@ -7,7 +7,7 @@ import {
   themeOptionsLight,
   ColorModeContext,
 } from "../config/theme";
-import { roboto_flex, open_sans, montserrat } from "./fonts";
+import { roboto_flex, open_sans, montserrat } from "../config/fonts";
 import "../styles/globals.css";
 
 type ColorModeType = "light" | "dark";
