@@ -9,7 +9,8 @@ const themeOptionsDark = {
       contrastText: "#fff",
     },
     secondary: {
-      main: "#758045",
+      // main: "#758045",
+      main: "#8a9656",
     },
     tertiary: {
       main: "#3a3838",
@@ -26,11 +27,12 @@ const themeOptionsDark = {
     },
     text: {
       primary: "rgba(255, 255, 255, 0.7)",
-      secondary: "rgba(255, 255, 255, 0.4)",
+      secondary: "rgba(255, 255, 255, 0.6)",
       disabled: "#fff",
     },
     background: {
-      default: "#303030",
+      // default: "#303030",
+      default: "#484554",
       paper: "#424242",
     },
     error: {
@@ -56,7 +58,8 @@ const themeOptionsLight = {
       dark: "#8c7ed0",
     },
     secondary: {
-      main: "#7d894a",
+      // main: "#7d894a",
+      main: "#707b43",
     },
     tertiary: {
       main: "#3a3838",
@@ -73,7 +76,7 @@ const themeOptionsLight = {
     },
     text: {
       primary: "#212121",
-      secondary: "rgba(0, 0, 0, 0.4)",
+      secondary: "rgba(0, 0, 0, 0.6)",
       disabled: "#3a3838",
     },
     background: {

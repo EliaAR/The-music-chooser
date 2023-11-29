@@ -6,11 +6,23 @@
   gap: 2rem;
   width: 100vw;
   height: 100vh;
+  &--dark {
+    background-image: linear-gradient(
+      to right bottom,
+      #484554,
+      #484552,
+      #484550,
+      #47454e,
+      #47454c
+    );
+  }
+  &--light {
+    background-color: red;
+  }
   &__infoContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     max-width: 30rem;
   }
   &__infoChoosyContainer {
@@ -23,25 +35,25 @@
     position: relative;
     display: block;
     width: 5rem;
-    height: 5rem;
+    height: 6rem;
   }
   &__infoChoosyBubble {
     position: absolute;
-    top: -75%;
-    right: -6.5rem;
+    top: -45%;
+    right: -4em;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 3.1rem;
-    width: 8.3rem;
+    height: 3rem;
+    width: 7rem;
     border-radius: 50%;
     box-shadow: 1px 12px 20px rgb(0 0 0 / 25%);
     font-weight: 700;
     font-size: 1.25rem;
     &--dark {
-      background-color: #f6f6f6;
+      background-color: #e1dfe0;
       &::before {
-        border: 15px solid #f6f6f6;
+        border: 15px solid #e1dfe0;
       }
     }
     &--light {
@@ -54,17 +66,18 @@
   &__infoChoosyBubble:before {
     content: "";
     position: absolute;
-    bottom: -1.4rem;
-    right: 6rem;
+    bottom: -1.15rem;
+    left: -0.1rem;
     border-left-color: transparent;
     border-bottom-color: transparent;
     border-right-color: transparent;
-    transform: rotate(21deg);
+    transform: rotate(31deg);
   }
   &__infoParagraph {
     text-align: center;
     font-weight: 700;
     font-size: 2.5rem;
+    text-shadow: 0.06rem 0.2rem 0.125rem rgba(28, 26, 38, 1);
   }
   &__buttonContainer {
     flex-grow: 0.1;
@@ -75,7 +88,6 @@
   &__buttonHomePage,
   &__buttonBack {
     text-transform: none;
-    font-size: 0.75rem;
   }
 }
 
@@ -83,7 +95,12 @@
   .notFoundPage {
     padding-inline: 0.5rem;
     &__infoParagraph {
+      width: 18rem;
       font-size: 1.75rem;
+    }
+    &__buttonHomePage,
+    &__buttonBack {
+      font-size: 0.75rem;
     }
   }
 }

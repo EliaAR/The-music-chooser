@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import darkWorriedChoosy from "../../public/darkWorriedChoosy.png";
-import lightWorriedChoosy from "../../public/lightWorriedChoosy.png";
+import lightShadowWorriedChoosy from "../../public/lightShadowWorriedChoosy.png";
 import styles from "./NotFoundPage.module.scss";
 
 function NotFoundPage() {
@@ -17,8 +17,11 @@ function NotFoundPage() {
   return (
     <Box
       component="main"
-      sx={{ backgroundColor: "background.default" }}
-      className={styles.notFoundPage}
+      className={`${styles.notFoundPage} ${
+        theme.palette.mode === "dark"
+          ? styles["notFoundPage--dark"]
+          : styles["notFoundPage--light"]
+      }`}
     >
       <Box component="section" className={styles.notFoundPage__infoContainer}>
         <Box
@@ -32,7 +35,7 @@ function NotFoundPage() {
             <Image
               src={
                 theme.palette.mode === "dark"
-                  ? lightWorriedChoosy.src
+                  ? lightShadowWorriedChoosy.src
                   : darkWorriedChoosy.src
               }
               alt="Choosy (logo)"
@@ -59,7 +62,7 @@ function NotFoundPage() {
 
         <Typography
           variant="body3"
-          sx={{ color: "primary.main" }}
+          sx={{ color: "primary.light" }}
           className={styles.notFoundPage__infoParagraph}
         >
           Parece que no encuentro la página que buscas

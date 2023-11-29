@@ -99,8 +99,11 @@ function HomePage() {
     <>
       <Box
         component="main"
-        sx={{ backgroundColor: "background.default" }}
-        className={styles.homePage}
+        className={`${styles.homePage} ${
+          theme.palette.mode === "dark"
+            ? styles["homePage--dark"]
+            : styles["homePage--light"]
+        }`}
       >
         <Typography
           component="h1"
